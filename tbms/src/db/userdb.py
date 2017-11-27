@@ -30,3 +30,9 @@ class Credentials(Base):
         password
     """
     __tablename__ = "credentials"
+
+
+class Permissions(Base):
+    """
+    Specifies what the user can do in the systems
+    """
