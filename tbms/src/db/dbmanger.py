@@ -5,9 +5,10 @@ from sqlalchemy import Column, Date, Integer, String, Boolean, Table
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship, backref
 
-# TODO: STILL have no idea what to do about the polling durations for stuff
-# TODO: workshop history table??
-# TODO: server credentials table??
+# todo: STILL have no idea what to do about the polling durations for stuff
+# todo: workshop history table??
+# todo: server credentials table??
+# todo: permissions
 
 db = sqlite3.connect("test.db")
 cursor = db.cursor()
@@ -20,8 +21,8 @@ Base = declarative_base()
 class VirtualMachine(Base):
     """
     Fields:
-        id | name | file_location | vrdp | network_adapters(n:n) | host_server (n:1) | snapshots (1:n) |
-        connection string (1:1)
+        id | name | file_location | vrdp | network_adapters(n:n) |
+        host_server (n:1) | snapshots (1:n) | connection string (1:1)
     """
     __tablename__ = "virtual_machine"
 
@@ -41,7 +42,8 @@ class VirtualMachine(Base):
     snapshots = relationship("Snapshot")
 
     # connection strings have a 1:1 relationship
-    connection_string = relationship("ConnectionString", uselist=False, back_populates="virtual_machine")
+    connection_string = relationship("ConnectionString", uselist=False,
+                                     back_populates="virtual_machine")
 
     # References
     wu_id = Column(Integer, ForeignKey("workshop_unit.id"))
@@ -50,8 +52,9 @@ class VirtualMachine(Base):
 class WorkshopUnit(Base):
     """
     Fields:
-        id | name | description | vms (1:n) | status | host server (n:1) | reference materials (n:n) |
-        connection strings (1:n) | session lifetime | published date | surveys (n:n)
+        id | name | description | vms (1:n) | status | host server (n:1) |
+        reference materials (n:n) | connection strings (1:n) |
+        session lifetime | published date | surveys (n:n)
     """
     __tablename__ = "workshop_unit"
 
@@ -59,7 +62,8 @@ class WorkshopUnit(Base):
     name = Column(String)
     description = Column(String)
     status = Column(String)
-    lifetime = Column(Integer)  # Amount of time the session is supposed to stay active
+    # Length of time the session is to stay active
+    lifetime = Column(Integer)
     published_date = Column(Date)
 
     # VMs have a 1:n relationship
@@ -73,7 +77,8 @@ class WorkshopUnit(Base):
     connection_strings = relationship("ConnectionString")
 
     # reference materials have a n:n relationship
-    reference_materials = relationship("ReferenceMaterial", secondary=unit_references)
+    reference_materials = relationship("ReferenceMaterial",
+                                       secondary=unit_references)
 
     # surveys have a n:n relationship
     surveys = relationship("Survey", secondary=unit_surveys)
@@ -86,8 +91,9 @@ class WorkshopUnit(Base):
 class WorkshopGroup(Base):
     """
     Fields:
-        id | name | description | WUs (1:n) | status | host server (n:1) | reference materials (n:n) |
-        surveys (1:n) | published date | session lifetime
+        id | name | description | WUs (1:n) | status | host server (n:1) |
+        reference materials (n:n) | surveys (1:n) | published date |
+        session lifetime
     """
     __tablename__ = "workshop_group"
 
@@ -95,7 +101,8 @@ class WorkshopGroup(Base):
     name = Column(String)
     description = Column(String)
     status = Column(String)
-    lifetime = Column(Integer)  # Amount of time the session is supposed to stay active
+    # Amount of time the session is supposed to stay active
+    lifetime = Column(Integer)
     published_date = Column(Date)
 
     # VMs have a 1:n relationship
@@ -106,7 +113,8 @@ class WorkshopGroup(Base):
     server = relationship("Server")
 
     # reference materials have a n:n relationship
-    reference_materials = relationship("ReferenceMaterial", secondary=group_references)
+    reference_materials = relationship("ReferenceMaterial",
+                                       secondary=group_references)
 
     # surveys have a n:n relationship
     surveys = relationship("Survey", secondary=group_surveys)
@@ -141,27 +149,36 @@ class NetworkAdapter(Base):
 
 
 vm_adapters = Table('vm_adapters', Base.metadata,
-                    Column('vm_id', Integer, ForeignKey('virtual_machine.id')),
-                    Column('network_id', Integer, ForeignKey('network_adapter.id'))
+                    Column('vm_id', Integer,
+                           ForeignKey('virtual_machine.id')),
+                    Column('network_id', Integer,
+                           ForeignKey('network_adapter.id'))
                     )
 
 unit_references = Table('unit_references', Base.metadata,
-                        Column('unit_id', Integer, ForeignKey('workshop_unit.id')),
-                        Column('reference_id', Integer, ForeignKey('reference_material.id'))
+                        Column('unit_id', Integer,
+                               ForeignKey('workshop_unit.id')),
+                        Column('reference_id', Integer,
+                               ForeignKey('reference_material.id'))
                         )
 
 unit_surveys = Table('unit_surveys', Base.metadata,
-                     Column('unit_id', Integer, ForeignKey('workshop_unit.id')),
-                     Column('survey_id', Integer, ForeignKey('survey.id'))
+                     Column('unit_id', Integer,
+                            ForeignKey('workshop_unit.id')),
+                     Column('survey_id', Integer,
+                            ForeignKey('survey.id'))
                      )
 
 group_references = Table('group_references', Base.metadata,
-                         Column('group_id', Integer, ForeignKey('workshop_group.id')),
-                         Column('reference_id', Integer, ForeignKey('reference_material.id'))
+                         Column('group_id', Integer,
+                                ForeignKey('workshop_group.id')),
+                         Column('reference_id', Integer,
+                                ForeignKey('reference_material.id'))
                          )
 
 group_surveys = Table('group_surveys', Base.metadata,
-                      Column('group_id', Integer, ForeignKey('workshop_group.id')),
+                      Column('group_id', Integer,
+                             ForeignKey('workshop_group.id')),
                       Column('survey_id', Integer, ForeignKey('survey.id'))
                       )
 
@@ -171,8 +188,8 @@ class User(Base):
     """
     Information about REGISTERED users
     Fields:
-        id | first name | last name | organization | email | skill level | credentials (1:1)
-        workshop history    // might need another table for dis
+        id | first name | last name | organization | email | skill level |
+        credentials (1:1) | workshop history
     """
     __tablename__ = "user"
 
@@ -182,7 +199,8 @@ class User(Base):
     organization = Column(String)
     email = Column(String)
     skill_level = Column(String)
-    credentials = relationship("Credentials", uselist=False, back_populates="user")
+    credentials = relationship("Credentials", uselist=False,
+                               back_populates="user")
 
     # References
     session_id = Column(Integer, ForeignKey('session.id'))
@@ -209,8 +227,6 @@ class Permissions(Base):
     Specifies what the user can do in the systems
     """
 
-    # todo: Figure out how we are going to deal with the permissions
-
 
 # Network subsystem stuff
 class Server(Base):
@@ -224,7 +240,6 @@ class Server(Base):
 
     id = Column(Integer, primary_key=True)
     ip = Column(String)
-    # todo: make a separate table to handle this
     username = Column(String)
     password = Column(String)
 
@@ -268,8 +283,9 @@ class ConnectionString(Base):
 class Statistics(Base):
     """
     Columns:
-        id | time stamp | server | no. of available connections | no. of unused connections |
-        no. of used connections | cpu usage | memory usage
+        id | time stamp | server | no. of available connections |
+        no. of unused connections | no. of used connections | cpu usage |
+        memory usage
     """
     __tablename__ = "statistics"
 

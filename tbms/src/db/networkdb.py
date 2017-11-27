@@ -9,6 +9,8 @@ from db.userdb import User
 Base = declarative_base()
 
 
+# todo: polling durations?
+# todo: server credentials table
 class Server(Base):
     """
     Fields:
@@ -20,7 +22,6 @@ class Server(Base):
 
     id = Column(Integer, primary_key=True)
     ip = Column(String)
-    # todo: make a separate table to handle this
     username = Column(String)
     password = Column(String)
 
@@ -64,8 +65,9 @@ class ConnectionString(Base):
 class Statistics(Base):
     """
     Columns:
-        id | time stamp | server | no. of available connections | no. of unused connections |
-        no. of used connections | cpu usage | memory usage
+        id | time stamp | server | no. of available connections |
+        no. of unused connections | no. of used connections | cpu usage |
+        memory usage
     """
     __tablename__ = "statistics"
 

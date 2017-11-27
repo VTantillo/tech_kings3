@@ -6,12 +6,13 @@ from sqlalchemy.orm import relationship, backref
 Base = declarative_base()
 
 
+# todo: workshop history
 class User(Base):
     """
     Information about REGISTERED users
     Fields:
-        id | first name | last name | organization | email | skill level | credentials (1:1)
-        workshop history    // might need another table for dis
+        id | first name | last name | organization | email | skill level |
+        credentials (1:1) | workshop history
     """
     __tablename__ = "user"
 
@@ -21,7 +22,8 @@ class User(Base):
     organization = Column(String)
     email = Column(String)
     skill_level = Column(String)
-    credentials = relationship("Credentials", uselist=False, back_populates="user")
+    credentials = relationship("Credentials", uselist=False,
+                               back_populates="user")
 
     # References
     session_id = Column(Integer, ForeignKey('session.id'))
@@ -43,10 +45,9 @@ class Credentials(Base):
     user = relationship('User', back_populates='credentials')
 
 
-
 class Permissions(Base):
     """
     Specifies what the user can do in the systems
     """
 
-    #todo: Figure out how we are going to deal with the permissions
+    # todo: Figure out how we are going to deal with the permissions
