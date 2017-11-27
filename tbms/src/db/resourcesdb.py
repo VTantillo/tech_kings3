@@ -3,16 +3,15 @@ from sqlalchemy import Column, Date, Integer, String, Boolean
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship, backref
 
+from db.userdb import User
+
 Base = declarative_base()
 
 
 class ReferenceMaterial(Base):
     """
-    Columns:
-        id
-        name
-        file location
-        type
+    Fields:
+        id | name | file location | type
     """
     __tablename__ = "reference_material"
 
@@ -24,12 +23,8 @@ class ReferenceMaterial(Base):
 
 class Survey(Base):
     """
-    Columns:
-        id
-        name
-        file location
-        completed (boolean)
-        user (1:1)
+    Fields:
+        id | name | file location | completed (boolean) | user (1:1)
     """
     __tablename__ = "survey"
 
@@ -38,4 +33,3 @@ class Survey(Base):
     file_location = Column(String)
     completed = Column(Boolean)
     user = relationship("User", uselist=False, back_populate="survey")
-    # todo: make sure that this relationship is recorded in the user class!!

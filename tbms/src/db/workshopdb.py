@@ -70,6 +70,10 @@ class WorkshopUnit(Base):
     # surveys have a n:n relationship
     surveys = relationship("Survey", secondary=unit_surveys)
 
+    # References
+    session_id = Column(Integer, ForeignKey('session.id'))
+    session = relationship('Session', back_populates='workshop_unit')
+
 
 class WorkshopGroup(Base):
     """

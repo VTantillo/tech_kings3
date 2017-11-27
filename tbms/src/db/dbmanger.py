@@ -1,14 +1,11 @@
 import sqlite3
 
 from sqlalchemy import create_engine, ForeignKey
-from sqlalchemy import Column, Date, Integer, String
+from sqlalchemy import Column, Date, Integer, String, Boolean, Table
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship, backref
 
-# TODO: May need to split them up into their own files
 # TODO: STILL have no idea what to do about the polling durations for stuff
-# TODO: Permissions table??
-# TODO: network adapter table??
 # TODO: workshop history table??
 # TODO: server credentials table??
 
@@ -22,200 +19,296 @@ Base = declarative_base()
 # Workshop subsystem stuff
 class VirtualMachine(Base):
     """
-    Columns:
-        id
-        name
-        file location
-        vrdp
-        network adapter (s) // might need another table for those...
-        host server ip
-        snapshots // point to the snapshot table
-        os?
-        info?
+    Fields:
+        id | name | file_location | vrdp | network_adapters(n:n) | host_server (n:1) | snapshots (1:n) |
+        connection string (1:1)
     """
     __tablename__ = "virtual_machine"
 
     id = Column(Integer, primary_key=True)
     name = Column(String)
-    file = Column(String)
+    file_name = Column(String)
     vrdp = Column(Integer)
-    network_adapter = Column(Integer, ForeignKey("network_adapter.id"))
-    snapshots = Column(Integer, ForeignKey("snapshot.id"))
-    host = Column(Integer, ForeignKey("server.id"))
-    connection_string = (Integer, ForeignKey("connection_string.id"))
+
+    # network adapters have an n:n relationship
+    network_adapters = relationship("NetworkAdapter", secondary=vm_adapters)
+
+    # the host server has an n:1 relationship
+    server_id = Column(Integer, ForeignKey('server.id'))
+    server = relationship("Server")
+
+    # snapshots have an 1:n relationship
+    snapshots = relationship("Snapshot")
+
+    # connection strings have a 1:1 relationship
+    connection_string = relationship("ConnectionString", uselist=False, back_populates="virtual_machine")
+
+    # References
+    wu_id = Column(Integer, ForeignKey("workshop_unit.id"))
 
 
 class WorkshopUnit(Base):
     """
-    Columns:
-        id
-        name
-        description
-        vms
-        status
-        host server ip
-        reference materials
-        connection strings
-        session lifetime
-        published date
+    Fields:
+        id | name | description | vms (1:n) | status | host server (n:1) | reference materials (n:n) |
+        connection strings (1:n) | session lifetime | published date | surveys (n:n)
     """
     __tablename__ = "workshop_unit"
 
     id = Column(Integer, primary_key=True)
     name = Column(String)
     description = Column(String)
-    vms = Column(Integer, ForeignKey("virtual_machine.id"))
     status = Column(String)
-    host = Column(Integer, ForeignKey("server.id"))
-    reference_materials = Column(Integer, ForeignKey("ref"))
-    connection_strings = Column(Integer, ForeignKey("connection_string"))
-    lifetime = Column(Integer)
+    lifetime = Column(Integer)  # Amount of time the session is supposed to stay active
     published_date = Column(Date)
-    surveys = Column(Integer, ForeignKey("survey"))
+
+    # VMs have a 1:n relationship
+    vms = relationship("VirtualMachine")
+
+    # host server has a n:1 relationship
+    server_id = Column(Integer, ForeignKey('server.id'))
+    server = relationship("Server")
+
+    # connection strings have a 1:n relationship
+    connection_strings = relationship("ConnectionString")
+
+    # reference materials have a n:n relationship
+    reference_materials = relationship("ReferenceMaterial", secondary=unit_references)
+
+    # surveys have a n:n relationship
+    surveys = relationship("Survey", secondary=unit_surveys)
+
+    # References
+    session_id = Column(Integer, ForeignKey('session.id'))
+    session = relationship('Session', back_populates='workshop_unit')
 
 
 class WorkshopGroup(Base):
     """
-    Columns:
-        id
-        name
-        description
-        wus
-        status
-        no. of units
-        host server ip
-        reference materials
-        session lifetime
-        published date
+    Fields:
+        id | name | description | WUs (1:n) | status | host server (n:1) | reference materials (n:n) |
+        surveys (1:n) | published date | session lifetime
     """
     __tablename__ = "workshop_group"
 
     id = Column(Integer, primary_key=True)
+    name = Column(String)
+    description = Column(String)
+    status = Column(String)
+    lifetime = Column(Integer)  # Amount of time the session is supposed to stay active
+    published_date = Column(Date)
+
+    # VMs have a 1:n relationship
+    wus = relationship("WorkshopUnit")
+
+    # host server has a n:1 relationship
+    server_id = Column(Integer, ForeignKey('server.id'))
+    server = relationship("Server")
+
+    # reference materials have a n:n relationship
+    reference_materials = relationship("ReferenceMaterial", secondary=group_references)
+
+    # surveys have a n:n relationship
+    surveys = relationship("Survey", secondary=group_surveys)
 
 
 class Snapshot(Base):
     """
-    Columns:
-        id
-        vm
-        date
-        state??
-        (idk how snapshots work tbh)
+    Fields:
+        id | date | file name
+
+        state?? (idk how snapshots work tbh)
     """
     __tablename__ = "snapshot"
 
     id = Column(Integer, primary_key=True)
+    date = Column(Date)
+    file_name = Column(String)
+
+    # References
+    vm_id = Column(Integer, ForeignKey('virtual_machine.id'))
+
+
+class NetworkAdapter(Base):
+    """
+    Fields:
+        id | name
+    """
+    __tablename__ = "network_adapter"
+
+    id = Column(Integer, primary_key=True)
+    name = Column(String)
+
+
+vm_adapters = Table('vm_adapters', Base.metadata,
+                    Column('vm_id', Integer, ForeignKey('virtual_machine.id')),
+                    Column('network_id', Integer, ForeignKey('network_adapter.id'))
+                    )
+
+unit_references = Table('unit_references', Base.metadata,
+                        Column('unit_id', Integer, ForeignKey('workshop_unit.id')),
+                        Column('reference_id', Integer, ForeignKey('reference_material.id'))
+                        )
+
+unit_surveys = Table('unit_surveys', Base.metadata,
+                     Column('unit_id', Integer, ForeignKey('workshop_unit.id')),
+                     Column('survey_id', Integer, ForeignKey('survey.id'))
+                     )
+
+group_references = Table('group_references', Base.metadata,
+                         Column('group_id', Integer, ForeignKey('workshop_group.id')),
+                         Column('reference_id', Integer, ForeignKey('reference_material.id'))
+                         )
+
+group_surveys = Table('group_surveys', Base.metadata,
+                      Column('group_id', Integer, ForeignKey('workshop_group.id')),
+                      Column('survey_id', Integer, ForeignKey('survey.id'))
+                      )
 
 
 # User subsystem stuff
 class User(Base):
     """
     Information about REGISTERED users
-    Columns:
-        id
-        first name
-        last name
-        org
-        email
-        skill level
-        credentials         // points to the credentials table
+    Fields:
+        id | first name | last name | organization | email | skill level | credentials (1:1)
         workshop history    // might need another table for dis
     """
     __tablename__ = "user"
 
     id = Column(Integer, primary_key=True)
+    first_name = Column(String)
+    last_name = Column(String)
+    organization = Column(String)
+    email = Column(String)
+    skill_level = Column(String)
+    credentials = relationship("Credentials", uselist=False, back_populates="user")
+
+    # References
+    session_id = Column(Integer, ForeignKey('session.id'))
+    session = relationship('Session', back_populates='user')
 
 
 class Credentials(Base):
     """
-    Columns:
-        user id (Foreign key from user table)
-        username
-        hashed password
+    Fields:
+        user id | username | password
     """
     __tablename__ = "credentials"
 
-    id = Column(Integer, primary_key=True)
     username = Column(String)
-    # MAKE SURE DIS SHIT IS HASHED SOMEWHERE
     password = Column(String)
+
+    # References
+    user_id = Column(Integer, ForeignKey('user.id'))
+    user = relationship('User', back_populates='credentials')
+
+
+class Permissions(Base):
+    """
+    Specifies what the user can do in the systems
+    """
+
+    # todo: Figure out how we are going to deal with the permissions
 
 
 # Network subsystem stuff
+class Server(Base):
+    """
+    Fields:
+        id | ip | status | credentials
+
+        (Server credential table?)
+    """
+    __tablename__ = "server"
+
+    id = Column(Integer, primary_key=True)
+    ip = Column(String)
+    # todo: make a separate table to handle this
+    username = Column(String)
+    password = Column(String)
+
+
 class Session(Base):
     """
-    Columns:
-        id
-        user
-        unit
-        lifetime
-        start time
+    Fields:
+        id | user (1:1) | unit (1:1) | lifetime | start time
+
+        (Should it have an end time too?)
     """
     __tablename__ = "session"
 
     id = Column(Integer, primary_key=True)
-    # should probably be references rather than just the ids or names
-    user = Column(String)
-    unit = Column(String)
+    lifetime = Column(Integer)
+    start_time = Column(Date)
 
+    # user has a 1:1 relationship
+    user = relationship("User", uselist=False, back_populates="session")
 
-class Server(Base):
-    """
-    Columns:
-        id
-        ip
-        username    // should these be in another table like the one for users
-        password
-        status
-        ?? The units and groups that are on the server
-    """
-    __tablename__ = "servers"
-
-    id = Column(Integer, primary_key=True)
+    # unit has a 1:1 relationship
+    unit = relationship("WorkshopUnit", uselist=False, back_populates="session")
 
 
 class ConnectionString(Base):
     """
-    id
-    file location
+    id | file name
     """
     __tablename__ = "connection_string"
+
+    id = Column(Integer, primary_key=True)
+    file_location = Column(String)
+
+    # References
+    vm_id = Column(Integer, ForeignKey('virtual_machine.id'))
+    vm = relationship("VirtualMachine", back_populates="connection_string")
+
+    wu_id = Column(Integer, ForeignKey('workshop_unit.id'))
 
 
 class Statistics(Base):
     """
     Columns:
-        server
-        no. of available connections
-        no. of unused connections
-        no. of used connections
-        cpu usage
-        memory usage
+        id | time stamp | server | no. of available connections | no. of unused connections |
+        no. of used connections | cpu usage | memory usage
     """
     __tablename__ = "statistics"
+
+    id = Column(Integer, primary_key=True)
+    time_stamp = Column(Date)
+    available = Column(Integer)
+    used = Column(Integer)
+    unused = Column(Integer)
+    cpu = Column(Integer)
+    memory = Column(Integer)
+
+    # server has n:1 relationship
+    server_id = Column(Integer, ForeignKey("server.id"))
+    server = relationship("Server")
 
 
 # Resource subsystem stuff
 class ReferenceMaterial(Base):
     """
-    Columns:
-        id
-        name
-        file location
-        type
+    Fields:
+        id | name | file location | type
     """
     __tablename__ = "reference_material"
+
+    id = Column(Integer, primary_key=True)
+    name = Column(String)
+    file_location = Column(String)
+    type = Column(String)
 
 
 class Survey(Base):
     """
-    Columns:
-        id
-        name
-        file location
-        completed (boolean)
-        // if we are going to
+    Fields:
+        id | name | file location | completed (boolean) | user (1:1)
     """
     __tablename__ = "survey"
 
-
+    id = Column(Integer, primary_key=True)
+    name = Column(String)
+    file_location = Column(String)
+    completed = Column(Boolean)
+    user = relationship("User", uselist=False, back_populate="survey")
