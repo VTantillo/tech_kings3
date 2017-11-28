@@ -1,14 +1,16 @@
-import sqlite3
-
 from sqlalchemy import create_engine, ForeignKey
 from sqlalchemy import Column, Date, Integer, String, Boolean, Table
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import relationship, backref
+from sqlalchemy.orm import relationship
 
-# todo: STILL have no idea what to do about the polling durations for stuff
-# todo: workshop history table??
-# todo: server credentials table??
+# Network
+# todo: polling
+# todo: server credentials
+# Resources
+# User
 # todo: permissions
+# todo: workshop history table??
+# Workshop
 
 engine = create_engine('sqlite:///test.db', echo=True)
 Base = declarative_base()
