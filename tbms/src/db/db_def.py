@@ -8,7 +8,6 @@ from sqlalchemy.orm import relationship
 # todo: server credentials
 # Resources
 # User
-# todo: permissions
 # todo: workshop history table??
 # Workshop
 
@@ -201,6 +200,8 @@ class User(Base):
     skill_level = Column(String)
     credentials = relationship("Credentials", uselist=False,
                                back_populates="user")
+    permissions_id = Column(Integer, ForeignKey('permissions.id'))
+    permissions = relationship("Permissions")
 
     # References
     session_id = Column(Integer, ForeignKey('session.id'))
