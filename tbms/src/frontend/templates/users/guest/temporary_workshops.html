@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" style="height: 100%;">
+<head>
+    <meta charset="UTF-8">
+    <title>User</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<header>
+    <nav class="navbar navbar-default" style="background-color: #ffffff; border-bottom-color: black; margin-bottom: 0px;">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <ul class="nav navbar-nav navbar-left">
+                    <li>
+                        <a class="glyphicon glyphicon-menu-hamburger" href="#"></a>
+                    </li>
+                    <li>
+                        <a class="navbar-brand" href="#">
+                            <strong style="color: orange;">UTEP & ARL</strong>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div><!-- /.container-fluid -->
+    </nav>
+</header>
+
+<body style="height: calc(100% - 52px);">
+    <div class="sidebar col-md-2">
+        <div class="nav nav-pills nav-stacked">
+            <li class="active"><a href="{{ url_for('users_guest_temporary_workshops') }}" style="background-color: #B8D0E4;"><img src="{{ url_for('static', filename='images/temporary_workshops_icon.png') }}"></a></li>
+        </div>
+    </div>
+    <div class="panel panel-default col-md-10" style="border-right-color: black; border-left-color: black; height: 100%; margin-bottom: 0px;">
+        <div class="panel-body">
+            Basic panel example
+        </div>
+    </div>
+</body>
+</html>

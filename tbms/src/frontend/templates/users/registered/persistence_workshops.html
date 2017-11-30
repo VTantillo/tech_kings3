@@ -2,7 +2,7 @@
 <html lang="en" style="height: 100%;">
 <head>
     <meta charset="UTF-8">
-    <title>Administration</title>
+    <title>User</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -19,7 +19,7 @@
                     </li>
                     <li>
                         <a class="navbar-brand" href="#">
-                            <img style="color: orange" alt="UTEP & ARL" src="...">
+                            <strong style="color: orange;">UTEP & ARL</strong>
                         </a>
                     </li>
                 </ul>
@@ -47,14 +47,6 @@
                                     </button>
                                 </li>
                             </div>
-                            <div class="col-sm-6">
-                                <li>
-                                    <button type="button" class="btn btn-default"
-                                            style="background-color: #ECECEC; margin-bottom: 5px; width: 100px;">
-                                        Preference
-                                    </button>
-                                </li>
-                            </div>
                         </ul>
                     </div>
                 </ul>
@@ -64,14 +56,10 @@
 </header>
 
 <body style="height: calc(100% - 52px);">
-    <div class="sidebar col-md-2" style="background-color: black">
+    <div class="sidebar col-md-2">
         <div class="nav nav-pills nav-stacked">
-            <li role="presentation"><a href="#"><img src="{{ url_for('static', filename='images/servers_icon.png')}}"></a></li>
-            <li role="presentation"><a href="#"><img src="{{ url_for('static', filename='images/virtual_machines_icon.png')}}"></a></li>
-            <li role="presentation"><a href="#"><img src="{{ url_for('static', filename='images/workshop_groups_icon.png')}}"></a></li>
-            <li role="presentation"><a href="#"><img src="{{ url_for('static', filename='images/workshop_units_icon.png')}}"></a></li>
-            <li role="presentation"><a href="#"><img src="{{ url_for('static', filename='images/statistics_icon.png')}}"></a></li>
-            <li role="presentation"><a href="#"><img src="{{ url_for('static', filename='images/user_profiles_icon.png')}}"></a></li>
+            <li><a href="{{ url_for('users_registered_temporary_workshops') }}"><img src="{{ url_for('static', filename='images/temporary_workshops_icon.png') }}"></a></li>
+            <li class="active"><a href="{{ url_for('users_registered_persistence_workshops') }}" style="background-color: #B8D0E4;"><img src="{{ url_for('static', filename='images/persistence_workshops_icon.png') }}"></a></li>
         </div>
     </div>
     <div class="panel panel-default col-md-10" style="border-right-color: black; border-left-color: black; height: 100%; margin-bottom: 0px;">

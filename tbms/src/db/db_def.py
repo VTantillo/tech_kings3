@@ -189,7 +189,7 @@ class User(Base):
         id | first name | last name | organization | email | skill level |
         credentials (1:1) | workshop history
     """
-    __tablename__ = "user"
+    __tablename__ = "users"
 
     id = Column(Integer, primary_key=True)
     first_name = Column(String)
@@ -198,17 +198,17 @@ class User(Base):
     email = Column(String)
     skill_level = Column(String)
     credentials = relationship("Credentials", uselist=False,
-                               back_populates="user")
+                               back_populates="users")
 
     # References
     session_id = Column(Integer, ForeignKey('session.id'))
-    session = relationship('Session', back_populates='user')
+    session = relationship('Session', back_populates='users')
 
 
 class Credentials(Base):
     """
     Fields:
-        user id | username | password
+        users id | username | password
     """
     __tablename__ = "credentials"
 
@@ -216,13 +216,13 @@ class Credentials(Base):
     password = Column(String)
 
     # References
-    user_id = Column(Integer, ForeignKey('user.id'), primary_key=True)
+    user_id = Column(Integer, ForeignKey('users.id'), primary_key=True)
     user = relationship('User', back_populates='credentials')
 
 
 class Permissions(Base):
     """
-    Specifies what the user can do in the systems
+    Specifies what the users can do in the systems
 
     Current fields are place holders just to see if the db script runs.
     """
@@ -251,7 +251,7 @@ class Server(Base):
 class Session(Base):
     """
     Fields:
-        id | user (1:1) | unit (1:1) | lifetime | start time
+        id | users (1:1) | unit (1:1) | lifetime | start time
 
         (Should it have an end time too?)
     """
@@ -261,7 +261,7 @@ class Session(Base):
     lifetime = Column(Integer)
     start_time = Column(Date)
 
-    # user has a 1:1 relationship
+    # users has a 1:1 relationship
     user = relationship("User", uselist=False, back_populates="session")
 
     # unit has a 1:1 relationship
@@ -323,7 +323,7 @@ class ReferenceMaterial(Base):
 class Survey(Base):
     """
     Fields:
-        id | name | file location | completed (boolean) | user (1:1)
+        id | name | file location | completed (boolean) | users (1:1)
     """
     __tablename__ = "survey"
 

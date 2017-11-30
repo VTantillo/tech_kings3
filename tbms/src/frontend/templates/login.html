@@ -16,7 +16,7 @@
                 <ul class="nav navbar-nav navbar-left">
                     <li>
                         <a class="navbar-brand" href="#">
-                            <img style="color: orange" alt="UTEP & ARL" src="...">
+                            <strong style="color: orange;">UTEP & ARL</strong>
                         </a>
                     </li>
                 </ul>
@@ -32,7 +32,7 @@
       <div class="panel panel-primary">
         <div class="panel-heading">Log in: Already have an Account</div>
         <div class="panel-body" align="left">
-            <form class="navbar-form" action="{{ url_for('administration') }}" method="POST">
+            <form class="navbar-form" action="{{ url_for('admin_servers') }}" method="POST">
                 <div class="form-group">
                     <input type="text" class="form-control" placeholder="Username"><br>
                     <input type="password" class="form-control" placeholder="Password"><br><br>
@@ -46,7 +46,7 @@
       <div class="panel panel-primary">
         <div class="panel-heading">Register: Don't have an Account</div>
         <div class="panel-body" align="left">
-            <form class="navbar-form">
+            <form class="navbar-form" action="{{ url_for('users_registered_temporary_workshops') }}" method="POST">
                 <div class="form-group">
                     <input type="text" class="form-control" placeholder="First Name"><br>
                     <input type="text" class="form-control" placeholder="Last Name"><br>
@@ -68,7 +68,7 @@
       <div class="panel panel-primary">
         <div class="panel-heading">Guest Log in: Prefer not to Register</div>
         <div class="panel-body" align="center">
-            <form class="navbar-form">
+            <form class="navbar-form" action="{{ url_for('users_guest_temporary_workshops') }}" method="POST">
                 <div class="form-group">
                     <button type="submit" class="btn btn-default">Guest Log in</button>
                 </div>
