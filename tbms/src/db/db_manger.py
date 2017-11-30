@@ -1,7 +1,7 @@
 """
-Salamah said to try and make it so that this module just has 4 methods that
-everyone can use.
+Interface for the rest of the system to the database
 """
+
 import db.db_workshop as workshop
 import db.db_user as user
 import db.db_network as network
