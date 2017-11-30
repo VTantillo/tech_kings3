@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<header>
+    <nav class="navbar navbar-default" style="background-color: #ffffff; border-bottom-color: black;">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <ul class="nav navbar-nav navbar-left">
+                    <li>
+                        <a class="navbar-brand" href="#">
+                            <img style="color: orange" alt="UTEP & ARL" src="...">
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div><!-- /.container-fluid -->
+    </nav>
+</header>
+
+<body>
+
+</div>
+    <div class="col-sm-4">
+      <div class="panel panel-primary">
+        <div class="panel-heading">Log in: Already have an Account</div>
+        <div class="panel-body" align="left">
+            <form class="navbar-form" action="{{ url_for('administration') }}" method="POST">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Username"><br>
+                    <input type="password" class="form-control" placeholder="Password"><br><br>
+                    <button type="submit" class="btn btn-default">Log in</button>
+                </div>
+            </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="panel panel-primary">
+        <div class="panel-heading">Register: Don't have an Account</div>
+        <div class="panel-body" align="left">
+            <form class="navbar-form">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="First Name"><br>
+                    <input type="text" class="form-control" placeholder="Last Name"><br>
+                    <input type="text" class="form-control" placeholder="Organization"><br>
+                    <input type="text" class="form-control" placeholder="Email"><br>
+                    <input type="password" class="form-control" placeholder="Password"><br>
+                    <input type="password" class="form-control" placeholder="Confirm Password"><br><br>
+                    <label>Skill Level: </label><br>
+                    <input type="radio" class="form-control"> Novice<br>
+                    <input type="radio" class="form-control"> Intermediate<br>
+                    <input type="radio" class="form-control"> Advanced<br><br>
+                    <button type="submit" class="btn btn-default">Register</button>
+                </div>
+            </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="panel panel-primary">
+        <div class="panel-heading">Guest Log in: Prefer not to Register</div>
+        <div class="panel-body" align="center">
+            <form class="navbar-form">
+                <div class="form-group">
+                    <button type="submit" class="btn btn-default">Guest Log in</button>
+                </div>
+            </form>
+        </div>
+      </div>
+    </div>
+</div>
+</body>
+</html>
