@@ -29,8 +29,8 @@
 
 </div>
     <div class="col-sm-4">
-      <div class="panel panel-primary">
-        <div class="panel-heading">Log in: Already have an Account</div>
+      <div class="panel panel-default" style="border-color: black">
+          <div class="panel-heading" style="background-color: #BCD3E6;"><strong>Log in: Already have an Account</strong></div>
         <div class="panel-body" align="left">
             <form class="navbar-form" action="{{ url_for('admin_servers') }}" method="POST">
                 <div class="form-group">
@@ -43,8 +43,8 @@
       </div>
     </div>
     <div class="col-sm-4">
-      <div class="panel panel-primary">
-        <div class="panel-heading">Register: Don't have an Account</div>
+      <div class="panel panel-default" style="border-color: black">
+          <div class="panel-heading" style="background-color: #BCD3E6;"><strong>Register: Don't have an Account</strong></div>
         <div class="panel-body" align="left">
             <form class="navbar-form" action="{{ url_for('users_registered_temporary_workshops') }}" method="POST">
                 <div class="form-group">
@@ -65,8 +65,8 @@
       </div>
     </div>
     <div class="col-sm-4">
-      <div class="panel panel-primary">
-        <div class="panel-heading">Guest Log in: Prefer not to Register</div>
+      <div class="panel panel-default" style="border-color: black">
+          <div class="panel-heading" style="background-color: #BCD3E6;"><strong>Guest Log in: Prefer not to Register</strong></div>
         <div class="panel-body" align="center">
             <form class="navbar-form" action="{{ url_for('users_guest_temporary_workshops') }}" method="POST">
                 <div class="form-group">
