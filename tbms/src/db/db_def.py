@@ -3,17 +3,10 @@ from sqlalchemy import Column, Date, Integer, String, Boolean, Table
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 
-# Network
-# todo: polling
-# todo: server credentials
-# Resources
-# User
-# todo: workshop history table??
-# Workshop
+# todo: STILL have no idea what to do about the polling durations for stuff
 
 engine = create_engine('sqlite:///test.db', echo=True)
 Base = declarative_base()
-
 
 # Workshop subsystem stuff
 # n:n tables
@@ -50,6 +43,12 @@ group_surveys = Table('group_surveys', Base.metadata,
                              ForeignKey('workshop_group.id')),
                       Column('survey_id', Integer, ForeignKey('survey.id'))
                       )
+
+user_history = Table('user_history', Base.metadata,
+                     Column('user_id', Integer,
+                            ForeignKey('user.id')),
+                     Column('unit_id', Integer, ForeignKey('workshop_unit.id'))
+                     )
 
 
 class VirtualMachine(Base):
@@ -200,8 +199,10 @@ class User(Base):
     skill_level = Column(String)
     credentials = relationship("Credentials", uselist=False,
                                back_populates="user")
-    permissions_id = Column(Integer, ForeignKey('permissions.id'))
     permissions = relationship("Permissions")
+
+    # unit has an n:n relationship
+    workshop_history = relationship("WorkshopUnit", secondary='user_history')
 
     # References
     session_id = Column(Integer, ForeignKey('session.id'))
@@ -230,7 +231,7 @@ class Permissions(Base):
     Current fields are place holders just to see if the db script runs.
     """
     __tablename__ = "permissions"
-    # todo: fix the table
+
     id = Column(Integer, primary_key=True)
     type = Column(String)
 
@@ -249,6 +250,21 @@ class Server(Base):
     ip = Column(String)
     username = Column(String)
     password = Column(String)
+
+
+class ServerCredentials(Base):
+    """
+    Fields:
+        user id | username | password
+    """
+    __tablename__ = "server_credentials"
+
+    username = Column(String)
+    password = Column(String)
+
+    # References
+    server_id = Column(Integer, ForeignKey('server.id'), primary_key=True)
+    server = relationship('Server', back_populates='server_credentials')
 
 
 class Session(Base):
@@ -334,6 +350,7 @@ class Survey(Base):
     name = Column(String)
     file_location = Column(String)
     completed = Column(Boolean)
+
     user = relationship("User", uselist=False, back_populates="survey")
 
 
