@@ -4,13 +4,16 @@
     <meta charset="UTF-8">
     <title>Administration</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='scripts/canvas.js')}}"></script>
 </head>
 
 <header>
-    <nav class="navbar navbar-default" style="background-color: #ffffff; border-bottom-color: black; margin-bottom: 0px;">
+    <nav class="navbar navbar-default"
+         style="background-color: #ffffff; border-bottom-color: black; margin-bottom: 0px;">
         <div class="container-fluid">
             <div class="navbar-header">
                 <ul class="nav navbar-nav navbar-left">
@@ -64,20 +67,172 @@
 </header>
 
 <body style="height: calc(100% - 52px);">
-    <div class="sidebar col-md-2">
-        <div class="nav nav-pills nav-stacked">
-            <li><a href="{{ url_for('admin_servers') }}"><img src="{{ url_for('static', filename='images/servers_icon.png') }}"></a></li>
-            <li><a href="{{ url_for('admin_virtual_machines') }}"><img src="{{ url_for('static', filename='images/virtual_machines_icon.png') }}"></a></li>
-            <li><a href="{{ url_for('admin_workshop_groups') }}"><img src="{{ url_for('static', filename='images/workshop_groups_icon.png') }}"></a></li>
-            <li><a href="{{ url_for('admin_workshop_units') }}"><img src="{{ url_for('static', filename='images/workshop_units_icon.png') }}"></a></li>
-            <li class="active"><a href="{{ url_for('admin_statistics') }}" style="background-color: #B8D0E4;"><img src="{{ url_for('static', filename='images/statistics_icon.png') }}"></a></li>
-            <li><a href="{{ url_for('admin_user_profiles') }}"><img src="{{ url_for('static', filename='images/user_profiles_icon.png') }}"></a></li>
-        </div>
+<div class="sidebar col-md-2">
+    <div class="nav nav-pills nav-stacked">
+        <li><a href="{{ url_for('admin_servers') }}"><img
+                src="{{ url_for('static', filename='images/servers_icon.png') }}"></a></li>
+        <li><a href="{{ url_for('admin_virtual_machines') }}"><img
+                src="{{ url_for('static', filename='images/virtual_machines_icon.png') }}"></a></li>
+        <li><a href="{{ url_for('admin_workshop_groups') }}"><img
+                src="{{ url_for('static', filename='images/workshop_groups_icon.png') }}"></a></li>
+        <li><a href="{{ url_for('admin_workshop_units') }}"><img
+                src="{{ url_for('static', filename='images/workshop_units_icon.png') }}"></a></li>
+        <li class="active"><a href="{{ url_for('admin_statistics') }}" style="background-color: #B8D0E4;"><img
+                src="{{ url_for('static', filename='images/statistics_icon.png') }}"></a></li>
+        <li><a href="{{ url_for('admin_user_profiles') }}"><img
+                src="{{ url_for('static', filename='images/user_profiles_icon.png') }}"></a></li>
     </div>
-    <div class="panel panel-default col-md-10" style="border-right-color: black; border-left-color: black; height: 100%; margin-bottom: 0px;">
+</div>
+<div class="panel panel-default col-md-10"
+     style="border-right-color: black; border-left-color: black; height: 100%; margin-bottom: 0px;">
+    <div class="panel panel-default col-sm-5"
+         style="margin-top: 8px; max-height: 50%; height: 50%; background-color: #FCFCFC; border-color: black">
+        <div class="panel-heading" style="background-color: #FCFCFC;" align="center"><strong>Workshop
+            Groups and Units</strong></div>
         <div class="panel-body">
-            Basic panel example
+            dfasfsdf
         </div>
     </div>
+    <div class="col-sm-2" align="center" style="max-height: 50%; height: 50%;">
+        <br><br><br><br><br>
+        <button type="button" class="btn btn-default"
+                style="background-color: #ECECEC; margin-bottom: 5px; width: 100px;"> >>
+        </button>
+        <br><br>
+        <button type="button" class="btn btn-default"
+                style="background-color: #ECECEC; margin-bottom: 5px; width: 100px;"> <<
+        </button>
+    </div>
+    <div class="panel panel-default col-sm-5"
+         style="margin-top: 8px; max-height: 50%; height: 50%; background-color: #FCFCFC; border-color: black">
+        <div class="panel-heading" style="background-color: #FCFCFC;" align="center"><strong> Selected
+            Workshop Groups and Units</strong></div>
+        <div class="panel-body">
+            fdsafsdfa
+        </div>
+    </div>
+    <div class="panel panel-default col-sm-12"
+         style="max-height: 40%; height: 40%; background-color: #E1EBF4; border-color: black">
+        <div class="panel-heading"
+             style="border-bottom-color: #E1EBF4; background-color: #E1EBF4; margin-top: 5px; margin-left: 8px;">
+            <div class="dropdown">
+                <button type="button" class="btn btn-default dropdown-toggle" style="background-color: #ffffff;"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Statistic Information of Group
+                    <span class="caret" style="color: #2F80C1;"></span>
+                </button>
+                <ul class="dropdown-menu" style="background-color: #F8F8F8; border-color: black; width: 250px">
+                    <li>
+                        Group 1
+                    </li>
+                    <li>
+                        Group 2
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="panel-body">
+        <div class="col-sm-4">
+            <div class="col-sm-6">
+
+            </div>
+            <div class="col-sm-6">
+                <canvas id="connections" width="150" height="150"></canvas>
+                <script>var canvas = document.getElementById("connections");
+                var context = canvas.getContext('2d');
+                var x = canvas.width / 2;
+                var y = canvas.height / 2;
+                var radius = 60;
+                var startAngleUsed = 0;
+                var endAngleUsed = (2 * Math.PI)*(.25);
+                var startAngleUnused = endAngleUsed;
+                var endAngleUnused = (2 * Math.PI);
+                var counterClockwise = false;
+
+                context.beginPath();
+                context.arc(x, y, radius, startAngleUsed, endAngleUsed, counterClockwise);
+                context.lineWidth = 10;
+                // line color
+                context.strokeStyle = "#85CCDE";
+                context.stroke();
+
+                context.beginPath();
+                context.arc(x, y, radius, startAngleUnused, endAngleUnused, counterClockwise);
+                context.lineWidth = 10;
+                // line color
+                context.strokeStyle = "#216778";
+                context.stroke();
+                </script>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="col-sm-6">
+
+            </div>
+            <div class="col-sm-6">
+                <canvas id="cpuUsage" width="150" height="150"></canvas>
+                <script>var canvas = document.getElementById("cpuUsage");
+                var context = canvas.getContext('2d');
+                var x = canvas.width / 2;
+                var y = canvas.height / 2;
+                var radius = 60;
+                var startAngleUsed = 0;
+                var endAngleUsed = (2 * Math.PI)*(.33);
+                var startAngleUnused = endAngleUsed;
+                var endAngleUnused = (2 * Math.PI);
+                var counterClockwise = false;
+
+                context.beginPath();
+                context.arc(x, y, radius, startAngleUsed, endAngleUsed, counterClockwise);
+                context.lineWidth = 10;
+                // line color
+                context.strokeStyle = "#85CCDE";
+                context.stroke();
+
+                context.beginPath();
+                context.arc(x, y, radius, startAngleUnused, endAngleUnused, counterClockwise);
+                context.lineWidth = 10;
+                // line color
+                context.strokeStyle = "#216778";
+                context.stroke();
+                </script>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="col-sm-6">
+
+            </div>
+            <div class="col-sm-6">
+                <canvas id="memUsage" width="150" height="150"></canvas>
+                <script>var canvas = document.getElementById("memUsage");
+                var context = canvas.getContext('2d');
+                var x = canvas.width / 2;
+                var y = canvas.height / 2;
+                var radius = 60;
+                var startAngleUsed = 0;
+                var endAngleUsed = (2 * Math.PI)*(.5);
+                var startAngleUnused = endAngleUsed;
+                var endAngleUnused = (2 * Math.PI);
+                var counterClockwise = false;
+
+                context.beginPath();
+                context.arc(x, y, radius, startAngleUsed, endAngleUsed, counterClockwise);
+                context.lineWidth = 10;
+                // line color
+                context.strokeStyle = "#85CCDE";
+                context.stroke();
+
+                context.beginPath();
+                context.arc(x, y, radius, startAngleUnused, endAngleUnused, counterClockwise);
+                context.lineWidth = 10;
+                // line color
+                context.strokeStyle = "#216778";
+                context.stroke();
+                </script>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
 </body>
 </html>
