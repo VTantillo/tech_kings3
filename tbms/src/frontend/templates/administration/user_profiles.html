@@ -63,6 +63,106 @@
     </nav>
 </header>
 
+<!-- UP Overlay Window -->
+<div id="addOverlay" class="modal fade" role="dialog">
+    <div class="modal-dialog" style="width: 50%;">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header" align="center" style="background-color: #B8D0E4;">
+                <strong>New User Profile</strong>
+            </div>
+            <div class="modal-body" style="background-color: #E2ECF3;">
+                <table class="table">
+                    <tbody>
+                    <tr>
+                        <td class="col-sm-2" style="border-color: #E2ECF3;"><strong>First Name</strong></td>
+                        <td class="col-sm-8" style="border-color: #E2ECF3;">
+                            <input type="text" class="form-control" placeholder="First Name"
+                                   aria-describedby="sizing-addon1">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-sm-2" style="border-color: #E2ECF3;"><strong>Last Name</strong></td>
+                        <td class="col-sm-8" style="border-color: #E2ECF3;">
+                            <input type="text" class="form-control" placeholder="Last Name"
+                                   aria-describedby="sizing-addon1">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-sm-2" style="border-color: #E2ECF3;"><strong>Organization</strong></td>
+                        <td class="col-sm-8" style="border-color: #E2ECF3;">
+                            <input type="text" class="form-control" placeholder="Organization"
+                                   aria-describedby="sizing-addon1">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-sm-2" style="border-color: #E2ECF3;"><strong>Email</strong></td>
+                        <td class="col-sm-8" style="border-color: #E2ECF3;">
+                            <input type="text" class="form-control" placeholder="Email"
+                                   aria-describedby="sizing-addon1">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-sm-2" style="border-color: #E2ECF3;"><strong>Password</strong></td>
+                        <td class="col-sm-8" style="border-color: #E2ECF3;">
+                            <input type="password" class="form-control" placeholder="Password"
+                                   aria-describedby="sizing-addon1">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-sm-2" style="border-color: #E2ECF3;"><strong>Workshop History</strong></td>
+                        <td class="col-sm-8" style="border-color: #E2ECF3;">
+                            <table class="table"  style="background-color: #E2ECF3;">
+                                <tbody>
+                                <tr>
+                                    <td class="col-sm-6" style="border-color: #E2ECF3;">Workshop A</td>
+                                    <td class="col-sm-6" style="border-color: #E2ECF3;">12/01/17</td>
+                                </tr>
+                                <tr>
+                                    <td class="col-sm-6" style="border-color: #E2ECF3;">Workshop B</td>
+                                    <td class="col-sm-6" style="border-color: #E2ECF3;">12/02/17</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer" style="background-color: #E2ECF3">
+                <button type="button" class="btn btn-default">Add</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- UP Overlay Window -->
+<div id="detailsOverlay" class="modal fade" role="dialog">
+    <div class="modal-dialog" style="width: 50%;">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header" align="center" style="background-color: #B8D0E4;">
+                <strong>User Profile Detailed View</strong>
+            </div>
+            <div class="modal-body" style="background-color: #E2ECF3;">
+                <table class="table">
+                    <tbody>
+                    Details and stuff
+                    </tbody>
+                </table>
+                <table class="table">
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer" style="background-color: #E2ECF3">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Back</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <body style="height: calc(100% - 52px);">
     <div class="sidebar col-md-2">
         <div class="nav nav-pills nav-stacked">
@@ -81,7 +181,7 @@
                     <div class="navbar-header">
                         <ul class="nav navbar-nav navbar-left">
                             <li>
-                                <button type="button" class="btn btn-default"
+                                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#addOverlay"
                                             style="background-color: #ECECEC; margin-top: 8px; margin-right: 8px;">
                                         +User
                                 </button>
@@ -131,24 +231,8 @@
                                 <th scope="row">
                                     <input type="checkbox">
                                 </th>
-                                <td>First Name</td>
-                                <td>Last Name</td>
-                                <td>Organization</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">
-                                    <input type="checkbox">
-                                </th>
-                                <td>First Name</td>
-                                <td>Last Name</td>
-                                <td>Organization</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">
-                                    <input type="checkbox">
-                                </th>
-                                <td>First Name</td>
-                                <td>Last Name</td>
+                                <td><a data-toggle="modal" data-target="#detailsOverlay">First Name</a></td>
+                                <td><a data-toggle="modal" data-target="#detailsOverlay">Last Name</a></td>
                                 <td>Organization</td>
                             </tr>
                             </tbody>

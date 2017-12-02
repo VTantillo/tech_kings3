@@ -94,14 +94,21 @@
         </div>
     </div>
     <div class="col-sm-2" align="center" style="max-height: 50%; height: 50%;">
-        <br><br><br><br><br>
-        <button type="button" class="btn btn-default"
-                style="background-color: #ECECEC; margin-bottom: 5px; width: 100px;"> >>
-        </button>
-        <br><br>
-        <button type="button" class="btn btn-default"
-                style="background-color: #ECECEC; margin-bottom: 5px; width: 100px;"> <<
-        </button>
+        <table style="height: 100%;"><!-- Table used for Vertical Align -->
+            <tbody>
+            <tr>
+                <td class="align-middle">
+                    <button type="button" class="btn btn-default align-middle"
+                            style="background-color: #ECECEC; margin-bottom: 5px; width: 100px;"> >>
+                    </button>
+                    <br><br>
+                    <button type="button" class="btn btn-default align-middle"
+                            style="background-color: #ECECEC; margin-bottom: 5px; width: 100px;"> <<
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
     </div>
     <div class="panel panel-default col-sm-5"
          style="margin-top: 8px; max-height: 50%; height: 50%; background-color: #FCFCFC; border-color: black">
@@ -112,7 +119,7 @@
         </div>
     </div>
     <div class="panel panel-default col-sm-12"
-         style="max-height: 40%; height: 40%; background-color: #E1EBF4; border-color: black">
+         style="max-height: 40%; height: 40%; background-color: #E1EBF4; border-color: black"><!-- Donut Graph Area -->
         <div class="panel-heading"
              style="border-bottom-color: #E1EBF4; background-color: #E1EBF4; margin-top: 5px; margin-left: 8px;">
             <div class="dropdown">
@@ -131,108 +138,180 @@
                 </ul>
             </div>
         </div>
-        <div class="panel-body">
-        <div class="col-sm-4">
-            <div class="col-sm-6">
+        <div class="panel-body" style="height: 80%;">
+            <div class="col-sm-4" style="height: 100%;">
+                <div class="col-sm-6" align="center" style="height: 100%;">
+                    <canvas id="connections" style="height: 100%;"></canvas>
+                    <script>var canvas = document.getElementById("connections");
+                    // Make it visually fill the positioned parent
+                    canvas.style.width = '100%';
+                    canvas.style.height = '100%';
+                    // ...then set the internal size to match
+                    canvas.width = canvas.offsetWidth;
+                    canvas.height = canvas.offsetHeight;
+                    var context = canvas.getContext('2d');
+                    var x = canvas.width / 2;
+                    var y = canvas.height / 2;
+                    var radius = canvas.width / 2.25;
+                    var startAngleUsed = 0;
+                    var endAngleUsed = (2 * Math.PI) * (.25);
+                    var startAngleUnused = endAngleUsed;
+                    var endAngleUnused = (2 * Math.PI);
+                    var counterClockwise = false;
 
+                    context.beginPath();
+                    context.arc(x, y, radius, startAngleUsed, endAngleUsed, counterClockwise);
+                    context.lineWidth = canvas.width / 15;
+                    // line color
+                    context.strokeStyle = "#85CCDE";
+                    context.stroke();
+
+                    context.beginPath();
+                    context.arc(x, y, radius, startAngleUnused, endAngleUnused, counterClockwise);
+                    context.lineWidth = canvas.width / 15;
+                    // line color
+                    context.strokeStyle = "#216778";
+                    context.stroke();
+                    </script>
+                </div>
+                <div class="col-sm-6" style="height: 100%;">
+                    <table style="height: 100%;"><!-- Table used for Vertical Align -->
+                        <tbody>
+                        <tr>
+                            <td class="align-top">
+                                75% Unused
+                            </td>
+                        </tr>
+                        <tr align="center">
+                            <td class="align-middle">
+                                Available connections
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="align-bottom">
+                                25% Used
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-            <div class="col-sm-6">
-                <canvas id="connections" width="150" height="150"></canvas>
-                <script>var canvas = document.getElementById("connections");
-                var context = canvas.getContext('2d');
-                var x = canvas.width / 2;
-                var y = canvas.height / 2;
-                var radius = 60;
-                var startAngleUsed = 0;
-                var endAngleUsed = (2 * Math.PI)*(.25);
-                var startAngleUnused = endAngleUsed;
-                var endAngleUnused = (2 * Math.PI);
-                var counterClockwise = false;
+            <div class="col-sm-4" style="height: 100%;">
+                <div class="col-sm-6" align="center" style="height: 100%;">
+                    <canvas id="cpu" style="height: 100%;"></canvas>
+                    <script>var canvas = document.getElementById("cpu");
+                    // Make it visually fill the positioned parent
+                    canvas.style.width = '100%';
+                    canvas.style.height = '100%';
+                    // ...then set the internal size to match
+                    canvas.width = canvas.offsetWidth;
+                    canvas.height = canvas.offsetHeight;
+                    var context = canvas.getContext('2d');
+                    var x = canvas.width / 2;
+                    var y = canvas.height / 2;
+                    var radius = canvas.width / 2.25;
+                    var startAngleUsed = 0;
+                    var endAngleUsed = (2 * Math.PI) * (.25);
+                    var startAngleUnused = endAngleUsed;
+                    var endAngleUnused = (2 * Math.PI);
+                    var counterClockwise = false;
 
-                context.beginPath();
-                context.arc(x, y, radius, startAngleUsed, endAngleUsed, counterClockwise);
-                context.lineWidth = 10;
-                // line color
-                context.strokeStyle = "#85CCDE";
-                context.stroke();
+                    context.beginPath();
+                    context.arc(x, y, radius, startAngleUsed, endAngleUsed, counterClockwise);
+                    context.lineWidth = canvas.width / 15;
+                    // line color
+                    context.strokeStyle = "#85CCDE";
+                    context.stroke();
 
-                context.beginPath();
-                context.arc(x, y, radius, startAngleUnused, endAngleUnused, counterClockwise);
-                context.lineWidth = 10;
-                // line color
-                context.strokeStyle = "#216778";
-                context.stroke();
-                </script>
+                    context.beginPath();
+                    context.arc(x, y, radius, startAngleUnused, endAngleUnused, counterClockwise);
+                    context.lineWidth = canvas.width / 15;
+                    // line color
+                    context.strokeStyle = "#216778";
+                    context.stroke();
+                    </script>
+                </div>
+                <div class="col-sm-6" style="height: 100%;">
+                    <table style="height: 100%;"><!-- Table used for Vertical Align -->
+                        <tbody>
+                        <tr>
+                            <td class="align-top">
+                                75% Unused
+                            </td>
+                        </tr>
+                        <tr align="center">
+                            <td class="align-middle">
+                                Available connections
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="align-bottom">
+                                25% Used
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="col-sm-6">
+            <div class="col-sm-4" style="height: 100%;">
+                <div class="col-sm-6" align="center" style="height: 100%;">
+                    <canvas id="mem" style="height: 100%;"></canvas>
+                    <script>var canvas = document.getElementById("mem");
+                    // Make it visually fill the positioned parent
+                    canvas.style.width = '100%';
+                    canvas.style.height = '100%';
+                    // ...then set the internal size to match
+                    canvas.width = canvas.offsetWidth;
+                    canvas.height = canvas.offsetHeight;
+                    var context = canvas.getContext('2d');
+                    var x = canvas.width / 2;
+                    var y = canvas.height / 2;
+                    var radius = canvas.width / 2.25;
+                    var startAngleUsed = 0;
+                    var endAngleUsed = (2 * Math.PI) * (.25);
+                    var startAngleUnused = endAngleUsed;
+                    var endAngleUnused = (2 * Math.PI);
+                    var counterClockwise = false;
 
-            </div>
-            <div class="col-sm-6">
-                <canvas id="cpuUsage" width="150" height="150"></canvas>
-                <script>var canvas = document.getElementById("cpuUsage");
-                var context = canvas.getContext('2d');
-                var x = canvas.width / 2;
-                var y = canvas.height / 2;
-                var radius = 60;
-                var startAngleUsed = 0;
-                var endAngleUsed = (2 * Math.PI)*(.33);
-                var startAngleUnused = endAngleUsed;
-                var endAngleUnused = (2 * Math.PI);
-                var counterClockwise = false;
+                    context.beginPath();
+                    context.arc(x, y, radius, startAngleUsed, endAngleUsed, counterClockwise);
+                    context.lineWidth = canvas.width / 15;
+                    // line color
+                    context.strokeStyle = "#85CCDE";
+                    context.stroke();
 
-                context.beginPath();
-                context.arc(x, y, radius, startAngleUsed, endAngleUsed, counterClockwise);
-                context.lineWidth = 10;
-                // line color
-                context.strokeStyle = "#85CCDE";
-                context.stroke();
-
-                context.beginPath();
-                context.arc(x, y, radius, startAngleUnused, endAngleUnused, counterClockwise);
-                context.lineWidth = 10;
-                // line color
-                context.strokeStyle = "#216778";
-                context.stroke();
-                </script>
-            </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="col-sm-6">
-
-            </div>
-            <div class="col-sm-6">
-                <canvas id="memUsage" width="150" height="150"></canvas>
-                <script>var canvas = document.getElementById("memUsage");
-                var context = canvas.getContext('2d');
-                var x = canvas.width / 2;
-                var y = canvas.height / 2;
-                var radius = 60;
-                var startAngleUsed = 0;
-                var endAngleUsed = (2 * Math.PI)*(.5);
-                var startAngleUnused = endAngleUsed;
-                var endAngleUnused = (2 * Math.PI);
-                var counterClockwise = false;
-
-                context.beginPath();
-                context.arc(x, y, radius, startAngleUsed, endAngleUsed, counterClockwise);
-                context.lineWidth = 10;
-                // line color
-                context.strokeStyle = "#85CCDE";
-                context.stroke();
-
-                context.beginPath();
-                context.arc(x, y, radius, startAngleUnused, endAngleUnused, counterClockwise);
-                context.lineWidth = 10;
-                // line color
-                context.strokeStyle = "#216778";
-                context.stroke();
-                </script>
+                    context.beginPath();
+                    context.arc(x, y, radius, startAngleUnused, endAngleUnused, counterClockwise);
+                    context.lineWidth = canvas.width / 15;
+                    // line color
+                    context.strokeStyle = "#216778";
+                    context.stroke();
+                    </script>
+                </div>
+                <div class="col-sm-6" style="height: 100%;">
+                    <table style="height: 100%;"><!-- Table used for Vertical Align -->
+                        <tbody>
+                        <tr>
+                            <td class="align-top">
+                                75% Unused
+                            </td>
+                        </tr>
+                        <tr align="center">
+                            <td class="align-middle">
+                                Available connections
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="align-bottom">
+                                25% Used
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
-</div>
 </div>
 </body>
 </html>

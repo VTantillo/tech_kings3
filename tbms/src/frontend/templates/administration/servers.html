@@ -63,6 +63,50 @@
     </nav>
 </header>
 
+<!-- Server Overlay Window -->
+<div id="serverOverlay" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header" align="center" style="background-color: #B8D0E4;">
+                <strong>New Server</strong>
+            </div>
+            <div class="modal-body" style="background-color: #E2ECF3;">
+                <table class="table">
+                    <tbody>
+                    <tr>
+                        <td align="right" style="border-color: #E2ECF3;"><strong>Server IP Address</strong></td>
+                        <td align="center" style="border-color: #E2ECF3;">
+                            <input type="text" class="form-control" placeholder="Server IP Address"
+                                   aria-describedby="sizing-addon1">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="right" style="border-color: #E2ECF3;"><strong>User Name</strong></td>
+                        <td align="center" style="border-color: #E2ECF3;">
+                            <input type="text" class="form-control" placeholder="User Name"
+                                   aria-describedby="sizing-addon1">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="right" style="border-color: #E2ECF3;"><strong>Password</strong></td>
+                        <td align="center" style="border-color: #E2ECF3;">
+                            <input type="password" class="form-control" placeholder="Password"
+                                   aria-describedby="sizing-addon1">
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer" style="background-color: #E2ECF3">
+                <button type="button" class="btn btn-default">Add</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
 <body style="height: calc(100% - 52px);">
     <div class="sidebar col-md-2">
         <div class="nav nav-pills nav-stacked">
@@ -74,6 +118,7 @@
             <li><a href="{{ url_for('admin_user_profiles') }}"><img src="{{ url_for('static', filename='images/user_profiles_icon.png') }}"></a></li>
         </div>
     </div>
+
     <div class="panel panel-default col-md-10" style="border-right-color: black; border-left-color: black; height: 100%; margin-bottom: 0px;">
         <div class="panel-body">
             <nav class="navbar navbar-default" style="background-color: #ffffff; border-color: #ffffff;">
@@ -81,7 +126,7 @@
                     <div class="navbar-header">
                         <ul class="nav navbar-nav navbar-left">
                             <li>
-                                <button type="button" class="btn btn-default"
+                                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#serverOverlay"
                                             style="background-color: #ECECEC; margin-top: 8px; margin-right: 8px;">
                                         +Server
                                 </button>

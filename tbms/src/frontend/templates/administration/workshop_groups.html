@@ -63,6 +63,164 @@
     </nav>
 </header>
 
+<!-- WG Overlay Window -->
+<div id="addOverlay" class="modal fade" role="dialog">
+    <div class="modal-dialog" style="width: 50%;">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header" align="center" style="background-color: #B8D0E4;">
+                <strong>New Workshop Group</strong>
+            </div>
+            <div class="modal-body" style="background-color: #E2ECF3;">
+                <table class="table">
+                    <tbody>
+                    <tr>
+                        <td class="col-sm-2" style="border-color: #E2ECF3;"><strong>Workshop Group</strong></td>
+                        <td class="col-sm-8" style="border-color: #E2ECF3;">
+                            <input type="text" class="form-control" placeholder="Workshop Group Name"
+                                   aria-describedby="sizing-addon1">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-sm-2" style="border-color: #E2ECF3;"><strong>Workshop Unit</strong></td>
+                        <td class="col-sm-8" style="border-color: #E2ECF3;">
+                            <input type="text" class="form-control" placeholder="Number"
+                                   aria-describedby="sizing-addon1">
+                        </td>
+                        <td class="col-sm-1" style="border-color: #E2ECF3;">
+                            <button class="glyphicon glyphicon-plus"></button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-sm-2" style="border-color: #E2ECF3;"><strong>Description</strong></td>
+                        <td class="col-sm-8" style="border-color: #E2ECF3;">
+                            <input type="text" class="form-control" placeholder="Description"
+                                   aria-describedby="sizing-addon1">
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <table class="table">
+                    <tbody>
+                    <tr>
+                        <td class="col-sm-2" style="border-color: #E2ECF3;"><strong>Reference Material</strong></td>
+                        <td class="col-sm-4" style="border-color: #E2ECF3;">
+                            <input type="text" class="form-control" placeholder="Number"
+                                   aria-describedby="sizing-addon1">
+                        </td>
+                        <td class="col-sm-4" style="border-color: #E2ECF3;">
+                            <input type="text" class="form-control" placeholder="Number"
+                                   aria-describedby="sizing-addon1">
+                        </td>
+                        <td class="col-sm-1" style="border-color: #E2ECF3;">
+                            <button class="glyphicon glyphicon-plus"></button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-sm-2" style="border-color: #E2ECF3;"><strong>Persistence Session</strong></td>
+                        <td class="col-sm-4" style="border-color: #E2ECF3;">
+                            <input type="text" class="form-control" placeholder="Number"
+                                   aria-describedby="sizing-addon1">
+                        </td>
+                        <td class="col-sm-4" style="border-color: #E2ECF3;">
+                            <input type="text" class="form-control" placeholder="Number"
+                                   aria-describedby="sizing-addon1">
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer" style="background-color: #E2ECF3">
+                <button type="button" class="btn btn-default">Add</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- WG Overlay Window -->
+<div id="detailsOverlay" class="modal fade" role="dialog">
+    <div class="modal-dialog" style="width: 50%;">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header" align="center" style="background-color: #B8D0E4;">
+                <strong>Workshop Group Detail View</strong>
+            </div>
+            <div class="modal-body" style="background-color: #E2ECF3;">
+                <table class="table">
+                    <tbody>
+                    Details and stuff
+                    </tbody>
+                </table>
+                <table class="table">
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer" style="background-color: #E2ECF3">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Back</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- WG Overlay Window -->
+<div id="cloneOverlay" class="modal fade" role="dialog">
+    <div class="modal-dialog" style="width: 50%;">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header" align="center" style="background-color: #B8D0E4;">
+                <strong>Clone</strong>
+            </div>
+            <div class="modal-body" style="background-color: #E2ECF3;">
+                <table class="table">
+                    <tbody>
+                    <tr>
+                    <tr>
+                        <td class="col-sm-1" style="border-color: #E2ECF3;"><strong>Selected Workshop Group</strong></td>
+                        <td class="col-sm-4" style="border-color: #E2ECF3;">Name of selected Workshop Group</td>
+                    </tr>
+                    <tr>
+                        <td class="col-sm-1" style="border-color: #E2ECF3;"><strong>No. of Clones</strong></td>
+                        <td class="col-sm-4" style="border-color: #E2ECF3;">
+                            <input type="text" class="form-control" placeholder="Number"
+                                   aria-describedby="sizing-addon1">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-sm-1" style="border-color: #E2ECF3;"><strong>VRDP Seed</strong></td>
+                        <td class="col-sm-4" style="border-color: #E2ECF3;">
+                            <input type="text" class="form-control" placeholder="VRDP Seed"
+                                   aria-describedby="sizing-addon1">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-sm-1" style="border-color: #E2ECF3;"><strong>Network Adapter Name</strong></td>
+                        <td class="col-sm-4" style="border-color: #E2ECF3;">
+                            <input type="text" class="form-control" placeholder="Network Adapter Name"
+                                   aria-describedby="sizing-addon1">
+                        </td>
+                        <td class="col-sm-1" style="border-color: #E2ECF3;"><strong>Network Adapter Seed</strong></td>
+                        <td class="col-sm-4" style="border-color: #E2ECF3;">
+                            <input type="text" class="form-control" placeholder="Network Adapter Seed"
+                                   aria-describedby="sizing-addon1">
+                        </td>
+                        <td class="col-sm-1" style="border-color: #E2ECF3;">
+                            <button class="glyphicon glyphicon-plus"></button>
+                        </td>
+                    </tr>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer" style="background-color: #E2ECF3">
+                <button type="button" class="btn btn-default">Clone</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <body style="height: calc(100% - 52px);">
     <div class="sidebar col-md-2">
         <div class="nav nav-pills nav-stacked">
@@ -81,7 +239,7 @@
                     <div class="navbar-header">
                         <ul class="nav navbar-nav navbar-left">
                             <li>
-                                <button type="button" class="btn btn-default"
+                                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#addOverlay"
                                             style="background-color: #ECECEC; margin-top: 8px; margin-right: 8px;">
                                         +Group
                                 </button>
@@ -111,7 +269,7 @@
                                 </button>
                             </li>
                             <li>
-                                <button type="button" class="btn btn-default"
+                                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#cloneOverlay"
                                             style="background-color: #ECECEC; margin-top: 8px; margin-right: 8px;">
                                         Clone
                                 </button>
@@ -159,25 +317,7 @@
                                 <th scope="row">
                                     <input type="checkbox">
                                 </th>
-                                <td>Workshop Group</td>
-                                <td>No.</td>
-                                <td>Host</td>
-                                <td>Status</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">
-                                    <input type="checkbox">
-                                </th>
-                                <td>Workshop Group</td>
-                                <td>No.</td>
-                                <td>Host</td>
-                                <td>Status</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">
-                                    <input type="checkbox">
-                                </th>
-                                <td>Workshop Group</td>
+                                <td><a data-toggle="modal" data-target="#detailsOverlay">Workshop Group</a></td>
                                 <td>No.</td>
                                 <td>Host</td>
                                 <td>Status</td>
