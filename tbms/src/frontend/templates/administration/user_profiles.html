@@ -5,8 +5,10 @@
     <title>Administration</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/collapseCSS.css' )}}"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="{{ url_for('static', filename='scripts/collapseJS.js') }}"></script>
 </head>
 
 <header>
@@ -174,8 +176,10 @@
             <li class="active"><a href="{{ url_for('admin_user_profiles') }}" style="background-color: #B8D0E4;"><img src="{{ url_for('static', filename='images/user_profiles_icon.png') }}"></a></li>
         </div>
     </div>
-    <div class="panel panel-default col-md-10" style="border-right-color: black; border-left-color: black; height: 100%; margin-bottom: 0px;">
-        <div class="panel-body">
+
+    <div class="panel panel-default col-md-10" style="border-right-color: black; border-left-color: black; max-height: 100%; height: 100%; margin-bottom: 0px;">
+        <div class="panel-body" style="height: 100%;">
+
             <nav class="navbar navbar-default" style="background-color: #ffffff; border-color: #ffffff;">
                 <div class="container-fluid">
                     <div class="navbar-header">
@@ -203,26 +207,27 @@
                 </div>
                 </div><!-- /.container-fluid -->
             </nav>
-            <div class="panel panel-default" style="background-color: #FCFCFC; border-color: black">
+
+            <div class="panel panel-default" style="background-color: #FCFCFC; border-color: black; max-height: 90%; height: 90%;">
                 <div class="panel-heading" style="background-color: #BCD3E6;" align="center"><strong>User Profiles</strong></div>
-                    <div class="panel-body">
+                    <div class="panel-body" style="max-height: 94%; overflow-y: scroll;">
                         <table class="table">
                             <thead>
                             <tr>
-                                <th scope="col" align="center">
+                                <th class="col-sm-1" scope="col" align="center">
                                     <input type="checkbox">
                                 </th>
-                                <th scope="col" align="center">
+                                <th class="col-sm-4" scope="col" align="center">
                                     <strong>First Name</strong>
-                                    <span class="caret" style="color: #2F80C1;"></span>
+                                    <i class="table-sort-button glyphicon glyphicon-triangle-bottom"></i>
                                 </th>
-                                <th scope="col" align="center">
+                                <th class="col-sm-4" scope="col" align="center">
                                     <strong>Last Name</strong>
-                                    <span class="caret" style="color: #2F80C1;"></span>
+                                    <i class="table-sort-button glyphicon glyphicon-triangle-bottom"></i>
                                 </th>
-                                <th scope="col" align="center">
+                                <th class="col-sm-3" scope="col" align="center">
                                     <strong>Organization</strong>
-                                    <span class="caret" style="color: #2F80C1;"></span>
+                                    <i class="table-sort-button glyphicon glyphicon-triangle-bottom"></i>
                                 </th>
                             </tr>
                             </thead>
@@ -231,9 +236,221 @@
                                 <th scope="row">
                                     <input type="checkbox">
                                 </th>
-                                <td><a data-toggle="modal" data-target="#detailsOverlay">First Name</a></td>
+                                <td>
+                                    <i class="table-drop-button glyphicon glyphicon-triangle-right" data-toggle="collapse" data-target="#idOfRow1"></i>
+                                    <a data-toggle="modal" data-target="#detailsOverlay">First Name</a>
+                                </td>
                                 <td><a data-toggle="modal" data-target="#detailsOverlay">Last Name</a></td>
                                 <td>Organization</td>
+                            </tr>
+                            <tr id="idOfRow1" class="collapse out">
+                                <td></td>
+                                <td>
+                                    Email Address: firstALastA@abc.com<br>
+                                    Skill Level: Novice
+                                </td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">
+                                    <input type="checkbox">
+                                </th>
+                                <td>
+                                    <i class="table-drop-button glyphicon glyphicon-triangle-right" data-toggle="collapse" data-target="#idOfRow2"></i>
+                                    <a data-toggle="modal" data-target="#detailsOverlay">First Name</a>
+                                </td>
+                                <td><a data-toggle="modal" data-target="#detailsOverlay">Last Name</a></td>
+                                <td>Organization</td>
+                            </tr>
+                            <tr id="idOfRow2" class="collapse out">
+                                <td></td>
+                                <td>
+                                    Email Address: firstALastA@abc.com<br>
+                                    Skill Level: Novice
+                                </td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">
+                                    <input type="checkbox">
+                                </th>
+                                <td>
+                                    <i class="table-drop-button glyphicon glyphicon-triangle-right" data-toggle="collapse" data-target="#idOfRow3"></i>
+                                    <a data-toggle="modal" data-target="#detailsOverlay">First Name</a>
+                                </td>
+                                <td><a data-toggle="modal" data-target="#detailsOverlay">Last Name</a></td>
+                                <td>Organization</td>
+                            </tr>
+                            <tr id="idOfRow3" class="collapse out">
+                                <td></td>
+                                <td>
+                                    Email Address: firstALastA@abc.com<br>
+                                    Skill Level: Novice
+                                </td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">
+                                    <input type="checkbox">
+                                </th>
+                                <td>
+                                    <i class="table-drop-button glyphicon glyphicon-triangle-right" data-toggle="collapse" data-target="#idOfRow4"></i>
+                                    <a data-toggle="modal" data-target="#detailsOverlay">First Name</a>
+                                </td>
+                                <td><a data-toggle="modal" data-target="#detailsOverlay">Last Name</a></td>
+                                <td>Organization</td>
+                            </tr>
+                            <tr id="idOfRow4" class="collapse out">
+                                <td></td>
+                                <td>
+                                    Email Address: firstALastA@abc.com<br>
+                                    Skill Level: Novice
+                                </td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">
+                                    <input type="checkbox">
+                                </th>
+                                <td>
+                                    <i class="table-drop-button glyphicon glyphicon-triangle-right" data-toggle="collapse" data-target="#idOfRow5"></i>
+                                    <a data-toggle="modal" data-target="#detailsOverlay">First Name</a>
+                                </td>
+                                <td><a data-toggle="modal" data-target="#detailsOverlay">Last Name</a></td>
+                                <td>Organization</td>
+                            </tr>
+                            <tr id="idOfRow5" class="collapse out">
+                                <td></td>
+                                <td>
+                                    Email Address: firstALastA@abc.com<br>
+                                    Skill Level: Novice
+                                </td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">
+                                    <input type="checkbox">
+                                </th>
+                                <td>
+                                    <i class="table-drop-button glyphicon glyphicon-triangle-right" data-toggle="collapse" data-target="#idOfRow6"></i>
+                                    <a data-toggle="modal" data-target="#detailsOverlay">First Name</a>
+                                </td>
+                                <td><a data-toggle="modal" data-target="#detailsOverlay">Last Name</a></td>
+                                <td>Organization</td>
+                            </tr>
+                            <tr id="idOfRow6" class="collapse out">
+                                <td></td>
+                                <td>
+                                    Email Address: firstALastA@abc.com<br>
+                                    Skill Level: Novice
+                                </td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">
+                                    <input type="checkbox">
+                                </th>
+                                <td>
+                                    <i class="table-drop-button glyphicon glyphicon-triangle-right" data-toggle="collapse" data-target="#idOfRow7"></i>
+                                    <a data-toggle="modal" data-target="#detailsOverlay">First Name</a>
+                                </td>
+                                <td><a data-toggle="modal" data-target="#detailsOverlay">Last Name</a></td>
+                                <td>Organization</td>
+                            </tr>
+                            <tr id="idOfRow7" class="collapse out">
+                                <td></td>
+                                <td>
+                                    Email Address: firstALastA@abc.com<br>
+                                    Skill Level: Novice
+                                </td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">
+                                    <input type="checkbox">
+                                </th>
+                                <td>
+                                    <i class="table-drop-button glyphicon glyphicon-triangle-right" data-toggle="collapse" data-target="#idOfRow8"></i>
+                                    <a data-toggle="modal" data-target="#detailsOverlay">First Name</a>
+                                </td>
+                                <td><a data-toggle="modal" data-target="#detailsOverlay">Last Name</a></td>
+                                <td>Organization</td>
+                            </tr>
+                            <tr id="idOfRow8" class="collapse out">
+                                <td></td>
+                                <td>
+                                    Email Address: firstALastA@abc.com<br>
+                                    Skill Level: Novice
+                                </td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">
+                                    <input type="checkbox">
+                                </th>
+                                <td>
+                                    <i class="table-drop-button glyphicon glyphicon-triangle-right" data-toggle="collapse" data-target="#idOfRow9"></i>
+                                    <a data-toggle="modal" data-target="#detailsOverlay">First Name</a>
+                                </td>
+                                <td><a data-toggle="modal" data-target="#detailsOverlay">Last Name</a></td>
+                                <td>Organization</td>
+                            </tr>
+                            <tr id="idOfRow9" class="collapse out">
+                                <td></td>
+                                <td>
+                                    Email Address: firstALastA@abc.com<br>
+                                    Skill Level: Novice
+                                </td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">
+                                    <input type="checkbox">
+                                </th>
+                                <td>
+                                    <i class="table-drop-button glyphicon glyphicon-triangle-right" data-toggle="collapse" data-target="#idOfRow10"></i>
+                                    <a data-toggle="modal" data-target="#detailsOverlay">First Name</a>
+                                </td>
+                                <td><a data-toggle="modal" data-target="#detailsOverlay">Last Name</a></td>
+                                <td>Organization</td>
+                            </tr>
+                            <tr id="idOfRow10" class="collapse out">
+                                <td></td>
+                                <td>
+                                    Email Address: firstALastA@abc.com<br>
+                                    Skill Level: Novice
+                                </td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">
+                                    <input type="checkbox">
+                                </th>
+                                <td>
+                                    <i class="table-drop-button glyphicon glyphicon-triangle-right" data-toggle="collapse" data-target="#idOfRow11"></i>
+                                    <a data-toggle="modal" data-target="#detailsOverlay">First Name</a>
+                                </td>
+                                <td><a data-toggle="modal" data-target="#detailsOverlay">Last Name</a></td>
+                                <td>Organization</td>
+                            </tr>
+                            <tr id="idOfRow11" class="collapse out">
+                                <td></td>
+                                <td>
+                                    Email Address: firstALastA@abc.com<br>
+                                    Skill Level: Novice
+                                </td>
+                                <td></td>
+                                <td></td>
                             </tr>
                             </tbody>
                         </table>

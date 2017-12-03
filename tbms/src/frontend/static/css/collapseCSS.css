@@ -1,0 +1,21 @@
+.zeroPadding {
+    padding: 0 !important;
+}
+a[aria-expanded=true] .glyphicon-triangle-right {
+   display: none;
+}
+a[aria-expanded=false] .glyphicon-triangle-bottom {
+   display: none;
+}
+
+.table-drop-button {
+    color: #2F80C1;
+}
+
+.table-sort-button {
+    color: #2F80C1;
+}
+
+.selectable-table tr.active td {
+    background-color: #BDF2F9;
+}

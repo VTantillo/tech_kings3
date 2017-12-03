@@ -5,8 +5,10 @@
     <title>Administration</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/collapseCSS.css' )}}"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="{{ url_for('static', filename='scripts/collapseJS.js') }}"></script>
 </head>
 
 <header>
@@ -180,19 +182,18 @@
 
 <!-- WU Overlay Window -->
 <div id="cloneOverlay" class="modal fade" role="dialog">
-    <div class="modal-dialog" style="width: 50%;">
+    <div class="modal-dialog" style="width: 75%; height: 75%; max-height: 75%">
         <!-- Modal content-->
-        <div class="modal-content">
+        <div class="modal-content" style="width: 100%; height: 100%; max-height: 100%">
             <div class="modal-header" align="center" style="background-color: #B8D0E4;">
                 <strong>Clone</strong>
             </div>
-            <div class="modal-body" style="background-color: #E2ECF3;">
+            <div class="modal-body" style="background-color: #E2ECF3; width: 100%; height: 100%; max-height: 100%; overflow-y: scroll;">
                 <table class="table">
                     <tbody>
                     <tr>
-                    <tr>
-                        <td class="col-sm-1" style="border-color: #E2ECF3;"><strong>Selected Workshop Unit</strong></td>
-                        <td class="col-sm-4" style="border-color: #E2ECF3;">Name of selected Workshop Unit</td>
+                        <td class="col-sm-1" style="border-color: #E2ECF3;"><strong>Selected Workshop Units</strong></td>
+                        <td class="col-sm-4" style="border-color: #E2ECF3;">Name of Workshop Unit</td>
                     </tr>
                     <tr>
                         <td class="col-sm-1" style="border-color: #E2ECF3;"><strong>No. of Clones</strong></td>
@@ -223,6 +224,250 @@
                             <button class="glyphicon glyphicon-plus"></button>
                         </td>
                     </tr>
+                    </tbody>
+                    <tbody>
+                    <tr>
+                        <td class="col-sm-1" style="border-color: #E2ECF3;"><strong>Selected Workshop Units</strong></td>
+                        <td class="col-sm-4" style="border-color: #E2ECF3;">Name of Workshop Unit</td>
+                    </tr>
+                    <tr>
+                        <td class="col-sm-1" style="border-color: #E2ECF3;"><strong>No. of Clones</strong></td>
+                        <td class="col-sm-4" style="border-color: #E2ECF3;">
+                            <input type="text" class="form-control" placeholder="Number"
+                                   aria-describedby="sizing-addon1">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-sm-1" style="border-color: #E2ECF3;"><strong>VRDP Seed</strong></td>
+                        <td class="col-sm-4" style="border-color: #E2ECF3;">
+                            <input type="text" class="form-control" placeholder="VRDP Seed"
+                                   aria-describedby="sizing-addon1">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-sm-1" style="border-color: #E2ECF3;"><strong>Network Adapter Name</strong></td>
+                        <td class="col-sm-4" style="border-color: #E2ECF3;">
+                            <input type="text" class="form-control" placeholder="Network Adapter Name"
+                                   aria-describedby="sizing-addon1">
+                        </td>
+                        <td class="col-sm-1" style="border-color: #E2ECF3;"><strong>Network Adapter Seed</strong></td>
+                        <td class="col-sm-4" style="border-color: #E2ECF3;">
+                            <input type="text" class="form-control" placeholder="Network Adapter Seed"
+                                   aria-describedby="sizing-addon1">
+                        </td>
+                        <td class="col-sm-1" style="border-color: #E2ECF3;">
+                            <button class="glyphicon glyphicon-plus"></button>
+                        </td>
+                    </tr>
+                    </tbody>
+                    <tbody>
+                    <tr>
+                        <td class="col-sm-1" style="border-color: #E2ECF3;"><strong>Selected Workshop Units</strong></td>
+                        <td class="col-sm-4" style="border-color: #E2ECF3;">Name of Workshop Unit</td>
+                    </tr>
+                    <tr>
+                        <td class="col-sm-1" style="border-color: #E2ECF3;"><strong>No. of Clones</strong></td>
+                        <td class="col-sm-4" style="border-color: #E2ECF3;">
+                            <input type="text" class="form-control" placeholder="Number"
+                                   aria-describedby="sizing-addon1">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-sm-1" style="border-color: #E2ECF3;"><strong>VRDP Seed</strong></td>
+                        <td class="col-sm-4" style="border-color: #E2ECF3;">
+                            <input type="text" class="form-control" placeholder="VRDP Seed"
+                                   aria-describedby="sizing-addon1">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-sm-1" style="border-color: #E2ECF3;"><strong>Network Adapter Name</strong></td>
+                        <td class="col-sm-4" style="border-color: #E2ECF3;">
+                            <input type="text" class="form-control" placeholder="Network Adapter Name"
+                                   aria-describedby="sizing-addon1">
+                        </td>
+                        <td class="col-sm-1" style="border-color: #E2ECF3;"><strong>Network Adapter Seed</strong></td>
+                        <td class="col-sm-4" style="border-color: #E2ECF3;">
+                            <input type="text" class="form-control" placeholder="Network Adapter Seed"
+                                   aria-describedby="sizing-addon1">
+                        </td>
+                        <td class="col-sm-1" style="border-color: #E2ECF3;">
+                            <button class="glyphicon glyphicon-plus"></button>
+                        </td>
+                    </tr>
+                    </tbody>
+                    <tbody>
+                    <tr>
+                        <td class="col-sm-1" style="border-color: #E2ECF3;"><strong>Selected Workshop Units</strong></td>
+                        <td class="col-sm-4" style="border-color: #E2ECF3;">Name of Workshop Unit</td>
+                    </tr>
+                    <tr>
+                        <td class="col-sm-1" style="border-color: #E2ECF3;"><strong>No. of Clones</strong></td>
+                        <td class="col-sm-4" style="border-color: #E2ECF3;">
+                            <input type="text" class="form-control" placeholder="Number"
+                                   aria-describedby="sizing-addon1">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-sm-1" style="border-color: #E2ECF3;"><strong>VRDP Seed</strong></td>
+                        <td class="col-sm-4" style="border-color: #E2ECF3;">
+                            <input type="text" class="form-control" placeholder="VRDP Seed"
+                                   aria-describedby="sizing-addon1">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-sm-1" style="border-color: #E2ECF3;"><strong>Network Adapter Name</strong></td>
+                        <td class="col-sm-4" style="border-color: #E2ECF3;">
+                            <input type="text" class="form-control" placeholder="Network Adapter Name"
+                                   aria-describedby="sizing-addon1">
+                        </td>
+                        <td class="col-sm-1" style="border-color: #E2ECF3;"><strong>Network Adapter Seed</strong></td>
+                        <td class="col-sm-4" style="border-color: #E2ECF3;">
+                            <input type="text" class="form-control" placeholder="Network Adapter Seed"
+                                   aria-describedby="sizing-addon1">
+                        </td>
+                        <td class="col-sm-1" style="border-color: #E2ECF3;">
+                            <button class="glyphicon glyphicon-plus"></button>
+                        </td>
+                    </tr>
+                    </tbody>
+                    <tbody>
+                    <tr>
+                        <td class="col-sm-1" style="border-color: #E2ECF3;"><strong>Selected Workshop Units</strong></td>
+                        <td class="col-sm-4" style="border-color: #E2ECF3;">Name of Workshop Unit</td>
+                    </tr>
+                    <tr>
+                        <td class="col-sm-1" style="border-color: #E2ECF3;"><strong>No. of Clones</strong></td>
+                        <td class="col-sm-4" style="border-color: #E2ECF3;">
+                            <input type="text" class="form-control" placeholder="Number"
+                                   aria-describedby="sizing-addon1">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-sm-1" style="border-color: #E2ECF3;"><strong>VRDP Seed</strong></td>
+                        <td class="col-sm-4" style="border-color: #E2ECF3;">
+                            <input type="text" class="form-control" placeholder="VRDP Seed"
+                                   aria-describedby="sizing-addon1">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-sm-1" style="border-color: #E2ECF3;"><strong>Network Adapter Name</strong></td>
+                        <td class="col-sm-4" style="border-color: #E2ECF3;">
+                            <input type="text" class="form-control" placeholder="Network Adapter Name"
+                                   aria-describedby="sizing-addon1">
+                        </td>
+                        <td class="col-sm-1" style="border-color: #E2ECF3;"><strong>Network Adapter Seed</strong></td>
+                        <td class="col-sm-4" style="border-color: #E2ECF3;">
+                            <input type="text" class="form-control" placeholder="Network Adapter Seed"
+                                   aria-describedby="sizing-addon1">
+                        </td>
+                        <td class="col-sm-1" style="border-color: #E2ECF3;">
+                            <button class="glyphicon glyphicon-plus"></button>
+                        </td>
+                    </tr>
+                    </tbody>
+                    <tbody>
+                    <tr>
+                        <td class="col-sm-1" style="border-color: #E2ECF3;"><strong>Selected Workshop Units</strong></td>
+                        <td class="col-sm-4" style="border-color: #E2ECF3;">Name of Workshop Unit</td>
+                    </tr>
+                    <tr>
+                        <td class="col-sm-1" style="border-color: #E2ECF3;"><strong>No. of Clones</strong></td>
+                        <td class="col-sm-4" style="border-color: #E2ECF3;">
+                            <input type="text" class="form-control" placeholder="Number"
+                                   aria-describedby="sizing-addon1">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-sm-1" style="border-color: #E2ECF3;"><strong>VRDP Seed</strong></td>
+                        <td class="col-sm-4" style="border-color: #E2ECF3;">
+                            <input type="text" class="form-control" placeholder="VRDP Seed"
+                                   aria-describedby="sizing-addon1">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-sm-1" style="border-color: #E2ECF3;"><strong>Network Adapter Name</strong></td>
+                        <td class="col-sm-4" style="border-color: #E2ECF3;">
+                            <input type="text" class="form-control" placeholder="Network Adapter Name"
+                                   aria-describedby="sizing-addon1">
+                        </td>
+                        <td class="col-sm-1" style="border-color: #E2ECF3;"><strong>Network Adapter Seed</strong></td>
+                        <td class="col-sm-4" style="border-color: #E2ECF3;">
+                            <input type="text" class="form-control" placeholder="Network Adapter Seed"
+                                   aria-describedby="sizing-addon1">
+                        </td>
+                        <td class="col-sm-1" style="border-color: #E2ECF3;">
+                            <button class="glyphicon glyphicon-plus"></button>
+                        </td>
+                    </tr>
+                    </tbody>
+                    <tbody>
+                    <tr>
+                        <td class="col-sm-1" style="border-color: #E2ECF3;"><strong>Selected Workshop Units</strong></td>
+                        <td class="col-sm-4" style="border-color: #E2ECF3;">Name of Workshop Unit</td>
+                    </tr>
+                    <tr>
+                        <td class="col-sm-1" style="border-color: #E2ECF3;"><strong>No. of Clones</strong></td>
+                        <td class="col-sm-4" style="border-color: #E2ECF3;">
+                            <input type="text" class="form-control" placeholder="Number"
+                                   aria-describedby="sizing-addon1">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-sm-1" style="border-color: #E2ECF3;"><strong>VRDP Seed</strong></td>
+                        <td class="col-sm-4" style="border-color: #E2ECF3;">
+                            <input type="text" class="form-control" placeholder="VRDP Seed"
+                                   aria-describedby="sizing-addon1">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-sm-1" style="border-color: #E2ECF3;"><strong>Network Adapter Name</strong></td>
+                        <td class="col-sm-4" style="border-color: #E2ECF3;">
+                            <input type="text" class="form-control" placeholder="Network Adapter Name"
+                                   aria-describedby="sizing-addon1">
+                        </td>
+                        <td class="col-sm-1" style="border-color: #E2ECF3;"><strong>Network Adapter Seed</strong></td>
+                        <td class="col-sm-4" style="border-color: #E2ECF3;">
+                            <input type="text" class="form-control" placeholder="Network Adapter Seed"
+                                   aria-describedby="sizing-addon1">
+                        </td>
+                        <td class="col-sm-1" style="border-color: #E2ECF3;">
+                            <button class="glyphicon glyphicon-plus"></button>
+                        </td>
+                    </tr>
+                    </tbody>
+                    <tbody>
+                    <tr>
+                        <td class="col-sm-1" style="border-color: #E2ECF3;"><strong>Selected Workshop Units</strong></td>
+                        <td class="col-sm-4" style="border-color: #E2ECF3;">Name of Workshop Unit</td>
+                    </tr>
+                    <tr>
+                        <td class="col-sm-1" style="border-color: #E2ECF3;"><strong>No. of Clones</strong></td>
+                        <td class="col-sm-4" style="border-color: #E2ECF3;">
+                            <input type="text" class="form-control" placeholder="Number"
+                                   aria-describedby="sizing-addon1">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-sm-1" style="border-color: #E2ECF3;"><strong>VRDP Seed</strong></td>
+                        <td class="col-sm-4" style="border-color: #E2ECF3;">
+                            <input type="text" class="form-control" placeholder="VRDP Seed"
+                                   aria-describedby="sizing-addon1">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-sm-1" style="border-color: #E2ECF3;"><strong>Network Adapter Name</strong></td>
+                        <td class="col-sm-4" style="border-color: #E2ECF3;">
+                            <input type="text" class="form-control" placeholder="Network Adapter Name"
+                                   aria-describedby="sizing-addon1">
+                        </td>
+                        <td class="col-sm-1" style="border-color: #E2ECF3;"><strong>Network Adapter Seed</strong></td>
+                        <td class="col-sm-4" style="border-color: #E2ECF3;">
+                            <input type="text" class="form-control" placeholder="Network Adapter Seed"
+                                   aria-describedby="sizing-addon1">
+                        </td>
+                        <td class="col-sm-1" style="border-color: #E2ECF3;">
+                            <button class="glyphicon glyphicon-plus"></button>
+                        </td>
                     </tr>
                     </tbody>
                 </table>
@@ -247,8 +492,10 @@
             <li><a href="{{ url_for('admin_user_profiles') }}"><img src="{{ url_for('static', filename='images/user_profiles_icon.png') }}"></a></li>
         </div>
     </div>
-    <div class="panel panel-default col-md-10" style="border-right-color: black; border-left-color: black; height: 100%; margin-bottom: 0px;">
-        <div class="panel-body">
+
+    <div class="panel panel-default col-md-10" style="border-right-color: black; border-left-color: black; max-height: 100%; height: 100%; margin-bottom: 0px;">
+        <div class="panel-body"  style="height: 100%;">
+
             <nav class="navbar navbar-default" style="background-color: #ffffff; border-color: #ffffff;">
                 <div class="container-fluid">
                     <div class="navbar-header">
@@ -300,34 +547,35 @@
                 </div>
                 </div><!-- /.container-fluid -->
             </nav>
-            <div class="panel panel-default" style="background-color: #FCFCFC; border-color: black">
+
+            <div class="panel panel-default" style="background-color: #FCFCFC; border-color: black; max-height: 90%; height: 90%;">
                 <div class="panel-heading" style="background-color: #BCD3E6;" align="center"><strong>Workshop Units</strong></div>
-                    <div class="panel-body">
+                    <div class="panel-body" style="max-height: 94%; overflow-y: scroll;">
                         <table class="table">
                             <thead>
                             <tr>
-                                <th scope="col" align="center">
+                                <th class="col-sm-1" scope="col" align="center">
                                     <input type="checkbox">
                                 </th>
-                                <th scope="col" align="center">
+                                <th class="col-sm-4" scope="col" align="center">
                                     <strong>Workshop Unit</strong>
-                                    <span class="caret" style="color: #2F80C1;"></span>
+                                    <i class="table-sort-button glyphicon glyphicon-triangle-bottom"></i>
                                 </th>
-                                <th scope="col" align="center">
+                                <th class="col-sm-2" scope="col" align="center">
                                     <strong>No. of VMs</strong>
-                                    <span class="caret" style="color: #2F80C1;"></span>
+                                    <i class="table-sort-button glyphicon glyphicon-triangle-bottom"></i>
                                 </th>
-                                <th scope="col" align="center">
+                                <th class="col-sm-2" scope="col" align="center">
                                     <strong>Host</strong>
-                                    <span class="caret" style="color: #2F80C1;"></span>
+                                    <i class="table-sort-button glyphicon glyphicon-triangle-bottom"></i>
                                 </th>
-                                <th scope="col" align="center">
+                                <th class="col-sm-2" scope="col" align="center">
                                     <strong>Session</strong>
-                                    <span class="caret" style="color: #2F80C1;"></span>
+                                    <i class="table-sort-button glyphicon glyphicon-triangle-bottom"></i>
                                 </th>
-                                <th scope="col" align="center">
+                                <th class="col-sm-1" scope="col" align="center">
                                     <strong>Status</strong>
-                                    <span class="caret" style="color: #2F80C1;"></span>
+                                    <i class="table-sort-button glyphicon glyphicon-triangle-bottom"></i>
                                 </th>
                             </tr>
                             </thead>
@@ -336,11 +584,199 @@
                                 <th scope="row">
                                     <input type="checkbox">
                                 </th>
-                                <td><a data-toggle="modal" data-target="#detailsOverlay">Workshop Unit</a></td>
+                                <td>
+                                    <i class="table-drop-button glyphicon glyphicon-triangle-right" data-toggle="collapse" data-target="#idOfRow1"></i>
+                                    <a data-toggle="modal" data-target="#detailsOverlay">Workshop Unit</a>
+                                </td>
                                 <td>No.</td>
                                 <td>Host</td>
                                 <td>Session</td>
                                 <td>Status</td>
+                            </tr>
+                            <tr id="idOfRow1" class="collapse out">
+                                <td></td>
+                                <td>
+                                    Description:<br>
+                                    <p>
+                                        This is th dscription blah blah blah blahhfsjakhflkjsdfkjalshfjksah fasnhfvlkjn jkfsad fkljnsk fnksfhasjek najkdhf kjs
+                                        fsda vjfkshflashkf lncsahkfc
+                                        fsdavjfsancflsahfsjlksha clnfhjssalj
+                                    </p>
+                                    Virtual Machines:<br>
+                                    <ul>
+                                        <li><table class="table"><tr><td class="col-sm-5">VM1</td><td class="col-sm-2">1234</td><td class="col-sm-5">netAdapter1,netAapter2</td></tr></table></li>
+                                        <li><table class="table"><tr><td class="col-sm-5">VM2</td><td class="col-sm-2">1235</td><td class="col-sm-5">netAdapter3</td></tr></table></li>
+                                    </ul>
+                                </td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">
+                                    <input type="checkbox">
+                                </th>
+                                <td>
+                                    <i class="table-drop-button glyphicon glyphicon-triangle-right" data-toggle="collapse" data-target="#idOfRow2"></i>
+                                    <a data-toggle="modal" data-target="#detailsOverlay">Workshop Unit</a>
+                                </td>
+                                <td>No.</td>
+                                <td>Host</td>
+                                <td>Session</td>
+                                <td>Status</td>
+                            </tr>
+                            <tr id="idOfRow2" class="collapse out">
+                                <td></td>
+                                <td>
+                                    Description:<br>
+                                    <p>
+                                        This is th dscription blah blah blah blahhfsjakhflkjsdfkjalshfjksah fasnhfvlkjn jkfsad fkljnsk fnksfhasjek najkdhf kjs
+                                        fsda vjfkshflashkf lncsahkfc
+                                        fsdavjfsancflsahfsjlksha clnfhjssalj
+                                    </p>
+                                    Virtual Machines:<br>
+                                    <ul>
+                                        <li><table class="table"><tr><td class="col-sm-5">VM1</td><td class="col-sm-2">1234</td><td class="col-sm-5">netAdapter1,netAapter2</td></tr></table></li>
+                                        <li><table class="table"><tr><td class="col-sm-5">VM2</td><td class="col-sm-2">1235</td><td class="col-sm-5">netAdapter3</td></tr></table></li>
+                                    </ul>
+                                </td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">
+                                    <input type="checkbox">
+                                </th>
+                                <td>
+                                    <i class="table-drop-button glyphicon glyphicon-triangle-right" data-toggle="collapse" data-target="#idOfRow3"></i>
+                                    <a data-toggle="modal" data-target="#detailsOverlay">Workshop Unit</a>
+                                </td>
+                                <td>No.</td>
+                                <td>Host</td>
+                                <td>Session</td>
+                                <td>Status</td>
+                            </tr>
+                            <tr id="idOfRow3" class="collapse out">
+                                <td></td>
+                                <td>
+                                    Description:<br>
+                                    <p>
+                                        This is th dscription blah blah blah blahhfsjakhflkjsdfkjalshfjksah fasnhfvlkjn jkfsad fkljnsk fnksfhasjek najkdhf kjs
+                                        fsda vjfkshflashkf lncsahkfc
+                                        fsdavjfsancflsahfsjlksha clnfhjssalj
+                                    </p>
+                                    Virtual Machines:<br>
+                                    <ul>
+                                        <li><table class="table"><tr><td class="col-sm-5">VM1</td><td class="col-sm-2">1234</td><td class="col-sm-5">netAdapter1,netAapter2</td></tr></table></li>
+                                        <li><table class="table"><tr><td class="col-sm-5">VM2</td><td class="col-sm-2">1235</td><td class="col-sm-5">netAdapter3</td></tr></table></li>
+                                    </ul>
+                                </td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">
+                                    <input type="checkbox">
+                                </th>
+                                <td>
+                                    <i class="table-drop-button glyphicon glyphicon-triangle-right" data-toggle="collapse" data-target="#idOfRow4"></i>
+                                    <a data-toggle="modal" data-target="#detailsOverlay">Workshop Unit</a>
+                                </td>
+                                <td>No.</td>
+                                <td>Host</td>
+                                <td>Session</td>
+                                <td>Status</td>
+                            </tr>
+                            <tr id="idOfRow4" class="collapse out">
+                                <td></td>
+                                <td>
+                                    Description:<br>
+                                    <p>
+                                        This is th dscription blah blah blah blahhfsjakhflkjsdfkjalshfjksah fasnhfvlkjn jkfsad fkljnsk fnksfhasjek najkdhf kjs
+                                        fsda vjfkshflashkf lncsahkfc
+                                        fsdavjfsancflsahfsjlksha clnfhjssalj
+                                    </p>
+                                    Virtual Machines:<br>
+                                    <ul>
+                                        <li><table class="table"><tr><td class="col-sm-5">VM1</td><td class="col-sm-2">1234</td><td class="col-sm-5">netAdapter1,netAapter2</td></tr></table></li>
+                                        <li><table class="table"><tr><td class="col-sm-5">VM2</td><td class="col-sm-2">1235</td><td class="col-sm-5">netAdapter3</td></tr></table></li>
+                                    </ul>
+                                </td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">
+                                    <input type="checkbox">
+                                </th>
+                                <td>
+                                    <i class="table-drop-button glyphicon glyphicon-triangle-right" data-toggle="collapse" data-target="#idOfRow5"></i>
+                                    <a data-toggle="modal" data-target="#detailsOverlay">Workshop Unit</a>
+                                </td>
+                                <td>No.</td>
+                                <td>Host</td>
+                                <td>Session</td>
+                                <td>Status</td>
+                            </tr>
+                            <tr id="idOfRow5" class="collapse out">
+                                <td></td>
+                                <td>
+                                    Description:<br>
+                                    <p>
+                                        This is th dscription blah blah blah blahhfsjakhflkjsdfkjalshfjksah fasnhfvlkjn jkfsad fkljnsk fnksfhasjek najkdhf kjs
+                                        fsda vjfkshflashkf lncsahkfc
+                                        fsdavjfsancflsahfsjlksha clnfhjssalj
+                                    </p>
+                                    Virtual Machines:<br>
+                                    <ul>
+                                        <li><table class="table"><tr><td class="col-sm-5">VM1</td><td class="col-sm-2">1234</td><td class="col-sm-5">netAdapter1,netAapter2</td></tr></table></li>
+                                        <li><table class="table"><tr><td class="col-sm-5">VM2</td><td class="col-sm-2">1235</td><td class="col-sm-5">netAdapter3</td></tr></table></li>
+                                    </ul>
+                                </td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">
+                                    <input type="checkbox">
+                                </th>
+                                <td>
+                                    <i class="table-drop-button glyphicon glyphicon-triangle-right" data-toggle="collapse" data-target="#idOfRow6"></i>
+                                    <a data-toggle="modal" data-target="#detailsOverlay">Workshop Unit</a>
+                                </td>
+                                <td>No.</td>
+                                <td>Host</td>
+                                <td>Session</td>
+                                <td>Status</td>
+                            </tr>
+                            <tr id="idOfRow6" class="collapse out">
+                                <td></td>
+                                <td>
+                                    Description:<br>
+                                    <p>
+                                        This is th dscription blah blah blah blahhfsjakhflkjsdfkjalshfjksah fasnhfvlkjn jkfsad fkljnsk fnksfhasjek najkdhf kjs
+                                        fsda vjfkshflashkf lncsahkfc
+                                        fsdavjfsancflsahfsjlksha clnfhjssalj
+                                    </p>
+                                    Virtual Machines:<br>
+                                    <ul>
+                                        <li><table class="table"><tr><td class="col-sm-5">VM1</td><td class="col-sm-2">1234</td><td class="col-sm-5">netAdapter1,netAapter2</td></tr></table></li>
+                                        <li><table class="table"><tr><td class="col-sm-5">VM2</td><td class="col-sm-2">1235</td><td class="col-sm-5">netAdapter3</td></tr></table></li>
+                                    </ul>
+                                </td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
                             </tr>
                             </tbody>
                         </table>
