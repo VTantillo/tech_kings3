@@ -1,4 +1,3 @@
-# todo: STILL have no idea what to do about the polling durations for stuff
-# todo: workshop history table??
-# todo: server credentials table??
-# todo: permissions
+"""
+Salamah said to try and make it so that this module just has 4 methods that everyone can use.
+"""

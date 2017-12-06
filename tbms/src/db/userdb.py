@@ -1,1 +1,3 @@
-from db.db_def import User, Credentials, Permissions
+"""
+User subsystem specific database operations that the db_manager will call
+"""
