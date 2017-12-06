@@ -1,18 +1,16 @@
-import sqlite3
+"""
+Describes the tables of the database in SQLAlchemy declarative language
+"""
 
 from sqlalchemy import create_engine, ForeignKey
 from sqlalchemy import Column, Date, Integer, String, Boolean, Table
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import relationship, backref
+from sqlalchemy.orm import relationship
 
 # todo: STILL have no idea what to do about the polling durations for stuff
-# todo: workshop history table??
-# todo: server credentials table??
-# todo: permissions
 
 engine = create_engine('sqlite:///test.db', echo=True)
 Base = declarative_base()
-
 
 # Workshop subsystem stuff
 # n:n tables
@@ -49,6 +47,12 @@ group_surveys = Table('group_surveys', Base.metadata,
                              ForeignKey('workshop_group.id')),
                       Column('survey_id', Integer, ForeignKey('survey.id'))
                       )
+
+user_history = Table('user_history', Base.metadata,
+                     Column('user_id', Integer,
+                            ForeignKey('user.id')),
+                     Column('unit_id', Integer, ForeignKey('workshop_unit.id'))
+                     )
 
 
 class VirtualMachine(Base):
@@ -189,7 +193,7 @@ class User(Base):
         id | first name | last name | organization | email | skill level |
         credentials (1:1) | workshop history
     """
-    __tablename__ = "users"
+    __tablename__ = "user"
 
     id = Column(Integer, primary_key=True)
     first_name = Column(String)
@@ -198,17 +202,21 @@ class User(Base):
     email = Column(String)
     skill_level = Column(String)
     credentials = relationship("Credentials", uselist=False,
-                               back_populates="users")
+                               back_populates="user")
+    permissions = relationship("Permissions")
+
+    # unit has an n:n relationship
+    workshop_history = relationship("WorkshopUnit", secondary='user_history')
 
     # References
     session_id = Column(Integer, ForeignKey('session.id'))
-    session = relationship('Session', back_populates='users')
+    session = relationship('Session', back_populates='user')
 
 
 class Credentials(Base):
     """
     Fields:
-        users id | username | password
+        user id | username | password
     """
     __tablename__ = "credentials"
 
@@ -216,18 +224,18 @@ class Credentials(Base):
     password = Column(String)
 
     # References
-    user_id = Column(Integer, ForeignKey('users.id'), primary_key=True)
+    user_id = Column(Integer, ForeignKey('user.id'), primary_key=True)
     user = relationship('User', back_populates='credentials')
 
 
 class Permissions(Base):
     """
-    Specifies what the users can do in the systems
+    Specifies what the user can do in the systems
 
     Current fields are place holders just to see if the db script runs.
     """
     __tablename__ = "permissions"
-    # todo: fix the table
+
     id = Column(Integer, primary_key=True)
     type = Column(String)
 
@@ -248,10 +256,25 @@ class Server(Base):
     password = Column(String)
 
 
+class ServerCredentials(Base):
+    """
+    Fields:
+        user id | username | password
+    """
+    __tablename__ = "server_credentials"
+
+    username = Column(String)
+    password = Column(String)
+
+    # References
+    server_id = Column(Integer, ForeignKey('server.id'), primary_key=True)
+    server = relationship('Server', back_populates='server_credentials')
+
+
 class Session(Base):
     """
     Fields:
-        id | users (1:1) | unit (1:1) | lifetime | start time
+        id | user (1:1) | unit (1:1) | lifetime | start time
 
         (Should it have an end time too?)
     """
@@ -261,7 +284,7 @@ class Session(Base):
     lifetime = Column(Integer)
     start_time = Column(Date)
 
-    # users has a 1:1 relationship
+    # user has a 1:1 relationship
     user = relationship("User", uselist=False, back_populates="session")
 
     # unit has a 1:1 relationship
@@ -323,7 +346,7 @@ class ReferenceMaterial(Base):
 class Survey(Base):
     """
     Fields:
-        id | name | file location | completed (boolean) | users (1:1)
+        id | name | file location | completed (boolean) | user (1:1)
     """
     __tablename__ = "survey"
 
@@ -331,6 +354,7 @@ class Survey(Base):
     name = Column(String)
     file_location = Column(String)
     completed = Column(Boolean)
+
     user = relationship("User", uselist=False, back_populates="survey")
 
 
