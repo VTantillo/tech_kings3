@@ -2,15 +2,6 @@
 Network subsystem specific database operations that the db_manager will call
 """
 
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
-
-from db.db_def import Server
-from db.db_def import ServerCredentials
-from db.db_def import Session
-from db.db_def import ConnectionString
-from db.db_def import Statistics
-
 
 def get(item, item_id):
     """
