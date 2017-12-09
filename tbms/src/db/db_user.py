@@ -21,7 +21,7 @@ def get(item, item_id):
             'organization': "UTEP",
             'email': "tkings@miners.utep.edu",
             'skill_level': "advanced",
-            'permission': 1
+            'permission': 2
         }
     """if item == "credentials" and item_id == "tech.kings2":
         dictionary = {

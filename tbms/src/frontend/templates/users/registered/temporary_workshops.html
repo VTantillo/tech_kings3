@@ -84,6 +84,9 @@
 </div>
 
 <body style="height: calc(100% - 52px);">
+<div class="col-sm-12" align="center">
+  <strong style="color: red;">{{ page_error }}</strong>
+</div>
     <div class="sidebar col-md-2">
         <div class="nav nav-pills nav-stacked">
             <li class="active"><a href="{{ url_for('users_registered_temporary_workshops') }}" style="background-color: #B8D0E4;"><img src="{{ url_for('static', filename='images/temporary_workshops_icon.png') }}"></a></li>
