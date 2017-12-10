@@ -4,6 +4,7 @@ A workshop group contains multiple workshop units of a specific exercise
 
 from workshop.cloneable import Cloneable
 from workshop.portable import Portable
+import workshop.workshop_unit
 
 
 class WorkshopGroup(Cloneable, Portable):

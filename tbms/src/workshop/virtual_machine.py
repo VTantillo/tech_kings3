@@ -4,6 +4,8 @@ belong to a unit.
 """
 
 from workshop.cloneable import Cloneable
+import workshop.network_adapter
+import workshop.snapshot
 
 
 class VirtualMachine(Cloneable):
