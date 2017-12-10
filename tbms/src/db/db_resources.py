@@ -2,11 +2,6 @@
 Resource subsystem specific database operations that the db_manager will call
 """
 
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
-
-from db.db_def import ReferenceMaterial
-from db.db_def import Survey
 
 
 def get(item, item_id):
