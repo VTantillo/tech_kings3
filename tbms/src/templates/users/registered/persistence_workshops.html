@@ -31,16 +31,18 @@
                     <div class="dropdown">
                         <button type="button" class="btn btn-default dropdown-toggle" style="background-color: #ECECEC;"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <strong>Logged in: Test User</strong>
+                            <strong>Logged in: {{ user['first_name'] + " " + user['last_name'] }}</strong>
                             <span class="caret" style="color: #2F80C1;"></span>
                         </button>
                         <ul class="dropdown-menu" style="background-color: #F8F8F8; border-color: black; width: 250px">
                             <div class="col-sm-6">
                                 <li>
+                                    <a href="{{ url_for('logout', logout='logout') }}">
                                     <button type="button" class="btn btn-default"
                                             style="background-color: #ECECEC; margin-bottom: 5px; width: 100px;">
                                         Logout
                                     </button>
+                                    </a>
                                 </li>
                                 <li>
                                     <button type="button" class="btn btn-default"

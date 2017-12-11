@@ -10,34 +10,34 @@ def login_error(error_dictionary):
         return render_template("login.html", register_error=error_dictionary['register_error'])
 
 
-def admin_servers_error(error_dictionary):
+def admin_servers_error(error_dictionary, user):
     if 'page_error' in error_dictionary.keys():
-        return render_template("administration/servers.html", page_error=error_dictionary['page_error'])
+        return render_template("administration/servers.html", page_error=error_dictionary['page_error'], user=user)
 
 
-def admin_statistics_error(error_dictionary):
+def admin_statistics_error(error_dictionary, user):
     if 'page_error' in error_dictionary.keys():
-        return render_template("administration/statistics.html", page_error=error_dictionary['page_error'])
+        return render_template("administration/statistics.html", page_error=error_dictionary['page_error'], user=user)
 
 
-def admin_user_profiles_error(error_dictionary):
+def admin_user_profiles_error(error_dictionary, user):
     if 'page_error' in error_dictionary.keys():
-        return render_template("administration/user_profiles.html", page_error=error_dictionary['page_error'])
+        return render_template("administration/user_profiles.html", page_error=error_dictionary['page_error'], user=user)
 
 
-def admin_virtual_machines_error(error_dictionary):
+def admin_virtual_machines_error(error_dictionary, user):
     if 'page_error' in error_dictionary.keys():
-        return render_template("administration/virtual_machines.html", page_error=error_dictionary['page_error'])
+        return render_template("administration/virtual_machines.html", page_error=error_dictionary['page_error'], user=user)
 
 
-def admin_workshop_groups_error(error_dictionary):
+def admin_workshop_groups_error(error_dictionary, user):
     if 'page_error' in error_dictionary.keys():
-        return render_template("administration/workshop_groups.html", page_error=error_dictionary['page_error'])
+        return render_template("administration/workshop_groups.html", page_error=error_dictionary['page_error'], user=user)
 
 
-def admin_workshop_units_error(error_dictionary):
+def admin_workshop_units_error(error_dictionary, user):
     if 'page_error' in error_dictionary.keys():
-        return render_template("administration/workshop_units.html", page_error=error_dictionary['page_error'])
+        return render_template("administration/workshop_units.html", page_error=error_dictionary['page_error'], user=user)
 
 
 def users_guest_temporary_workshops_error(error_dictionary):
@@ -45,11 +45,11 @@ def users_guest_temporary_workshops_error(error_dictionary):
         return render_template("users/guest/temporary_workshops.html", page_error=error_dictionary['page_error'])
 
 
-def users_registered_temporary_workshops_error(error_dictionary):
+def users_registered_temporary_workshops_error(error_dictionary, user):
     if 'page_error' in error_dictionary.keys():
-        return render_template("users/registered/temporary_workshops.html", page_error=error_dictionary['page_error'])
+        return render_template("users/registered/temporary_workshops.html", page_error=error_dictionary['page_error'], user=user)
 
 
-def users_registered_persistence_workshops_error(error_dictionary):
+def users_registered_persistence_workshops_error(error_dictionary, user):
     if 'page_error' in error_dictionary.keys():
-        return render_template("users/registered/persistence_workshops.html", page_error=error_dictionary['page_error'])
+        return render_template("users/registered/persistence_workshops.html", page_error=error_dictionary['page_error'], user=user)

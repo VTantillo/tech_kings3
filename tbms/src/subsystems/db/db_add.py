@@ -1,8 +1,8 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from db.db_def import User, Credentials, Permissions
+from db_def import User, Credentials, Permissions
 
-import hashlib
+import _pysha3
 
 engine = create_engine('sqlite:///test.db', echo=True)
 
@@ -11,7 +11,7 @@ session = Session()
 
 salt = "tech.kings"
 
-sha = hashlib.sha3_256(b"tech.kings").hexdigest()
+sha = _pysha3.sha3_256(b"tech.kings").hexdigest()
 
 hash_salt = sha
 
@@ -24,8 +24,8 @@ salt2 = "two"
 hash_salt1 = salt1 + password1 + hash_salt
 hash_salt2 = salt2 + password2 + hash_salt
 
-hash_salt1 = hashlib.sha3_256(hash_salt1.encode()).hexdigest()
-hash_salt2 = hashlib.sha3_256(hash_salt2.encode()).hexdigest()
+hash_salt1 = _pysha3.sha3_256(hash_salt1.encode()).hexdigest()
+hash_salt2 = _pysha3.sha3_256(hash_salt2.encode()).hexdigest()
 
 user1 = User(
     first_name="Tech",

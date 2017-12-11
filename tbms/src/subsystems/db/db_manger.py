@@ -2,10 +2,10 @@
 Interface for the rest of the system to the database
 """
 
-import tbms.src.subsystems.db.db_workshop as workshop
-import tbms.src.subsystems.db.db_user as user
-import tbms.src.subsystems.db.db_network as network
-import tbms.src.subsystems.db.db_resources as resources
+import db_workshop as workshop
+import db_user as user
+import db_network as network
+import db_resources as resources
 
 
 class WorkshopDB:
@@ -55,6 +55,7 @@ class WorkshopDB:
 
 
 class UserDB:
+
     @staticmethod
     def get(item, item_id):
         # get record item is table and item_id is key
@@ -96,12 +97,7 @@ class UserDB:
 class NetworkDB:
     @staticmethod
     def get(item, item_id):
-        """
-        Description:
-        :param item:
-        :param item_id:
-        :return:
-        """
+        # get record item is table and item_id is key
         data = network.get(item, item_id)
         return data
 
