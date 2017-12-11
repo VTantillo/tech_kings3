@@ -92,189 +92,104 @@
 
 <div class="panel panel-default col-md-10"
      style="border-right-color: black; border-left-color: black; height: 100%; margin-bottom: 0px;">
-    <table style="width: 100%; height: 55%; max-height: 55%;">
-        <tbody style="height: 100%; max-height: 100%;">
-        <tr style="height: 100%; max-height: 100%;">
-            <td class="col-sm-5" style="height: 100%; max-height: 100%;">
-                <div class="panel panel-default"
-                     style="background-color: #FCFCFC; border-color: black; max-height: 90%; height: 90%;">
-                    <div class="panel-heading" style="background-color: #FCFCFC;" align="center"><strong>Available
-                        Virtual Machines</strong></div>
-                    <div class="panel-body" style="height: 90%; max-height: 90%; overflow-y: scroll;">
-                        <table class="table selectable-table">
-                            <thead>
-                            <td>
-                                <i class="table-drop-button glyphicon glyphicon-triangle-right"
-                                   data-toggle="collapse"
-                                   data-target=".idOfRow1"></i>
-                                <strong>Workshop Groups</strong>
-                            </td>
-                            </thead>
+    <div class="panel panel-default col-md-5"
+                     style="background-color: #FCFCFC; border-color: black; max-height: 50%; height: 50%;">
+                    <div class="panel-heading" style="background-color: #FCFCFC;" align="center"><strong>Workshop Groups and Units</strong></div>
+                    <div class="panel-body" style="height: 85%; max-height: 85%; overflow-y: scroll;">
+                        <table>
                             <tbody>
-                            <tr class="collapse out idOfRow1 clickable-row">
+                            <tr>
                                 <td>
-                                    Workshop Group A
+                                    <i class="table-drop-button glyphicon glyphicon-triangle-right"
+                                       data-toggle="collapse" data-target="#agroups"></i>
+                                    <strong>Workshop Groups</strong>
                                 </td>
                             </tr>
-                            <tr class="collapse out idOfRow1 clickable-row">
+                            <tr id="agroups" class="collapse out">
                                 <td>
-                                    Workshop Group B
+                                    {% for row_index in range(servers|count) %}
+                                        {% for index in range(servers[row_index].get_groups()|count) %}
+                                            <input type="checkbox">
+                                            {{ servers[row_index].get_groups()[index] }}<br><br>
+                                        {% endfor %}
+                                    {% endfor %}
                                 </td>
                             </tr>
-                            <tr class="collapse out idOfRow1 clickable-row">
+                            <tr>
                                 <td>
-                                    Workshop Group C
+                                    <i class="table-drop-button glyphicon glyphicon-triangle-right"
+                                       data-toggle="collapse" data-target="#astandalone_units"></i>
+                                    <strong>Standalone Workshop Units</strong>
                                 </td>
                             </tr>
-                            </tbody>
-                            <thead>
-                            <td>
-                                <i class="table-drop-button glyphicon glyphicon-triangle-right"
-                                   data-toggle="collapse"
-                                   data-target=".idOfRow2"></i>
-                                <strong>Standalone Workshop Units</strong>
-                            </td>
-                            </thead>
-                            <tbody>
-                            <tr class="collapse out idOfRow2 clickable-row">
+                            <tr id="astandalone_units" class="collapse out">
                                 <td>
-                                    Workshop Unit A
-                                </td>
-                            </tr>
-                            <tr class="collapse out idOfRow2 clickable-row">
-                                <td>
-                                    Workshop Unit B
-                                </td>
-                            </tr>
-                            </tbody>
-                            <thead>
-                            <td>
-                                <i class="table-drop-button glyphicon glyphicon-triangle-right"
-                                   data-toggle="collapse"
-                                   data-target=".idOfRow1"></i>
-                                <strong>Workshop Groups</strong>
-                            </td>
-                            </thead>
-                            <tbody>
-                            <tr class="collapse out idOfRow1 clickable-row">
-                                <td>
-                                    Workshop Group A
-                                </td>
-                            </tr>
-                            <tr class="collapse out idOfRow1 clickable-row">
-                                <td>
-                                    Workshop Group B
-                                </td>
-                            </tr>
-                            <tr class="collapse out idOfRow1 clickable-row">
-                                <td>
-                                    Workshop Group C
-                                </td>
-                            </tr>
-                            </tbody>
-                            <thead>
-                            <td>
-                                <i class="table-drop-button glyphicon glyphicon-triangle-right"
-                                   data-toggle="collapse"
-                                   data-target=".idOfRow2"></i>
-                                <strong>Standalone Workshop Units</strong>
-                            </td>
-                            </thead>
-                            <tbody>
-                            <tr class="collapse out idOfRow2 clickable-row">
-                                <td>
-                                    Workshop Unit A
-                                </td>
-                            </tr>
-                            <tr class="collapse out idOfRow2 clickable-row">
-                                <td>
-                                    Workshop Unit B
+                                    {% for row_index in range(servers|count) %}
+                                        {% for index in range(servers[row_index].get_standalone_units()|count) %}
+                                            <input type="checkbox">
+                                            {{ servers[row_index].get_standalone_units()[index] }}<br><br>
+                                        {% endfor %}
+                                    {% endfor %}
                                 </td>
                             </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
-            </td>
-            <td class="col-sm-2">
-                <div align="center">
-                    <table style="height: 100%;"><!-- Table used for Vertical Align -->
-                        <tbody>
-                        <tr>
-                            <td class="align-middle">
-                                <button type="button" class="btn btn-default align-middle"
-                                        style="background-color: #ECECEC;"> >>
-                                </button>
-                                <br><br>
-                                <button type="button" class="btn btn-default align-middle"
-                                        style="background-color: #ECECEC;"> <<
-                                </button>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
+    <div class="panel panel-default col-md-2" align="center"
+                     style="background-color: #ffffff; border-color: #ffffff; max-height: 50%; height: 50%;">
+                    <button type="button" class="btn btn-default align-middle"
+                            style="background-color: #ECECEC;"> >>
+                    </button>
+                    <br><br>
+                    <button type="button" class="btn btn-default align-middle"
+                            style="background-color: #ECECEC;"> <<
+                    </button>
                 </div>
-            </td>
-            <td class="col-sm-5" style="height: 100%; max-height: 100%;">
-                <div class="panel panel-default"
-                     style="background-color: #FCFCFC; border-color: black; max-height: 90%; height: 90%;">
-                    <div class="panel-heading" style="background-color: #FCFCFC;" align="center"><strong>
-                        Selected
-                        Virtual Machines</strong></div>
-                    <div class="panel-body" style="height: 90%; max-height: 90%; overflow-y: scroll;">
-                        <table class="table selectable-table">
-                            <thead>
-                            <td>
-                                <i class="table-drop-button glyphicon glyphicon-triangle-right"
-                                   data-toggle="collapse"
-                                   data-target=".idOfRow1a"></i>
-                                <strong>Workshop Groups</strong>
-                            </td>
-                            </thead>
+    <div class="panel panel-default col-md-5"
+                     style="background-color: #FCFCFC; border-color: black; max-height: 50%; height: 50%;">
+                    <div class="panel-heading" style="background-color: #FCFCFC;" align="center"><strong>Workshop Groups and Units</strong></div>
+                    <div class="panel-body" style="height: 85%; max-height: 85%; overflow-y: scroll;">
+                        <table>
                             <tbody>
-                            <tr class="collapse out idOfRow1a clickable-row">
+                            <tr>
                                 <td>
-                                    Workshop Group A
+                                    <i class="table-drop-button glyphicon glyphicon-triangle-right"
+                                       data-toggle="collapse" data-target="#bgroups"></i>
+                                    <strong>Workshop Groups</strong>
                                 </td>
                             </tr>
-                            <tr class="collapse out idOfRow1a clickable-row">
+                            <tr id="bgroups" class="collapse out">
                                 <td>
-                                    Workshop Group B
+                                    {% for row_index in range(servers|count) %}
+                                        {% for index in range(servers[row_index].get_groups()|count) %}
+                                            <input type="checkbox">
+                                            {{ servers[row_index].get_groups()[index] }}<br><br>
+                                        {% endfor %}
+                                    {% endfor %}
                                 </td>
                             </tr>
-                            <tr class="collapse out idOfRow1a clickable-row">
+                            <tr>
                                 <td>
-                                    Workshop Group C
+                                    <i class="table-drop-button glyphicon glyphicon-triangle-right"
+                                       data-toggle="collapse" data-target="#bstandalone_units"></i>
+                                    <strong>Standalone Workshop Units</strong>
                                 </td>
                             </tr>
-                            </tbody>
-                            <thead>
-                            <td>
-                                <i class="table-drop-button glyphicon glyphicon-triangle-right"
-                                   data-toggle="collapse"
-                                   data-target=".idOfRow2a"></i>
-                                <strong>Standalone Workshop Units</strong>
-                            </td>
-                            </thead>
-                            <tbody>
-                            <tr class="collapse out idOfRow2a clickable-row">
+                            <tr id="bstandalone_units" class="collapse out">
                                 <td>
-                                    Workshop Unit A
-                                </td>
-                            </tr>
-                            <tr class="collapse out idOfRow2a clickable-row">
-                                <td>
-                                    Workshop Unit B
+                                    {% for row_index in range(servers|count) %}
+                                        {% for index in range(servers[row_index].get_standalone_units()|count) %}
+                                            <input type="checkbox">
+                                            {{ servers[row_index].get_standalone_units()[index] }}<br><br>
+                                        {% endfor %}
+                                    {% endfor %}
                                 </td>
                             </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
-            </td>
-        </tr>
-        </tbody>
-    </table>
     <div class="panel panel-default col-sm-12"
          style="max-height: 40%; height: 40%; background-color: #E1EBF4; border-color: black"><!-- Donut Graph Area -->
         <div class="panel-heading"

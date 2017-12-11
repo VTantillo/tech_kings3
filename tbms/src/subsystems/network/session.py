@@ -4,7 +4,6 @@ which unit belongs to the user for the duration of the session.
 """
 
 # should collaborate with workshops to get the units
-import workshop.ws_manager
 
 
 class Session:

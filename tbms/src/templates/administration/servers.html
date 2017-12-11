@@ -177,119 +177,41 @@
                             </tr>
                             </thead>
                             <tbody>
-
-                            <tr>
-                                <th scope="row">
-                                    <input type="checkbox">
-                                </th>
-                                <td>
-                                    <i class="table-drop-button glyphicon glyphicon-triangle-right" data-toggle="collapse" data-target="#idOfRow1"></i>
-                                    <a>127.0.0.1</a>
-                                </td>
-                                <td>Status</td>
-                            </tr>
-                            <tr id="idOfRow1" class="collapse out">
+                            {% for row_index in range(servers|count) %}
+                                <tr>
+                                    <th scope="row"><input type="checkbox"></th>
+                                    <td>
+                                        <i class="table-drop-button glyphicon glyphicon-triangle-right"
+                                           data-toggle="collapse" data-target="#{{ row_index }}"></i>
+                                        <a>{{ servers[row_index].get_ip() }}</a>
+                                    </td>
+                                    <td>{{ servers[row_index].get_status() }}</td>
+                                </tr>
+                                <tr id="{{ row_index }}" class="collapse out">
                                 <td></td>
                                 <td>
                                     Workshop Groups:<br>
                                     <ul>
-                                        <li><a>Workshop Group A</a></li>
+                                        {% for index in range(servers[row_index].get_groups()|count) %}
+                                        <li><a>{{ servers[row_index].get_groups()[index] }}</a></li>
+                                        {% endfor %}
                                     </ul>
                                     Workshop Units:<br>
                                     <ul>
-                                        <li><a>Workshop Unit A</a></li>
+                                        {% for index in range(servers[row_index].get_units()|count) %}
+                                        <li><a>{{ servers[row_index].get_units()[index] }}</a></li>
+                                        {% endfor %}
                                     </ul>
                                     Workshop Units(Standalone):<br>
                                     <ul>
-                                        <li><a>Workshop Unit C</a></li>
+                                        {% for index in range(servers[row_index].get_standalone_units()|count) %}
+                                        <li><a>{{ servers[row_index].get_standalone_units()[index] }}</a></li>
+                                        {% endfor %}
                                     </ul>
                                 </td>
                                 <td></td>
                             </tr>
-                            <tr>
-                                <th scope="row">
-                                    <input type="checkbox">
-                                </th>
-                                <td>
-                                    <i data-toggle="collapse" data-target="#idOfRow2" class="table-drop-button glyphicon glyphicon-triangle-right"></i>
-                                    <a>127.0.0.2</a>
-                                </td>
-                                <td>Status</td>
-                            </tr>
-                            <tr id="idOfRow2" class="collapse out">
-                                <td></td>
-                                <td>
-                                    Workshop Groups:<br>
-                                    <ul>
-                                        <li><a>Workshop Group A</a></li>
-                                    </ul>
-                                    Workshop Units:<br>
-                                    <ul>
-                                        <li><a>Workshop Unit A</a></li>
-                                    </ul>
-                                    Workshop Units(Standalone):<br>
-                                    <ul>
-                                        <li><a>Workshop Unit C</a></li>
-                                    </ul>
-                                </td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">
-                                    <input type="checkbox">
-                                </th>
-                                <td>
-                                    <i data-toggle="collapse" data-target="#idOfRow3" class="table-drop-button glyphicon glyphicon-triangle-right"></i>
-                                    <a>127.0.0.3</a>
-                                </td>
-                                <td>Status</td>
-                            </tr>
-                            <tr id="idOfRow3" class="collapse out">
-                                <td></td>
-                                <td>
-                                    Workshop Groups:<br>
-                                    <ul>
-                                        <li><a>Workshop Group A</a></li>
-                                    </ul>
-                                    Workshop Units:<br>
-                                    <ul>
-                                        <li><a>Workshop Unit A</a></li>
-                                    </ul>
-                                    Workshop Units(Standalone):<br>
-                                    <ul>
-                                        <li><a>Workshop Unit C</a></li>
-                                    </ul>
-                                </td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">
-                                    <input type="checkbox">
-                                </th>
-                                <td>
-                                    <i data-toggle="collapse" data-target="#idOfRow4" class="table-drop-button glyphicon glyphicon-triangle-right"></i>
-                                    <a>127.0.0.4</a>
-                                </td>
-                                <td>Status</td>
-                            </tr>
-                            <tr id="idOfRow4" class="collapse out">
-                                <td></td>
-                                <td>
-                                    Workshop Groups:<br>
-                                    <ul>
-                                        <li><a>Workshop Group A</a></li>
-                                    </ul>
-                                    Workshop Units:<br>
-                                    <ul>
-                                        <li><a>Workshop Unit A</a></li>
-                                    </ul>
-                                    Workshop Units(Standalone):<br>
-                                    <ul>
-                                        <li><a>Workshop Unit C</a></li>
-                                    </ul>
-                                </td>
-                                <td></td>
-                            </tr>
+                            {% endfor %}
                             </tbody>
                         </table>
                     </div>

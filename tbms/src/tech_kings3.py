@@ -8,6 +8,7 @@ import time
 from flask import Flask, render_template, request
 
 from subsystems.user import usr_manager
+from subsystems.network import net_manager
 from vboxapi import VirtualBoxManager
 from errors import login_error, users_guest_temporary_workshops_error, users_registered_temporary_workshops_error, \
     admin_servers_error
@@ -17,7 +18,7 @@ class Controller:
 
     def __init__(self):
         self.user = None
-        self.servers = {'date': [u'2012-06-28', u'2012-06-29', u'2012-06-30'], 'users': [405, 368, 119]}
+        self.servers = None
 
     def get_user(self):
         return self.user
@@ -26,10 +27,10 @@ class Controller:
         self.user = u
 
     def get_servers(self):
-        return self.user
+        return self.servers
 
-    def set_servers(self, u):
-        self.user = u
+    def set_servers(self, s):
+        self.servers = s
 
     def clean(self):
         self.user = None
@@ -122,6 +123,9 @@ def login_auth():
         errors = {'login_error': "Invalid username or password"}
         return login_error(errors)
     elif controller.get_user().get_permissions() == 1:
+        # Get list of servers
+        server_list = net_manager.read('servers')
+        controller.set_servers(server_list)
         return admin_servers()
     elif controller.get_user().get_permissions() == 2:
         return users_registered_temporary_workshops()
@@ -132,13 +136,13 @@ def login_auth():
 @app.route('/administration/servers', methods=['POST', 'GET'])
 @admin_required
 def admin_servers():
-    return render_template("administration/servers.html", user=controller.get_user())
+    return render_template("administration/servers.html", user=controller.get_user(), servers=controller.get_servers())
 
 
 @app.route('/administration/statistics', methods=['POST', 'GET'])
 @admin_required
 def admin_statistics():
-    return render_template("administration/statistics.html", user=controller.get_user())
+    return render_template("administration/statistics.html", user=controller.get_user(), servers=controller.get_servers())
 
 
 @app.route('/administration/user_profiles', methods=['POST', 'GET'])
@@ -150,7 +154,7 @@ def admin_user_profiles():
 @app.route('/administration/virtual_machines', methods=['POST', 'GET'])
 @admin_required
 def admin_virtual_machines():
-    return render_template("administration/virtual_machines.html", user=controller.get_user())
+    return render_template("administration/virtual_machines.html", user=controller.get_user(), servers=controller.get_servers())
 
 
 @app.route('/administration/workshop_groups', methods=['POST', 'GET'])

@@ -3,7 +3,6 @@ Statistics will look at the resource usage and connections active on a
 specific server at a given time.
 """
 # collaborates with server
-import network.server
 
 
 class Statistics:
