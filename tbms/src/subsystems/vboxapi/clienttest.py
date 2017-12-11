@@ -55,35 +55,36 @@ def main(argv):
     from vboxapi import VirtualBoxManager
     # This is a VirtualBox COM/XPCOM API client, no data needed.
     #mgr = VirtualBoxManager(None, None)
-    mgr = VirtualBoxManager("WEBSERVICE", {
+    manager = VirtualBoxManager("WEBSERVICE", {
         'url': 'http://192.168.0.18:18083/',
         'user': 'Vbox',
         'password': 'password'})
 
     # Get the global VirtualBox object
-    vbox = mgr.getVirtualBox()
+    vbox = manager.getVirtualBox()
 
     print("Running VirtualBox version %s" %(vbox.version))
 
     # Get all constants through the Python manager code
-    vboxConstants = mgr.constants
+    vboxConstants = manager.constants
 
     # Enumerate all defined machines
-    for mach in mgr.getArray(vbox, 'machines'):
+    for machine in manager.getArray(vbox, 'machines'):
 
         try:
             # Be prepared for failures - the VM can be inaccessible
             vmname = '<inaccessible>'
             try:
-                vmname = mach.name
+                vmname = machine.name
             except Exception as e:
                 None
 
             vmid = '';
             try:
-                vmid = mach.id
+                vmid = machine.id
             except Exception as e:
                 None
+
 
             # Print some basic VM information even if there were errors
             print("Machine name: %s [%s]" %(vmname,vmid))
@@ -91,17 +92,17 @@ def main(argv):
                 continue
 
             # Print some basic VM information
-            print("    State:           %s" %(enumToString(vboxConstants, "MachineState", mach.state)))
-            print("    Session state:   %s" %(enumToString(vboxConstants, "SessionState", mach.sessionState)))
+            print("    State:           %s" %(enumToString(vboxConstants, "MachineState", machine.state)))
+            print("    Session state:   %s" %(enumToString(vboxConstants, "SessionState", machine.sessionState)))
 
             # Do some stuff which requires a running VM
-            if mach.state == vboxConstants.MachineState_Running:
+            if machine.state == vboxConstants.MachineState_Running:
 
                 # Get the session object
-                session = mgr.getSessionObject()
+                session = manager.getSessionObject()
 
                  # Lock the current machine (shared mode, since we won't modify the machine)
-                mach.lockMachine(session, vboxConstants.LockType_Shared)
+                machine.lockMachine(session, vboxConstants.LockType_Shared)
 
                 # Acquire the VM's console and guest object
                 console = session.console
@@ -126,11 +127,11 @@ def main(argv):
                 session.unlockMachine()
 
         except Exception as e:
-            print("Errror [%s]: %s" %(mach.name, str(e)))
+            print("Errror [%s]: %s" %(machine.name, str(e)))
             traceback.print_exc()
 
     # Call destructor and delete manager
-    del mgr
+    del manager
 
 if __name__ == '__main__':
     main(sys.argv)
