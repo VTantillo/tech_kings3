@@ -1,13 +1,23 @@
 from functools import wraps
+from logging import exception
+from multiprocessing import Process
+
+import time
+
+
 from flask import Flask, render_template, request
+
 from subsystems.user import usr_manager
-from errors import login_error, users_guest_temporary_workshops_error, users_registered_temporary_workshops_error, admin_servers_error
+from vboxapi import VirtualBoxManager
+from errors import login_error, users_guest_temporary_workshops_error, users_registered_temporary_workshops_error, \
+    admin_servers_error
 
 
 class Controller:
 
     def __init__(self):
         self.user = None
+        self.servers = {'date': [u'2012-06-28', u'2012-06-29', u'2012-06-30'], 'users': [405, 368, 119]}
 
     def get_user(self):
         return self.user
@@ -15,8 +25,16 @@ class Controller:
     def set_user(self, u):
         self.user = u
 
+    def get_servers(self):
+        return self.user
+
+    def set_servers(self, u):
+        self.user = u
+
     def clean(self):
         self.user = None
+        self.servers = None
+
 
 app = Flask(__name__)
 controller = Controller()
@@ -79,11 +97,14 @@ def login():
     return render_template("login.html")
 
 
-@app.route('/<logout>', methods=['POST', 'GET'])
+@app.route('/request/<logout>', methods=['POST', 'GET'])
 def logout(logout):
-    print("Logout called "+logout)
-    controller.clean()
-    return login()
+    if logout == 'logout':
+        print("Logout called " + logout)
+        controller.clean()
+        return login()
+    else:
+        print("Something else called this idk why")
 
 
 @app.route('/', methods=['POST', 'GET'])
@@ -162,5 +183,26 @@ def users_registered_persistence_workshops():
     return render_template("users/registered/persistence_workshops.html", user=controller.get_user())
 
 
+def ping_loop():
+    while True:
+        print("Pinging 192.168.0.18..")
+        try:
+            manager = VirtualBoxManager("WEBSERVICE", {
+                'url': 'http://192.168.0.18:18083/',
+                'user': 'Vbox',
+                'password': 'password'})
+
+            # Get the global VirtualBox object
+            vbox = manager.getVirtualBox()
+            print("Running VirtualBox version %s" % (vbox.version))
+        except Exception:
+            print("Server not responding")
+            raise
+        time.sleep(10)
+
+
 if __name__ == "__main__":
+    #p = Process(target=ping_loop)
+    #p.start()
     app.run()
+    #p.join()
