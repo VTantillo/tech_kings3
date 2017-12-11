@@ -222,6 +222,7 @@ class Credentials(Base):
 
     username = Column(String)
     password = Column(String)
+    salt = Column(String)
 
     # References
     user_id = Column(Integer, ForeignKey('user.id'), primary_key=True)
