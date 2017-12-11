@@ -9,19 +9,9 @@ import tbms.src.db.db_resources as resources
 
 
 class WorkshopDB:
-    @staticmethod
-    def get(item, item_id):
-        """
-        Description:
-        :param item:
-        :param item_id:
-        :return:
-        """
-        data = workshop.get(item, item_id)
-        return data
 
     @staticmethod
-    def add(item, values):
+    def create(item, values):
         """
         Description:
         :param item:
@@ -30,6 +20,17 @@ class WorkshopDB:
         """
         new_id = workshop.add(item, values)
         return new_id
+
+    @staticmethod
+    def read(item, item_id):
+        """
+        Description:
+        :param item:
+        :param item_id:
+        :return:
+        """
+        data = workshop.get(item, item_id)
+        return data
 
     @staticmethod
     def update(item, item_id, values):
@@ -55,14 +56,9 @@ class WorkshopDB:
 
 
 class UserDB:
-    @staticmethod
-    def get(item, item_id):
-        # get record item is table and item_id is key
-        data = user.get(item, item_id)
-        return data
 
     @staticmethod
-    def add(item, values):
+    def create(item, values):
         """
         Description:
         :param item:
@@ -70,6 +66,12 @@ class UserDB:
         :return:
         """
         return user.add(item, values)
+
+    @staticmethod
+    def read(item, item_id):
+        # get record item is table and item_id is key
+        data = user.get(item, item_id)
+        return data
 
     @staticmethod
     def update(item, item_id, values):
@@ -94,8 +96,19 @@ class UserDB:
 
 
 class NetworkDB:
+
     @staticmethod
-    def get(item, item_id):
+    def create(item, values):
+        """
+        Description:
+        :param item:
+        :param values:
+        :return:
+        """
+        return network.add(item, values)
+
+    @staticmethod
+    def read(item, item_id):
         """
         Description:
         :param item:
@@ -104,16 +117,6 @@ class NetworkDB:
         """
         data = network.get(item, item_id)
         return data
-
-    @staticmethod
-    def add(item, values):
-        """
-        Description:
-        :param item:
-        :param values:
-        :return:
-        """
-        return network.add(item, values)
 
     @staticmethod
     def update(item, item_id, values):
@@ -138,8 +141,19 @@ class NetworkDB:
 
 
 class ResourceDB:
+
     @staticmethod
-    def get(item, item_id):
+    def create(item, values):
+        """
+        Description:
+        :param item:
+        :param values:
+        :return:
+        """
+        return resources.add(item, values)
+
+    @staticmethod
+    def read(item, item_id):
         """
         Description:
         :param item:
@@ -148,16 +162,6 @@ class ResourceDB:
         """
         data = resources.get(item, item_id)
         return data
-
-    @staticmethod
-    def add(item, values):
-        """
-        Description:
-        :param item:
-        :param values:
-        :return:
-        """
-        return resources.add(item, values)
 
     @staticmethod
     def update(item, item_id, values):
