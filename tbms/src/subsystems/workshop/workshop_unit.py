@@ -2,8 +2,8 @@
 A workshop unit contains multiple virtual machines for a particular exercise
 """
 
-from workshop.cloneable import Cloneable
-from workshop.portable import Portable
+from cloneable import Cloneable
+from portable import Portable
 
 
 class WorkshopUnit(Cloneable, Portable):

@@ -4,11 +4,11 @@ from multiprocessing import Process
 
 import time
 
-
 from flask import Flask, render_template, request
 
 from subsystems.user import usr_manager
 from subsystems.network import net_manager
+from subsystems.workshop import ws_manager
 from vboxapi import VirtualBoxManager
 from errors import login_error, users_guest_temporary_workshops_error, users_registered_temporary_workshops_error, \
     admin_servers_error
@@ -124,8 +124,16 @@ def login_auth():
         errors = {'login_error': "Invalid username or password"}
         return login_error(errors)
     elif controller.get_user().get_permissions() == 1:
+
         # Get list of servers
         server_list = net_manager.read('servers')
+        init_servers(server_list)
+        # Get list of unit instances
+        # Get list of workshop instances
+        # Update servers in server list with wg, wu, wu(s), and vms that belong to that server
+
+        print(server_list)
+        # Add to controller
         controller.set_servers(server_list)
         return admin_servers()
     elif controller.get_user().get_permissions() == 2:
@@ -143,7 +151,8 @@ def admin_servers():
 @app.route('/administration/statistics', methods=['POST', 'GET'])
 @admin_required
 def admin_statistics():
-    return render_template("administration/statistics.html", user=controller.get_user(), servers=controller.get_servers())
+    return render_template("administration/statistics.html", user=controller.get_user(),
+                           servers=controller.get_servers())
 
 
 @app.route('/administration/user_profiles', methods=['POST', 'GET'])
@@ -155,19 +164,22 @@ def admin_user_profiles():
 @app.route('/administration/virtual_machines', methods=['POST', 'GET'])
 @admin_required
 def admin_virtual_machines():
-    return render_template("administration/virtual_machines.html", user=controller.get_user(), servers=controller.get_servers())
+    return render_template("administration/virtual_machines.html", user=controller.get_user(),
+                           servers=controller.get_servers())
 
 
 @app.route('/administration/workshop_groups', methods=['POST', 'GET'])
 @admin_required
 def admin_workshop_groups():
-    return render_template("administration/workshop_groups.html", user=controller.get_user())
+    return render_template("administration/workshop_groups.html", user=controller.get_user(),
+                           servers=controller.get_servers())
 
 
 @app.route('/administration/workshop_units', methods=['POST', 'GET'])
 @admin_required
 def admin_workshop_units():
-    return render_template("administration/workshop_units.html", user=controller.get_user())
+    return render_template("administration/workshop_units.html", user=controller.get_user(),
+                           servers=controller.get_servers())
 
 
 @app.route('/users/guest/temporary_workshops', methods=['POST', 'GET'])
@@ -208,6 +220,66 @@ def get_most_recent(root, most_recent):
     return most_recent
 
 
+def init_servers(servers_list):
+    print("Getting VM information from VirtualBox...")
+    for server in servers_list:
+        print("Getting VMs from " + server.get_ip() + "...")
+        manager = VirtualBoxManager("WEBSERVICE", {
+            'url': 'http://' + server.get_ip() + ':18083/',
+            'user': server.get_username,
+            'password': server.get_password})
+
+        # Get the global VirtualBox object
+        vbox = manager.getVirtualBox()
+
+
+        # Make list of wg instances
+        wg_list = []
+        # Get list of wgs in this server from database (query all wg records that have this server as host)
+        # Create list of wg instances
+        # Add wg list for this server
+
+        # Make list of wu instances
+        wu_list = []
+        # Get list of wus in this server from database (query all wu records that have this server as host)
+        # Create list of wu instances
+        # Add wu list for this server
+
+        # Make list of vm instances
+        vm_list = []
+        # Get vms in this server from vbox and create list of vm instances
+        # Enumerate all defined machines
+        for machine in manager.getArray(vbox, 'machines'):
+            print("Machine retrieved")
+            vmname = str(machine.name)
+            vmid = str(machine.id)
+            vmadapter = str(machine.getNetworkAdapter(0).internalNetwork)
+            vmVRDEserver = machine.VRDEServer
+            vmport = str(vmVRDEserver.getVRDEProperty(u'TCP/Ports'))
+            parent_snapshot = find_parent(machine.currentSnapshot)
+            if parent_snapshot != '':
+                most_recent = get_most_recent(parent_snapshot, parent_snapshot)
+                recent_snapshot = str(most_recent.name)
+            else:
+                recent_snapshot = 'No snapshot'
+            vm_fields = {'name': vmname,
+                         'id': vmid,
+                         'adapter': vmadapter,
+                         'port': vmport,
+                         'recent_snapshot': recent_snapshot,
+                         'host_ip': server.get_ip()
+                         }
+            vm_instance = ws_manager.create('vm', vm_fields)
+            vm_list.append(vm_instance)
+            print("Machine added to vm list")
+
+        # Add vm list for this server
+        server.set_vms(vm_list)
+        del manager
+
+    return vm_list
+
+
 def ping_loop():
     while True:
         print("Pinging 192.168.0.18..")
@@ -237,19 +309,18 @@ def ping_loop():
                     None
 
                 vmadapter = machine.getNetworkAdapter(0).internalNetwork
-                print("Adapter Name: "+str(vmadapter))
+                print("Adapter Name: " + str(vmadapter))
 
                 vmVRDEServer = machine.VRDEServer
-                print("Port: "+str(vmVRDEServer.getVRDEProperty(u'TCP/Ports')))
+                print("Port: " + str(vmVRDEServer.getVRDEProperty(u'TCP/Ports')))
 
                 parent_snapshot = find_parent(machine.currentSnapshot)
 
                 if parent_snapshot != '':
                     most_recent = get_most_recent(parent_snapshot, parent_snapshot)
-                    print("Most recent Snapshot: "+str(most_recent.name))
+                    print("Most recent Snapshot: " + str(most_recent.name))
                 else:
                     print("No snapshot")
-
 
                 # Print some basic VM information even if there were errors
                 print("Machine name: %s [%s]" % (vmname, vmid))
@@ -298,18 +369,18 @@ def ping_loop():
                 print("Errror [%s]: %s" % (machine.name, str(e)))
                 traceback.print_exc()
             print(
-            "-----------------------------------------------------------------------------------------------------")
+                "-----------------------------------------------------------------------------------------------------")
         # Call destructor and delete manager
         del manager
         seconds = 600
         while seconds >= 0:
-            #print("Ping in "+str(seconds)+" seoonds...")
+            # print("Ping in "+str(seconds)+" seoonds...")
             time.sleep(1)
-            seconds = seconds-1
+            seconds = seconds - 1
 
 
 if __name__ == "__main__":
-    p = Process(target=ping_loop)
-    p.start()
+    # p = Process(target=ping_loop)
+    # p.start()
     app.run()
-    p.join()
+    # p.join()

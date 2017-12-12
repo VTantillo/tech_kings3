@@ -17,7 +17,7 @@ def read(class_name):
     if class_name == 'servers': # Get all servers in database
         servers = []
         id = 1
-        server = Server(id, '', '', [], [], [], [])
+        server = Server(id, '', '', '', '', [], [], [], [])
         servers.append(server.read())
         if id == -1:
             return None

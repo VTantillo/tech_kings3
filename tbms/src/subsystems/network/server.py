@@ -12,9 +12,11 @@ class Server:
     Representation of a server in the system.
     """
 
-    def __init__(self, id, ip, status, groups, units, standalone_units, vms):
+    def __init__(self, id, ip, username, password, status, groups, units, standalone_units, vms):
         self.id = id
         self.ip = ip
+        self.username = username
+        self.password = password
         self.status = status
         self.groups = groups
         self.units = units
@@ -39,12 +41,12 @@ class Server:
         if len(dictionary.keys()) == 0:
             return None
         else:
-            return Server(dictionary['id'], dictionary['ip'],
+            return Server(dictionary['id'], dictionary['ip'], dictionary['username'], dictionary['password'],
                           'N/A',
-                          ['Workshop Group A', 'Workshop Group B', 'Workshop Group C'],
-                          ['Workshop Unit A', 'Workshop Unit B', 'Workshop Unit C'],
-                          ['Workshop Unit X', 'Workshop Unit Y', 'Workshop Unit Z'],
-                          ['VM 1', 'VM 2', 'VM 3', 'VM 4', 'VM 5', 'VM 6'])
+                          [],
+                          [],
+                          [],
+                          [])
 
     def update(self):
         pass
@@ -54,6 +56,12 @@ class Server:
 
     def get_ip(self):
         return self.ip
+
+    def get_username(self):
+        return self.username
+
+    def get_password(self):
+        return self.password
 
     def get_status(self):
         return self.status
@@ -69,5 +77,11 @@ class Server:
 
     def get_vms(self):
         return self.vms
+
+    def set_vms(self, vm_list):
+        self.vms = vm_list
+
+    def print_server(self):
+        print(str(self.id)+" "+str(self.ip)+" "+str(self.status)+" "+str(self.groups)+" "+str(self.units)+" "+str(self.standalone_units)+" "+str(self.vms))
     # not sure if there is anything else we need to add here
     # for private responsibilities. Store maybe?

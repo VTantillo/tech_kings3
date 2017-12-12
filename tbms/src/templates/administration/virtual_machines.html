@@ -83,19 +83,19 @@
                     <div class="panel-body" style="height: 88%; max-height: 88%; overflow-y: scroll;">
                         <table>
                             <tbody>
-                            {% for row_index in range(servers|count) %}
+                            {% for server_index in range(servers|count) %}
                                 <tr>
                                     <td>
                                         <i class="table-drop-button glyphicon glyphicon-triangle-right"
-                                           data-toggle="collapse" data-target="#a{{ row_index }}"></i>
-                                        <strong>{{ servers[row_index].get_ip() }}</strong>
+                                           data-toggle="collapse" data-target="#a{{ server_index }}"></i>
+                                        <strong>{{ servers[server_index].get_ip() }}</strong>
                                     </td>
                                 </tr>
-                                <tr id="a{{ row_index }}" class="collapse out">
+                                <tr id="a{{ server_index }}" class="collapse out">
                                     <td align="left">
-                                            {% for index in range(servers[row_index].get_vms()|count) %}
+                                            {% for vm_index in range(servers[server_index].get_vms()|count) %}
                                                 <input type="checkbox">
-                                                {{ servers[row_index].get_vms()[index] }}<br><br>
+                                                {{ servers[server_index].get_vms()[vm_index].get_name() }}<br><br>
                                             {% endfor %}
                                     </td>
                                 </tr>
@@ -121,19 +121,19 @@
                     <div class="panel-body" style="height: 88%; max-height: 88%; overflow-y: scroll;">
                         <table>
                             <tbody>
-                            {% for row_index in range(servers|count) %}
+                            {% for server_index in range(servers|count) %}
                                 <tr>
                                     <td>
                                         <i class="table-drop-button glyphicon glyphicon-triangle-right"
-                                           data-toggle="collapse" data-target="#b{{ row_index }}"></i>
-                                        <strong>{{ servers[row_index].get_ip() }}</strong>
+                                           data-toggle="collapse" data-target="#b{{ server_index }}"></i>
+                                        <strong>{{ servers[server_index].get_ip() }}</strong>
                                     </td>
                                 </tr>
-                                <tr id="b{{ row_index }}" class="collapse out">
+                                <tr id="b{{ server_index }}" class="collapse out">
                                     <td align="left">
-                                            {% for index in range(servers[row_index].get_vms()|count) %}
+                                            {% for vm_index in range(servers[server_index].get_vms()|count) %}
                                                 <input type="checkbox">
-                                                {{ servers[row_index].get_vms()[index] }}<br><br>
+                                                {{ servers[server_index].get_vms()[vm_index].get_name() }}<br><br>
                                             {% endfor %}
                                     </td>
                                 </tr>
@@ -535,366 +535,20 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <th scope="row">
-                                    <input type="checkbox">
-                                </th>
-                                <td>Virtual Machine Name</td>
-                                <td>VRDP</td>
-                                <td>Network Adapters</td>
-                                <td>Snapshot</td>
-                                <td>Host</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">
-                                    <input type="checkbox">
-                                </th>
-                                <td>Virtual Machine Name</td>
-                                <td>VRDP</td>
-                                <td>Network Adapters</td>
-                                <td>Snapshot</td>
-                                <td>Host</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">
-                                    <input type="checkbox">
-                                </th>
-                                <td>Virtual Machine Name</td>
-                                <td>VRDP</td>
-                                <td>Network Adapters</td>
-                                <td>Snapshot</td>
-                                <td>Host</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">
-                                    <input type="checkbox">
-                                </th>
-                                <td>Virtual Machine Name</td>
-                                <td>VRDP</td>
-                                <td>Network Adapters</td>
-                                <td>Snapshot</td>
-                                <td>Host</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">
-                                    <input type="checkbox">
-                                </th>
-                                <td>Virtual Machine Name</td>
-                                <td>VRDP</td>
-                                <td>Network Adapters</td>
-                                <td>Snapshot</td>
-                                <td>Host</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">
-                                    <input type="checkbox">
-                                </th>
-                                <td>Virtual Machine Name</td>
-                                <td>VRDP</td>
-                                <td>Network Adapters</td>
-                                <td>Snapshot</td>
-                                <td>Host</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">
-                                    <input type="checkbox">
-                                </th>
-                                <td>Virtual Machine Name</td>
-                                <td>VRDP</td>
-                                <td>Network Adapters</td>
-                                <td>Snapshot</td>
-                                <td>Host</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">
-                                    <input type="checkbox">
-                                </th>
-                                <td>Virtual Machine Name</td>
-                                <td>VRDP</td>
-                                <td>Network Adapters</td>
-                                <td>Snapshot</td>
-                                <td>Host</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">
-                                    <input type="checkbox">
-                                </th>
-                                <td>Virtual Machine Name</td>
-                                <td>VRDP</td>
-                                <td>Network Adapters</td>
-                                <td>Snapshot</td>
-                                <td>Host</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">
-                                    <input type="checkbox">
-                                </th>
-                                <td>Virtual Machine Name</td>
-                                <td>VRDP</td>
-                                <td>Network Adapters</td>
-                                <td>Snapshot</td>
-                                <td>Host</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">
-                                    <input type="checkbox">
-                                </th>
-                                <td>Virtual Machine Name</td>
-                                <td>VRDP</td>
-                                <td>Network Adapters</td>
-                                <td>Snapshot</td>
-                                <td>Host</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">
-                                    <input type="checkbox">
-                                </th>
-                                <td>Virtual Machine Name</td>
-                                <td>VRDP</td>
-                                <td>Network Adapters</td>
-                                <td>Snapshot</td>
-                                <td>Host</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">
-                                    <input type="checkbox">
-                                </th>
-                                <td>Virtual Machine Name</td>
-                                <td>VRDP</td>
-                                <td>Network Adapters</td>
-                                <td>Snapshot</td>
-                                <td>Host</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">
-                                    <input type="checkbox">
-                                </th>
-                                <td>Virtual Machine Name</td>
-                                <td>VRDP</td>
-                                <td>Network Adapters</td>
-                                <td>Snapshot</td>
-                                <td>Host</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">
-                                    <input type="checkbox">
-                                </th>
-                                <td>Virtual Machine Name</td>
-                                <td>VRDP</td>
-                                <td>Network Adapters</td>
-                                <td>Snapshot</td>
-                                <td>Host</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">
-                                    <input type="checkbox">
-                                </th>
-                                <td>Virtual Machine Name</td>
-                                <td>VRDP</td>
-                                <td>Network Adapters</td>
-                                <td>Snapshot</td>
-                                <td>Host</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">
-                                    <input type="checkbox">
-                                </th>
-                                <td>Virtual Machine Name</td>
-                                <td>VRDP</td>
-                                <td>Network Adapters</td>
-                                <td>Snapshot</td>
-                                <td>Host</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">
-                                    <input type="checkbox">
-                                </th>
-                                <td>Virtual Machine Name</td>
-                                <td>VRDP</td>
-                                <td>Network Adapters</td>
-                                <td>Snapshot</td>
-                                <td>Host</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">
-                                    <input type="checkbox">
-                                </th>
-                                <td>Virtual Machine Name</td>
-                                <td>VRDP</td>
-                                <td>Network Adapters</td>
-                                <td>Snapshot</td>
-                                <td>Host</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">
-                                    <input type="checkbox">
-                                </th>
-                                <td>Virtual Machine Name</td>
-                                <td>VRDP</td>
-                                <td>Network Adapters</td>
-                                <td>Snapshot</td>
-                                <td>Host</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">
-                                    <input type="checkbox">
-                                </th>
-                                <td>Virtual Machine Name</td>
-                                <td>VRDP</td>
-                                <td>Network Adapters</td>
-                                <td>Snapshot</td>
-                                <td>Host</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">
-                                    <input type="checkbox">
-                                </th>
-                                <td>Virtual Machine Name</td>
-                                <td>VRDP</td>
-                                <td>Network Adapters</td>
-                                <td>Snapshot</td>
-                                <td>Host</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">
-                                    <input type="checkbox">
-                                </th>
-                                <td>Virtual Machine Name</td>
-                                <td>VRDP</td>
-                                <td>Network Adapters</td>
-                                <td>Snapshot</td>
-                                <td>Host</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">
-                                    <input type="checkbox">
-                                </th>
-                                <td>Virtual Machine Name</td>
-                                <td>VRDP</td>
-                                <td>Network Adapters</td>
-                                <td>Snapshot</td>
-                                <td>Host</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">
-                                    <input type="checkbox">
-                                </th>
-                                <td>Virtual Machine Name</td>
-                                <td>VRDP</td>
-                                <td>Network Adapters</td>
-                                <td>Snapshot</td>
-                                <td>Host</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">
-                                    <input type="checkbox">
-                                </th>
-                                <td>Virtual Machine Name</td>
-                                <td>VRDP</td>
-                                <td>Network Adapters</td>
-                                <td>Snapshot</td>
-                                <td>Host</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">
-                                    <input type="checkbox">
-                                </th>
-                                <td>Virtual Machine Name</td>
-                                <td>VRDP</td>
-                                <td>Network Adapters</td>
-                                <td>Snapshot</td>
-                                <td>Host</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">
-                                    <input type="checkbox">
-                                </th>
-                                <td>Virtual Machine Name</td>
-                                <td>VRDP</td>
-                                <td>Network Adapters</td>
-                                <td>Snapshot</td>
-                                <td>Host</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">
-                                    <input type="checkbox">
-                                </th>
-                                <td>Virtual Machine Name</td>
-                                <td>VRDP</td>
-                                <td>Network Adapters</td>
-                                <td>Snapshot</td>
-                                <td>Host</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">
-                                    <input type="checkbox">
-                                </th>
-                                <td>Virtual Machine Name</td>
-                                <td>VRDP</td>
-                                <td>Network Adapters</td>
-                                <td>Snapshot</td>
-                                <td>Host</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">
-                                    <input type="checkbox">
-                                </th>
-                                <td>Virtual Machine Name</td>
-                                <td>VRDP</td>
-                                <td>Network Adapters</td>
-                                <td>Snapshot</td>
-                                <td>Host</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">
-                                    <input type="checkbox">
-                                </th>
-                                <td>Virtual Machine Name</td>
-                                <td>VRDP</td>
-                                <td>Network Adapters</td>
-                                <td>Snapshot</td>
-                                <td>Host</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">
-                                    <input type="checkbox">
-                                </th>
-                                <td>Virtual Machine Name</td>
-                                <td>VRDP</td>
-                                <td>Network Adapters</td>
-                                <td>Snapshot</td>
-                                <td>Host</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">
-                                    <input type="checkbox">
-                                </th>
-                                <td>Virtual Machine Name</td>
-                                <td>VRDP</td>
-                                <td>Network Adapters</td>
-                                <td>Snapshot</td>
-                                <td>Host</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">
-                                    <input type="checkbox">
-                                </th>
-                                <td>Virtual Machine Name</td>
-                                <td>VRDP</td>
-                                <td>Network Adapters</td>
-                                <td>Snapshot</td>
-                                <td>Host</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">
-                                    <input type="checkbox">
-                                </th>
-                                <td>Virtual Machine Name</td>
-                                <td>VRDP</td>
-                                <td>Network Adapters</td>
-                                <td>Snapshot</td>
-                                <td>Host</td>
-                            </tr>
+                            {% for server_index in range(servers|count) %}
+                                {% for vm_index in range(servers[server_index].get_vms()|count) %}
+                                    <tr>
+                                        <th scope="row">
+                                            <input type="checkbox">
+                                        </th>
+                                        <td>{{ servers[server_index].get_vms()[vm_index].get_name() }}</td>
+                                        <td>{{ servers[server_index].get_vms()[vm_index].get_port() }}</td>
+                                        <td>{{ servers[server_index].get_vms()[vm_index].get_adapter() }}</td>
+                                        <td>{{ servers[server_index].get_vms()[vm_index].get_recent_snapshot() }}</td>
+                                        <td><a>{{ servers[server_index].get_vms()[vm_index].get_host_ip() }}</a></td>
+                                    </tr>
+                                {% endfor %}
+                            {% endfor %}
                             </tbody>
                         </table>
                     </div>
