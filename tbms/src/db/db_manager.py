@@ -2,10 +2,10 @@
 Interface for the rest of the system to the database
 """
 
-import tbms.src.db.db_workshop as workshop
-import tbms.src.db.db_user as user
-import tbms.src.db.db_network as network
-import tbms.src.db.db_resources as resources
+import db.db_workshop as workshop
+import db.db_user as user
+import db.db_network as network
+import db.db_resources as resources
 
 
 class WorkshopDB:
@@ -23,7 +23,7 @@ class WorkshopDB:
         return new_id
 
     @staticmethod
-    def read(item, item_id):
+    def read(item, item_id=None):
         """
         Retrieves the specified item from the database by the identifier
         provided.
@@ -76,7 +76,7 @@ class UserDB:
         return user.create(item, values)
 
     @staticmethod
-    def read(item, item_id):
+    def read(item, item_id=None):
         """
         Retrieves the specified item from the database by the identifier
         provided.
@@ -128,7 +128,7 @@ class NetworkDB:
         return network.create(item, values)
 
     @staticmethod
-    def read(item, item_id):
+    def read(item, item_id=None):
         """
         Retrieves the specified item from the database by the identifier
         provided.
@@ -179,7 +179,7 @@ class ResourceDB:
         return resources.create(item, values)
 
     @staticmethod
-    def read(item, item_id):
+    def read(item, item_id=None):
         """
         Retrieves the specified item from the database by the identifier
         provided.

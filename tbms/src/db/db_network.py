@@ -55,9 +55,6 @@ def read(item, item_id):
     if item == "all servers":
         pass
 
-    if item == "all connection strings":
-        pass
-
     if item == "all sessions":
         pass
 

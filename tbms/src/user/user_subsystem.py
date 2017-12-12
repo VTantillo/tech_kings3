@@ -1,6 +1,6 @@
 import hashlib
 
-from tbms.src.db.db_manger import UserDB
+from tbms.src.db.db_manager import UserDB
 
 
 class UserManager:

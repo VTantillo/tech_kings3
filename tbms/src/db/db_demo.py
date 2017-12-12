@@ -9,7 +9,6 @@ from sqlalchemy.orm import relationship
 
 from db import engine
 
-#engine = create_engine('sqlite:///test.db', echo=True)
 Base = declarative_base()
 
 # Workshop subsystem stuff

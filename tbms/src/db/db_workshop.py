@@ -2,6 +2,8 @@
 Workshop subsystem specific operations that the db_manager will call.
 """
 
+import db.q_workshops as q
+
 
 def create(item, values):
     """
@@ -10,22 +12,22 @@ def create(item, values):
     :return:
     """
     if item == "virtual machine":
-        pass
+        q.add_vm(values)
 
     if item == "workshop unit":
-        pass
+        q.add_wu(values)
 
     if item == "workshop group":
-        pass
+        q.add_wg(values)
 
     if item == "snapshot":
-        pass
+        q.add_snapshot(values)
 
     if item == "network adapter":
-        pass
+        q.add_network_adapter(values)
 
 
-def read(item, item_id):
+def read(item, item_id=None):
     """
 
     :param item:
@@ -33,28 +35,34 @@ def read(item, item_id):
     :return:
     """
     if item == "virtual machine":
-        pass
+        return q.get_vm(item_id)
 
     if item == "workshop unit":
-        pass
+        return q.get_wu(item_id)
 
     if item == "workshop group":
-        pass
+        return q.get_wg(item_id)
 
     if item == "snapshot":
-        pass
+        return q.get_snapshot(item_id)
 
     if item == "network adapter":
-        pass
+        return q.get_network_adapter(item_id)
 
     if item == "all vms":
-        pass
+        return q.get_all_vms()
 
     if item == "all wus":
-        pass
+        return q.get_all_wus()
 
     if item == "all wgs":
-        pass
+        return q.get_all_wgs()
+
+    if item == "server wus":
+        return q.get_server_wus(item_id)
+
+    if item == "server wgs":
+        return q.get_server_wgs(item_id)
 
 
 def update(item, item_id, values):
@@ -66,19 +74,19 @@ def update(item, item_id, values):
     :return:
     """
     if item == "virtual machine":
-        pass
+        return q.update_vm(item_id, values)
 
     if item == "workshop unit":
-        pass
+        return q.update_wu(item_id, values)
 
     if item == "workshop group":
-        pass
+        return q.update_wg(item_id, values)
 
     if item == "snapshot":
-        pass
+        return q.update_wu(item_id, values)
 
     if item == "network adapter":
-        pass
+        return q.update_network_adapter(item_id, values)
 
 
 def delete(item, item_id):
@@ -89,16 +97,16 @@ def delete(item, item_id):
     :return:
     """
     if item == "virtual machine":
-        pass
+        return q.delete_vm(item_id)
 
     if item == "workshop unit":
-        pass
+        return q.delete_wu(item_id)
 
     if item == "workshop group":
-        pass
+        return q.delete_wg(item_id)
 
     if item == "snapshot":
-        pass
+        return q.delete_snapshot(item_id)
 
     if item == "network adapter":
-        pass
+        return q.delete_network_adapter(item_id)
