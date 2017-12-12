@@ -13,46 +13,53 @@ class WorkshopDB:
     @staticmethod
     def create(item, values):
         """
-        Description:
-        :param item:
-        :param values:
-        :return:
+        Adds a new item to the database
+        :param item: A string specifying which class that is to be added
+        :param values: A dictionary with the values that are to be added to
+            the row corresponding to the new item
+        :return: The id of the item that was created in the database
         """
-        new_id = workshop.add(item, values)
+        new_id = workshop.create(item, values)
         return new_id
 
     @staticmethod
     def read(item, item_id):
         """
-        Description:
-        :param item:
-        :param item_id:
-        :return:
+        Retrieves the specified item from the database by the identifier
+        provided.
+        :param item: A string of the class that the caller wants to get from
+            the db
+        :param item_id: An identifier used to retrieve the item from the
+            database.  In the case of the workshop, it should be an integer
+        :return: A dictionary of the item that was requested.  If the item
+            was not found in the database it should return an empty dictionary.
         """
-        data = workshop.get(item, item_id)
+        data = workshop.read(item, item_id)
         return data
 
     @staticmethod
     def update(item, item_id, values):
         """
-        Description:
-        :param item:
-        :param item_id:
-        :param values:
-        :return:
+        Updates a specific row of the table with new information.
+        :param item: A string of the name of the class that is going to be
+            updated.
+        :param item_id: Identifier of which item is to be updated
+        :param values: A dictionary of values that the caller wants to changed
+            in the table
+        :return: A boolean if the update was successful or not
         """
         # need to check whether or not the values dict is empty first
-        workshop.update(item, item_id, values)
+        return workshop.update(item, item_id, values)
 
     @staticmethod
     def delete(item, item_id):
         """
-        Description:
-        :param item:
-        :param item_id:
-        :return:
+        Deletes the item with the specified id from the database
+        :param item: String of the class that the caller wants to delete.
+        :param item_id: Identifier of the item that the caller wants to delete.
+        :return: A boolean if the deletion was successful or not
         """
-        workshop.delete(item, item_id)
+        return workshop.delete(item, item_id)
 
 
 class UserDB:
@@ -60,39 +67,51 @@ class UserDB:
     @staticmethod
     def create(item, values):
         """
-        Description:
-        :param item:
-        :param values:
-        :return:
+        Adds a new item to the database
+        :param item: A string specifying which class that is to be added
+        :param values: A dictionary with the values that are to be added to
+            the row corresponding to the new item
+        :return: The id of the item that was created in the database
         """
-        return user.add(item, values)
+        return user.create(item, values)
 
     @staticmethod
     def read(item, item_id):
-        # get record item is table and item_id is key
-        data = user.get(item, item_id)
-        return data
+        """
+        Retrieves the specified item from the database by the identifier
+        provided.
+        :param item: A string of the class that the caller wants to get from
+            the db
+        :param item_id: An identifier used to retrieve the item from the
+            database. For the user, a special case is getting the
+            credentials, so the identifier could be a string as well as int
+        :return: A dictionary of the item that was requested.  If the item
+            was not found in the database it should return an empty dictionary.
+        """
+        return user.read(item, item_id)
 
     @staticmethod
     def update(item, item_id, values):
         """
-        Description:
-        :param item:
-        :param item_id:
-        :param values:
-        :return:
+        Updates a specific row of the table with new information.
+        :param item: A string of the name of the class that is going to be
+            updated.
+        :param item_id: Identifier of which item is to be updated
+        :param values: A dictionary of values that the caller wants to changed
+            in the table
+        :return: A boolean if the update was successful or not
         """
-        user.update(item, item_id, values)
+        return user.update(item, item_id, values)
 
     @staticmethod
     def delete(item, item_id):
         """
-        Description:
-        :param item:
-        :param item_id:
-        :return:
+        Deletes the item with the specified id from the database
+        :param item: String of the class that the caller wants to delete.
+        :param item_id: Identifier of the item that the caller wants to delete.
+        :return: A boolean if the deletion was successful or not
         """
-        user.delete(item, item_id)
+        return user.delete(item, item_id)
 
 
 class NetworkDB:
@@ -100,44 +119,50 @@ class NetworkDB:
     @staticmethod
     def create(item, values):
         """
-        Description:
-        :param item:
-        :param values:
-        :return:
+        Description: Adds a new item to the database
+        :param item: A string specifying which class that is to be added
+        :param values: A dictionary with the values that are to be added to
+            the row corresponding to the new item
+        :return: The id of the item that was created in the database
         """
-        return network.add(item, values)
+        return network.create(item, values)
 
     @staticmethod
     def read(item, item_id):
         """
-        Description:
-        :param item:
-        :param item_id:
-        :return:
+        Retrieves the specified item from the database by the identifier
+        provided.
+        :param item: A string of the class that the caller wants to get from
+            the db
+        :param item_id: An identifier used to retrieve the item from the
+            database.
+        :return: A dictionary of the item that was requested.  If the item
+            was not found in the database it should return an empty dictionary.
         """
-        data = network.get(item, item_id)
-        return data
+        return network.read(item, item_id)
 
     @staticmethod
     def update(item, item_id, values):
         """
-        Description:
-        :param item:
-        :param item_id:
-        :param values:
-        :return:
+        Updates a specific row of the table with new information.
+        :param item: A string of the name of the class that is going to be
+            updated.
+        :param item_id: Identifier of which item is to be updated
+        :param values: A dictionary of values that the caller wants to changed
+            in the table
+        :return: A boolean if the update was successful or not
         """
-        network.update(item, item_id, values)
+        return network.update(item, item_id, values)
 
     @staticmethod
     def delete(item, item_id):
         """
-        Description:
-        :param item:
-        :param item_id:
-        :return:
+        Deletes the item with the specified id from the database
+        :param item: String of the class that the caller wants to delete.
+        :param item_id: Identifier of the item that the caller wants to delete.
+        :return: A boolean if the deletion was successful or not
         """
-        network.delete(item, item_id)
+        return network.delete(item, item_id)
 
 
 class ResourceDB:
@@ -145,41 +170,47 @@ class ResourceDB:
     @staticmethod
     def create(item, values):
         """
-        Description:
-        :param item:
-        :param values:
-        :return:
+        Description: Adds a new item to the database
+        :param item: A string specifying which class that is to be added
+        :param values: A dictionary with the values that are to be added to
+            the row corresponding to the new item
+        :return: The id of the item that was created in the database
         """
-        return resources.add(item, values)
+        return resources.create(item, values)
 
     @staticmethod
     def read(item, item_id):
         """
-        Description:
-        :param item:
-        :param item_id:
-        :return:
+        Retrieves the specified item from the database by the identifier
+        provided.
+        :param item: A string of the class that the caller wants to get from
+            the db
+        :param item_id: An identifier used to retrieve the item from the
+            database.
+        :return: A dictionary of the item that was requested.  If the item
+            was not found in the database it should return an empty dictionary.
         """
-        data = resources.get(item, item_id)
-        return data
+        return resources.read(item, item_id)
 
     @staticmethod
     def update(item, item_id, values):
         """
-        Description:
-        :param item:
-        :param item_id:
-        :param values:
-        :return:
+        Updates a specific row of the table with new information.
+        :param item: A string of the name of the class that is going to be
+            updated.
+        :param item_id: Identifier of which item is to be updated
+        :param values: A dictionary of values that the caller wants to changed
+            in the table
+        :return: A boolean if the update was successful or not
         """
-        resources.update(item, item_id, values)
+        return resources.update(item, item_id, values)
 
     @staticmethod
     def delete(item, item_id):
         """
-        Description:
-        :param item:
-        :param item_id:
-        :return:
+        Deletes the item with the specified id from the database
+        :param item: String of the class that the caller wants to delete.
+        :param item_id: Identifier of the item that the caller wants to delete.
+        :return: A boolean if the deletion was successful or not
         """
-        resources.delete(item, item_id)
+        return resources.delete(item, item_id)

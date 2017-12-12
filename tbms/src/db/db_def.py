@@ -7,8 +7,6 @@ from sqlalchemy import Column, Date, Integer, String, Boolean, Table
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 
-# todo: STILL have no idea what to do about the polling durations for stuff
-
 engine = create_engine('sqlite:///test.db', echo=True)
 Base = declarative_base()
 
@@ -121,6 +119,8 @@ class WorkshopUnit(Base):
     surveys = relationship("Survey", secondary=unit_surveys)
 
     # References
+    wg_id = Column(Integer, ForeignKey("workshop_group.id"))
+
     session_id = Column(Integer, ForeignKey('session.id'))
     session = relationship('Session', back_populates='workshop_unit')
 
@@ -142,7 +142,7 @@ class WorkshopGroup(Base):
     lifetime = Column(Integer)
     published_date = Column(Date)
 
-    # VMs have a 1:n relationship
+    # WUs have a 1:n relationship
     wus = relationship("WorkshopUnit")
 
     # host server has a n:1 relationship
@@ -203,7 +203,7 @@ class User(Base):
     skill_level = Column(String)
     credentials = relationship("Credentials", uselist=False,
                                back_populates="user")
-    permissions = relationship("Permissions")
+    permissions = Column(String, nullable=False)
 
     # unit has an n:n relationship
     workshop_history = relationship("WorkshopUnit", secondary='user_history')
@@ -220,25 +220,13 @@ class Credentials(Base):
     """
     __tablename__ = "credentials"
 
-    username = Column(String)
+    username = Column(String, unique=True)
     password = Column(String)
     salt = Column(String)
 
     # References
     user_id = Column(Integer, ForeignKey('user.id'), primary_key=True)
     user = relationship('User', back_populates='credentials')
-
-
-class Permissions(Base):
-    """
-    Specifies what the user can do in the systems
-
-    Current fields are place holders just to see if the db script runs.
-    """
-    __tablename__ = "permissions"
-
-    id = Column(Integer, primary_key=True)
-    type = Column(String)
 
 
 # Network subsystem stuff
@@ -253,8 +241,11 @@ class Server(Base):
 
     id = Column(Integer, primary_key=True)
     ip = Column(String)
-    username = Column(String)
-    password = Column(String)
+    status = Column(String)
+    server_credentials = relationship("ServerCredentials", uselist=False,
+                                      back_populates='server')
+
+    # Why don't I have the VM's and stuff here?
 
 
 class ServerCredentials(Base):
@@ -266,6 +257,7 @@ class ServerCredentials(Base):
 
     username = Column(String)
     password = Column(String)
+    salt = Column(String)
 
     # References
     server_id = Column(Integer, ForeignKey('server.id'), primary_key=True)
@@ -289,7 +281,8 @@ class Session(Base):
     user = relationship("User", uselist=False, back_populates="session")
 
     # unit has a 1:1 relationship
-    unit = relationship("WorkshopUnit", uselist=False, back_populates="session")
+    workshop_unit = relationship("WorkshopUnit", uselist=False,
+                                 back_populates="session")
 
 
 class ConnectionString(Base):
@@ -303,8 +296,11 @@ class ConnectionString(Base):
 
     # References
     vm_id = Column(Integer, ForeignKey('virtual_machine.id'))
-    vm = relationship("VirtualMachine", back_populates="connection_string")
+    virtual_machine = relationship("VirtualMachine",
+                                   back_populates="connection_string")
 
+    # I don't think we should have this reference.  The unit can get
+    # the connection strings through its vms
     wu_id = Column(Integer, ForeignKey('workshop_unit.id'))
 
 
@@ -356,7 +352,8 @@ class Survey(Base):
     file_location = Column(String)
     completed = Column(Boolean)
 
-    user = relationship("User", uselist=False, back_populates="survey")
+    user_id = Column(Integer, ForeignKey('user.id'))
+    user = relationship("User")
 
 
 # Create tables

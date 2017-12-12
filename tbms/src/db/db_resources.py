@@ -3,43 +3,63 @@ Resource subsystem specific database operations that the db_manager will call
 """
 
 
-
-def get(item, item_id):
+def create(item, values):
     """
-    Description:
-    :param item:
-    :param item_id:
-    :return:
-    """
-    pass
-
-
-def add(item, values):
-    """
-    Description:
     :param item:
     :param values:
     :return:
     """
-    pass
+    if item == "reference material":
+        pass
+
+    if item == "survey":
+        pass
+
+
+def read(item, item_id):
+    """
+
+    :param item:
+    :param item_id:
+    :return:
+    """
+    if item == "reference material":
+        pass
+
+    if item == "survey":
+        pass
+
+    if item == "all surveys":
+        pass
+
+    if item == "all reference materials":
+        pass
 
 
 def update(item, item_id, values):
     """
-    Description:
+
     :param item:
     :param item_id:
     :param values:
     :return:
     """
-    pass
+    if item == "reference material":
+        pass
+
+    if item == "survey":
+        pass
 
 
 def delete(item, item_id):
     """
-    Description:
+
     :param item:
     :param item_id:
     :return:
     """
-    pass
+    if item == "reference material":
+        pass
+
+    if item == "survey":
+        pass
