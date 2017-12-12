@@ -27,7 +27,15 @@ class Server:
     def read(self):
         # return dictionary of server specified by the id
         dictionary = NetworkDB.get("servers", self.id)
-        # get status
+        # get vm info
+        manager = VirtualBoxManager("WEBSERVICE", {
+            'url': 'http://'+dictionary['ip']+':18083/',
+            'user': dictionary['username'],
+            'password': dictionary['password']})
+
+        # Get the global VirtualBox object
+        vbox = manager.getVirtualBox()
+
         if len(dictionary.keys()) == 0:
             return None
         else:

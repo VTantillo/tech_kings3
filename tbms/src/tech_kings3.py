@@ -1,5 +1,5 @@
+import traceback
 from functools import wraps
-from logging import exception
 from multiprocessing import Process
 
 import time
@@ -12,6 +12,7 @@ from subsystems.network import net_manager
 from vboxapi import VirtualBoxManager
 from errors import login_error, users_guest_temporary_workshops_error, users_registered_temporary_workshops_error, \
     admin_servers_error
+from tbms.src.subsystems.vboxapi.clienttest import enumToString
 
 
 class Controller:
@@ -187,26 +188,128 @@ def users_registered_persistence_workshops():
     return render_template("users/registered/persistence_workshops.html", user=controller.get_user())
 
 
+def find_parent(snapshot):
+    if snapshot != '':
+        if snapshot.parent != "":
+            return find_parent(snapshot.parent)
+        else:
+            return snapshot
+    return snapshot
+
+
+def get_most_recent(root, most_recent):
+    if root.getChildrenCount() > 0:
+        for child in root.children:
+            most_recent = get_most_recent(child, most_recent)
+
+    if root.timeStamp > most_recent.timeStamp:
+        most_recent = root
+
+    return most_recent
+
+
 def ping_loop():
     while True:
         print("Pinging 192.168.0.18..")
-        try:
-            manager = VirtualBoxManager("WEBSERVICE", {
-                'url': 'http://192.168.0.18:18083/',
-                'user': 'Vbox',
-                'password': 'password'})
+        manager = VirtualBoxManager("WEBSERVICE", {
+            'url': 'http://192.168.0.18:18083/',
+            'user': 'Vbox',
+            'password': 'password'})
 
-            # Get the global VirtualBox object
-            vbox = manager.getVirtualBox()
-            print("Running VirtualBox version %s" % (vbox.version))
-        except Exception:
-            print("Server not responding")
-            raise
-        time.sleep(10)
+        # Get the global VirtualBox object
+        vbox = manager.getVirtualBox()
+        # Get all constants through the Python manager code
+        vboxConstants = manager.constants
+        # Enumerate all defined machines
+        for machine in manager.getArray(vbox, 'machines'):
+            try:
+                # Be prepared for failures - the VM can be inaccessible
+                vmname = '<inaccessible>'
+                try:
+                    vmname = machine.name
+                except Exception as e:
+                    None
+
+                vmid = '';
+                try:
+                    vmid = machine.id
+                except Exception as e:
+                    None
+
+                vmadapter = machine.getNetworkAdapter(0).internalNetwork
+                print("Adapter Name: "+str(vmadapter))
+
+                vmVRDEServer = machine.VRDEServer
+                print("Port: "+str(vmVRDEServer.getVRDEProperty(u'TCP/Ports')))
+
+                parent_snapshot = find_parent(machine.currentSnapshot)
+
+                if parent_snapshot != '':
+                    most_recent = get_most_recent(parent_snapshot, parent_snapshot)
+                    print("Most recent Snapshot: "+str(most_recent.name))
+                else:
+                    print("No snapshot")
+
+
+                # Print some basic VM information even if there were errors
+                print("Machine name: %s [%s]" % (vmname, vmid))
+                if vmname == '<inaccessible>' or vmid == '':
+                    continue
+
+                # Print some basic VM information
+                print("    State:           %s" % (enumToString(vboxConstants, "MachineState", machine.state)))
+                print("    Session state:   %s" % (
+                    enumToString(vboxConstants, "SessionState", machine.sessionState)))
+
+                # Do some stuff which requires a running VM
+                if machine.state == vboxConstants.MachineState_Running:
+
+                    # Get the session object
+                    session = manager.getSessionObject()
+
+                    # Lock the current machine (shared mode, since we won't modify the machine)
+                    machine.lockMachine(session, vboxConstants.LockType_Shared)
+
+                    # Acquire the VM's console and guest object
+                    console = session.console
+                    guest = console.guest
+
+                    # Retrieve the current Guest Additions runlevel and print
+                    # the installed Guest Additions version
+                    addRunLevel = guest.additionsRunLevel
+                    print("    Additions State: %s" % (
+                        enumToString(vboxConstants, "AdditionsRunLevelType", addRunLevel)))
+                    if addRunLevel != vboxConstants.AdditionsRunLevelType_None:
+                        print("    Additions Ver:   %s" % (guest.additionsVersion))
+
+                    # Get the VM's display object
+                    display = console.display
+
+                    # Get the VM's current display resolution + bit depth + position
+                    screenNum = 0  # From first screen
+                    (screenW, screenH, screenBPP, screenX, screenY, _) = display.getScreenResolution(screenNum)
+                    print("    Display (%d):     %dx%d, %d BPP at %d,%d" % (
+                        screenNum, screenW, screenH, screenBPP, screenX, screenY))
+
+                    # We're done -- don't forget to unlock the machine!
+                    session.unlockMachine()
+
+            except Exception as e:
+                print("Errror [%s]: %s" % (machine.name, str(e)))
+                traceback.print_exc()
+            print(
+            "-----------------------------------------------------------------------------------------------------")
+        # Call destructor and delete manager
+        del manager
+        seconds = 600
+        while seconds >= 0:
+            #print("Ping in "+str(seconds)+" seoonds...")
+            time.sleep(1)
+            seconds = seconds-1
 
 
 if __name__ == "__main__":
-    #p = Process(target=ping_loop)
-    #p.start()
+    p = Process(target=ping_loop)
+    p.start()
     app.run()
-    #p.join()
+    p.join()

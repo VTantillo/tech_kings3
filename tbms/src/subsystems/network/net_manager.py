@@ -19,9 +19,6 @@ def read(class_name):
         id = 1
         server = Server(id, '', '', [], [], [], [])
         servers.append(server.read())
-        id = 1
-        server = Server(id, '', '', [], [], [], [])
-        servers.append(server.read())
         if id == -1:
             return None
         else:
