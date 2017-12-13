@@ -9,10 +9,12 @@ from flask import Flask, render_template, request
 from subsystems.user import usr_manager
 from subsystems.network import net_manager
 from subsystems.workshop import ws_manager
-from vboxapi import VirtualBoxManager
+from subsystems.db import db_workshop
+
 from errors import login_error, users_guest_temporary_workshops_error, users_registered_temporary_workshops_error, \
     admin_servers_error
 from tbms.src.subsystems.vboxapi.clienttest import enumToString
+from vboxapi import VirtualBoxManager
 
 
 class Controller:
@@ -96,6 +98,11 @@ def guest_user_required(f):
 
 @app.route('/')
 def login():
+    vms = db_workshop.read("all vms")
+
+    for vm in vms:
+        print(vm.id)
+
     return render_template("login.html")
 
 
