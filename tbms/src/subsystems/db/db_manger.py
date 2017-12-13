@@ -21,14 +21,14 @@ class WorkshopDB:
         return data
 
     @staticmethod
-    def add(item, values):
+    def add(item, item_id, values):
         """
         Description:
         :param item:
         :param values:
         :return:
         """
-        new_id = workshop.add(item, values)
+        new_id = workshop.add(item, item_id, values)
         return new_id
 
     @staticmethod

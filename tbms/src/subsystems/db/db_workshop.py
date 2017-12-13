@@ -13,7 +13,7 @@ def get(item, item_id):
     pass
 
 
-def add(item, values):
+def add(item, item_id, values):
     """
     Description:
     :param item:
