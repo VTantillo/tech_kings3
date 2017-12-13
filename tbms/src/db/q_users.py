@@ -15,6 +15,8 @@ def add_user(val):
                     permissions=val['permissions'])
     session.add(new_user)
     session.commit()
+    # should return the id of the new entry
+
 
 
 def add_credentials(val):
