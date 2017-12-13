@@ -1,5 +1,5 @@
 """class representing ReferenceMaterials"""
-class referenceMaterial(object):
+class referenceMaterial:
 
     def __init__(self, id, file):
         """Initialize/create a survey"""

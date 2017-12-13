@@ -1,5 +1,5 @@
 """a class representing Surveys"""
-class survey(object):
+class survey:
     def __init__(self , id , file  ):
         """Initialize a survey"""
         """id should be a number given to uniquely identify the survey"""
