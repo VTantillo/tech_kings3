@@ -3,6 +3,7 @@ Used to authenticate the credentials of a user who tries to log in to the
 system.
 """
 
+
 def authenticate():
     pass
 
