@@ -204,7 +204,7 @@ class User(Base):
     skill_level = Column(String)
     credentials = relationship("Credentials", uselist=False,
                                back_populates="user")
-    permissions = Column(String, nullable=False)
+    permissions = Column(Integer, nullable=False)
 
     # unit has an n:n relationship
     workshop_history = relationship("WorkshopUnit", secondary='user_history')

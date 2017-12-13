@@ -18,7 +18,6 @@ def add_user(val):
     # should return the id of the new entry
 
 
-
 def add_credentials(val):
     new_cred = Credentials(user_id=val['user_id'],
                            username=val['username'],
@@ -34,7 +33,7 @@ def get_user(usr_id):
 
 
 def get_credentials(usr_id):
-    res = session.query(Credentials).filter(Credentials.user_id == usr_id)
+    res = session.query(Credentials).filter(Credentials.username == usr_id)
     return res
 
 
@@ -48,7 +47,7 @@ def update_user(usr_id, val):
     if 'first_name' in val:
         user.first_name = val['first_name']
     if 'last_name' in val:
-        user.last_name = val['']
+        user.last_name = val['last_name']
     if 'organization' in val:
         user.organization = val['organization']
     if 'email' in val:

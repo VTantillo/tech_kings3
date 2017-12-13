@@ -1,6 +1,7 @@
 import datetime
 
 from db.db_manager import WorkshopDB as workshop
+from db.db_manager import UserDB as user
 
 vm1 = {
     'name': 'vm1',
@@ -63,6 +64,13 @@ wg1 = {
     'server_id': 1,
 }
 
+cred = {
+    'username': 'admin',
+    'user_id': 1,
+    'password': 'e9e8707c6343bafe43891613343c56a4e5e4b06b2c473d7c6e765a037cd4e0c0',
+    'salt': '67b176705b46206614219f47a05aee7ae6a3edbe850bbbe214c536b989aea4d2'
+}
+
 workshop.create("virtual machine", vm1)
 workshop.create("virtual machine", vm2)
 workshop.create("virtual machine", vm3)
@@ -72,6 +80,8 @@ workshop.create("workshop unit", wu1)
 workshop.create("workshop unit", wu1)
 
 workshop.create("workshop group", wg1)
+
+user.create("credentials", cred)
 
 
 vms = workshop.read("all vms")

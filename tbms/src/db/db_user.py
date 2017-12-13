@@ -27,13 +27,16 @@ def read(item, item_id):
     :return:
     """
     if item == "user":
-        q.get_user(item_id)
+        user = q.get_user(item_id)
+        return user.__dict__
 
     if item == "credentials":
-        q.get_credentials(item_id)
+        credentials = q.get_credentials(item_id)
+        return credentials.__dict__
 
     if item == "all users":
-        q.get_all_users()
+        all_users = q.get_all_users()
+        return all_users.__dict__
 
 
 def update(item, item_id, values):
