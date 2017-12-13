@@ -1,2 +1,0 @@
-# Resources Subsystem
-Ramon
