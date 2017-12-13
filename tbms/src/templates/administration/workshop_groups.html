@@ -302,8 +302,8 @@
                                             <a data-toggle="modal"
                                                data-target="#detailsOverlay">{{ servers[server_index].get_groups()[wg_index].name }}</a>
                                         </td>
-                                        <td>{{ server_index }} {{ servers[server_index].get_groups()[wg_index].name }}</td>
-                                        <td>{{ servers[server_index].get_groups()[wg_index].server_id }}</td>
+                                        <td>{{ servers[server_index].get_groups()[wg_index].number_of_wus }}</td>
+                                        <td>{{ servers[server_index].get_groups()[wg_index].host_ip }}</td>
                                         <td>{{ servers[server_index].get_groups()[wg_index].status }}</td>
                                     </tr>
                                     <tr id="s{{ server_index }}wg{{ wg_index }}" class="collapse out">
@@ -313,7 +313,7 @@
                                             <p>
                                                 {{ servers[server_index].get_groups()[wg_index].description }}
                                             </p>
-                                            Virtual Machines:<br>
+                                            Workshop Units:<br>
                                             <ul>
                                                 {% for wu_index in range(servers[server_index].get_groups()[wg_index].wus|count) %}
                                                     <li>

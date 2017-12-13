@@ -318,8 +318,8 @@
                                             <a data-toggle="modal"
                                                data-target="#detailsOverlay">{{ servers[server_index].get_units()[wu_index].name }}</a>
                                         </td>
-                                        <td>{{ server_index }} {{ servers[server_index].get_units()[wu_index].name }}</td>
-                                        <td>{{ servers[server_index].get_units()[wu_index].server_id }}</td>
+                                        <td>{{ servers[server_index].get_units()[wu_index].number_of_vms }}</td>
+                                        <td>{{ servers[server_index].get_units()[wu_index].host_ip }}</td>
                                         <td>{{ servers[server_index].get_units()[wu_index].session }}</td>
                                         <td>{{ servers[server_index].get_units()[wu_index].status }}</td>
                                     </tr>
@@ -363,8 +363,8 @@
                                             <a data-toggle="modal"
                                                data-target="#detailsOverlay">{{ servers[server_index].get_standalone_units()[wu_index].name }}</a>
                                         </td>
-                                        <td>{{ server_index }} {{ servers[server_index].get_standalone_units()[wu_index].name }}</td>
-                                        <td>{{ servers[server_index].get_standalone_units()[wu_index].server_id }}</td>
+                                        <td>{{ servers[server_index].get_standalone_units()[wu_index].number_of_vms }}</td>
+                                        <td>{{ servers[server_index].get_standalone_units()[wu_index].host_ip }}</td>
                                         <td>{{ servers[server_index].get_standalone_units()[wu_index].session }}</td>
                                         <td>{{ servers[server_index].get_standalone_units()[wu_index].status }}</td>
                                     </tr>

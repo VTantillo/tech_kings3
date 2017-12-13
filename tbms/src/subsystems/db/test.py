@@ -4,7 +4,7 @@ from db_manager import WorkshopDB as workshop
 from db_manager import UserDB as user
 from db_manager import NetworkDB as network
 
-vm1 = {
+"""vm1 = {
     'name': 'vm1',
     'file_name': 'c://vm/goes/here/vm1',
     'vrdp': 333,
@@ -34,7 +34,7 @@ vm4 = {
     'vrdp': 336,
     'server_id': 1,
     'wu_id': 2
-}
+}"""
 
 wu1 = {
     'name': 'wu1',
@@ -94,7 +94,7 @@ wu5s = {
 wg1 = {
     'name': 'wg1',
     'description': 'It a group',
-    'status': 'works?',
+    'status': 'N/A',
     'lifetime': 111111,
     'published_date': datetime.date(2017, 1, 1),
     'server_id': 1
@@ -103,7 +103,7 @@ wg1 = {
 wg2 = {
     'name': 'wg2',
     'description': 'It a group again',
-    'status': 'works?',
+    'status': 'N/A',
     'lifetime': 111111,
     'published_date': datetime.date(2017, 1, 1),
     'server_id': 2
@@ -157,10 +157,10 @@ server2 = {
     'password': 'password'
 }
 
-workshop.create("virtual machine", vm1)
+"""workshop.create("virtual machine", vm1)
 workshop.create("virtual machine", vm2)
 workshop.create("virtual machine", vm3)
-workshop.create("virtual machine", vm4)
+workshop.create("virtual machine", vm4)"""
 workshop.create("workshop unit", wu1)
 workshop.create("workshop unit", wu2)
 workshop.create("workshop unit", wu3)
