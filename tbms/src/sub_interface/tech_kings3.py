@@ -6,14 +6,15 @@ import time
 
 from flask import Flask, render_template, request
 
-from subsystems.user import usr_manager
-from subsystems.network import net_manager
-from subsystems.workshop import ws_manager
-from subsystems.db import db_workshop
+from src.sub_user import usr_manager
+from src.sub_network import net_manager
+from src.sub_workshop import ws_manager
+from src.sub_resource import res_manager
 
 from errors import login_error, users_guest_temporary_workshops_error, users_registered_temporary_workshops_error, \
     admin_servers_error
-from tbms.src.subsystems.vboxapi.clienttest import enumToString
+
+from vboxapi.clienttest import enumToString
 from vboxapi import VirtualBoxManager
 
 
