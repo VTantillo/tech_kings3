@@ -136,6 +136,7 @@ def login_auth():
         server_query_list = net_manager.read('all servers')
         # Convert query object to Server instance
         server_list = net_manager.convert_query_list_to_instance_list(server_query_list)
+
         init_servers(server_list)
 
         for server in server_list:
@@ -148,6 +149,25 @@ def login_auth():
         return users_registered_temporary_workshops()
     elif controller.get_user().get_permissions() == 3:
         return users_guest_temporary_workshops()
+
+
+@app.route('/administration/servers/<add>', methods=['POST', 'GET'])
+@admin_required
+def server_action(add):
+    server = {
+        'ip': request.form['ip'],
+        'status': 'N/A',
+        'username': request.form['username'],
+        'password': request.form['password']
+    }
+    net_manager.create("server", server)
+    server_query_list = net_manager.read('all servers')
+    server_list = net_manager.convert_query_list_to_instance_list(server_query_list)
+    # Reinitialize servers
+    init_servers(server_list)
+    controller.set_servers(server_list)
+
+    return admin_servers()
 
 
 @app.route('/administration/servers', methods=['POST', 'GET'])
@@ -290,8 +310,6 @@ def init_servers(servers_list):
         # Add vm list for this server
         server.set_vms(vm_list)
         del manager
-
-    return vm_list
 
 
 def ping_loop():

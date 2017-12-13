@@ -174,8 +174,8 @@ user.create("credentials", cred2)
 user.create("user", user1)
 user.create("user", user2)
 
-network.create("server", server1)
-network.create("server", server2)
+#network.create("server", server1)
+#network.create("server", server2)
 
 vms = workshop.read("all vms")
 wus = workshop.read("all wus")

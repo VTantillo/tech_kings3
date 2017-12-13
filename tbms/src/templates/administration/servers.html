@@ -76,27 +76,28 @@
             <div class="modal-header" align="center" style="background-color: #B8D0E4;">
                 <strong>New Server</strong>
             </div>
+            <form action="{{ url_for('server_action', add='add') }}" method="POST">
             <div class="modal-body" style="background-color: #E2ECF3;">
                 <table class="table">
                     <tbody>
                     <tr>
                         <td align="right" style="border-color: #E2ECF3;"><strong>Server IP Address</strong></td>
                         <td align="center" style="border-color: #E2ECF3;">
-                            <input type="text" class="form-control" placeholder="Server IP Address"
+                            <input type="text" class="form-control" name="ip" placeholder="Server IP Address"
                                    aria-describedby="sizing-addon1">
                         </td>
                     </tr>
                     <tr>
                         <td align="right" style="border-color: #E2ECF3;"><strong>User Name</strong></td>
                         <td align="center" style="border-color: #E2ECF3;">
-                            <input type="text" class="form-control" placeholder="User Name"
+                            <input type="text" class="form-control" name="username" placeholder="User Name"
                                    aria-describedby="sizing-addon1">
                         </td>
                     </tr>
                     <tr>
                         <td align="right" style="border-color: #E2ECF3;"><strong>Password</strong></td>
                         <td align="center" style="border-color: #E2ECF3;">
-                            <input type="password" class="form-control" placeholder="Password"
+                            <input type="password" class="form-control" name="password"placeholder="Password"
                                    aria-describedby="sizing-addon1">
                         </td>
                     </tr>
@@ -104,9 +105,10 @@
                 </table>
             </div>
             <div class="modal-footer" style="background-color: #E2ECF3">
-                <button type="button" class="btn btn-default">Add</button>
+                <button type="submit" class="btn btn-default">Add</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
             </div>
+            </form>
         </div>
 
     </div>

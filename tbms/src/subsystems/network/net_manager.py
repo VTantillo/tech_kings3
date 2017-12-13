@@ -8,8 +8,8 @@ import session
 import statistics
 
 
-def create():
-    pass
+def create(item, values):
+    return NetworkDB.create(item, values)
 
 
 # Return server(s) instance or
