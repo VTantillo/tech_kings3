@@ -2,7 +2,7 @@
 User subsystem specific database operations that the db_manager will call
 """
 
-import db.q_users as q
+import q_users as q
 
 def create(item, values):
     """
@@ -26,13 +26,25 @@ def read(item, item_id):
     :return:
     """
     if item == "user":
-        q.get_user(item_id)
+        return q.get_user(item_id)
 
     if item == "credentials":
-        q.get_credentials(item_id)
+        cred = q.get_credentials(item_id)
+        return cred.__dict__
+        """if cred.count() == 1:
+            dic = {
+                'user_id': cred.user_id,
+                'username': cred.username,
+                'password': cred.password,
+                'salt': cred.salt
+            }
+        else:
+            dic = {}
+
+        return dic"""
 
     if item == "all users":
-        q.get_all_users()
+        return q.get_all_users()
 
 
 def update(item, item_id, values):

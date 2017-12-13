@@ -1,6 +1,6 @@
 import datetime
 
-from db.db_manager import WorkshopDB as workshop
+from db_manager import WorkshopDB as workshop
 
 vm1 = {
     'name': 'vm1',

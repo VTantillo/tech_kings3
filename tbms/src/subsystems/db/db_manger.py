@@ -59,7 +59,7 @@ class UserDB:
     @staticmethod
     def get(item, item_id):
         # get record item is table and item_id is key
-        data = user.get(item, item_id)
+        data = user.read(item, item_id)
         return data
 
     @staticmethod

@@ -2,10 +2,10 @@
 Interface for the rest of the system to the database
 """
 
-import db.db_workshop as workshop
-import db.db_user as user
-import db.db_network as network
-import db.db_resources as resources
+import db_workshop as workshop
+import db_user as user
+import db_network as network
+import db_resources as resources
 
 
 class WorkshopDB:

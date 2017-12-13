@@ -98,10 +98,11 @@ def guest_user_required(f):
 
 @app.route('/')
 def login():
+
     vms = db_workshop.read("all vms")
 
     for vm in vms:
-        print(vm.id)
+        print(vm.__dict__)
 
     return render_template("login.html")
 

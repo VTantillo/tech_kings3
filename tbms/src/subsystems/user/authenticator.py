@@ -3,7 +3,7 @@ Used to authenticate the credentials of a user who tries to log in to the
 system.
 """
 import _pysha3
-from ..db.db_manger import UserDB
+from ..db.db_manager import UserDB
 
 
 def hash_function(password, salt1):
@@ -17,7 +17,9 @@ def hash_function(password, salt1):
 
 def authenticate(username, password):
     # Get credentials and check password
-    dictionary = UserDB.get("credentials", username)
+    dictionary = UserDB.read("credentials", username)
+    for key in dictionary:
+        print(key)
     # If not empty dictionary then extract password and salt and compare
     if len(dictionary.keys()) != 0:
         hashed_password = hash_function(password, dictionary['salt'])
