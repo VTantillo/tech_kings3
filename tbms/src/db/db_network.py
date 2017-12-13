@@ -1,9 +1,7 @@
 """
 Network subsystem specific database operations that the db_manager will call
 """
-from db import Session
-
-session = Session
+from db import q_networks as q
 
 
 def create(item, values):
@@ -13,8 +11,7 @@ def create(item, values):
     :return:
     """
     if item == "server":
-        # Call thing for server
-        pass
+        q.add_server(values)
 
     if item == "connection string":
         # Call thing for connection string
@@ -37,8 +34,7 @@ def read(item, item_id):
     :return:
     """
     if item == "server":
-        # Call thing for server
-        pass
+        return q.get_server(item_id)
 
     if item == "connection string":
         # Call thing for connection string
@@ -53,7 +49,7 @@ def read(item, item_id):
         pass
 
     if item == "all servers":
-        pass
+        return q.get_all_servers()
 
     if item == "all sessions":
         pass
@@ -71,8 +67,7 @@ def update(item, item_id, values):
     :return:
     """
     if item == "server":
-        # Call thing for server
-        pass
+        q.update_server(item_id, values)
 
     if item == "connection string":
         # Call thing for connection string
@@ -95,8 +90,7 @@ def delete(item, item_id):
     :return:
     """
     if item == "server":
-        # Call thing for server
-        pass
+        q.delete_server(item_id)
 
     if item == "connection string":
         # Call thing for connection string
@@ -109,3 +103,6 @@ def delete(item, item_id):
     if item == "statistics":
         # Call thing for statistics
         pass
+
+    if item == "all servers":
+        q.delete_all_servers()

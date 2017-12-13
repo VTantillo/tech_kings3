@@ -243,10 +243,9 @@ class Server(Base):
     id = Column(Integer, primary_key=True)
     ip = Column(String)
     status = Column(String)
-    server_credentials = relationship("ServerCredentials", uselist=False,
-                                      back_populates='server')
+    username = Column(String)
+    password = Column(String)
 
-    # Why don't I have the VM's and stuff here?
 
 
 class ServerCredentials(Base):

@@ -109,6 +109,13 @@ def get_server_wgs(server_id):
     return res
 
 
+def get_server_standalone(server_id):
+    res = session.query(WorkshopUnit).filter(
+        WorkshopUnit.server_id == server_id).filter(
+        WorkshopUnit.wg_id == -1).all()
+    return res
+
+
 def update_vm(vm_id, values):
     vm = get_vm(vm_id)
     if 'name' in values:
