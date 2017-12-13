@@ -110,7 +110,7 @@
                                     {% for row_index in range(servers|count) %}
                                         {% for index in range(servers[row_index].get_groups()|count) %}
                                             <input type="checkbox">
-                                            {{ servers[row_index].get_groups()[index] }}<br><br>
+                                            {{ servers[row_index].get_groups()[index].name }}<br><br>
                                         {% endfor %}
                                     {% endfor %}
                                 </td>
@@ -127,7 +127,7 @@
                                     {% for row_index in range(servers|count) %}
                                         {% for index in range(servers[row_index].get_standalone_units()|count) %}
                                             <input type="checkbox">
-                                            {{ servers[row_index].get_standalone_units()[index] }}<br><br>
+                                            {{ servers[row_index].get_standalone_units()[index].name }}<br><br>
                                         {% endfor %}
                                     {% endfor %}
                                 </td>
@@ -164,7 +164,7 @@
                                     {% for row_index in range(servers|count) %}
                                         {% for index in range(servers[row_index].get_groups()|count) %}
                                             <input type="checkbox">
-                                            {{ servers[row_index].get_groups()[index] }}<br><br>
+                                            {{ servers[row_index].get_groups()[index].name }}<br><br>
                                         {% endfor %}
                                     {% endfor %}
                                 </td>
@@ -181,7 +181,7 @@
                                     {% for row_index in range(servers|count) %}
                                         {% for index in range(servers[row_index].get_standalone_units()|count) %}
                                             <input type="checkbox">
-                                            {{ servers[row_index].get_standalone_units()[index] }}<br><br>
+                                            {{ servers[row_index].get_standalone_units()[index].name }}<br><br>
                                         {% endfor %}
                                     {% endfor %}
                                 </td>
