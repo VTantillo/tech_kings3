@@ -2,6 +2,7 @@
 User subsystem specific database operations that the db_manager will call
 """
 
+import db.q_users as q
 
 def create(item, values):
     """
@@ -11,12 +12,10 @@ def create(item, values):
     :return:
     """
     if item == "user":
-        # Call thing to get the user
-        pass
+        q.add_user(values)
 
     if item == "credentials":
-        # Call thing to get credentials
-        pass
+        q.add_credentials(values)
 
 
 def read(item, item_id):
@@ -27,16 +26,13 @@ def read(item, item_id):
     :return:
     """
     if item == "user":
-        # Call thing to get the user
-        pass
+        q.get_user(item_id)
 
     if item == "credentials":
-        # Call thing to get credentials
-        pass
+        q.get_credentials(item_id)
 
     if item == "all users":
-        # Call thing to return all users
-        pass
+        q.get_all_users()
 
 
 def update(item, item_id, values):
@@ -48,12 +44,10 @@ def update(item, item_id, values):
     :return:
     """
     if item == "user":
-        # Call thing to get the user
-        pass
+        q.update_user(item_id, values)
 
     if item == "credentials":
-        # Call thing to get credentials
-        pass
+        q.update_credentials(item_id, values)
 
 
 def delete(item, item_id):
@@ -64,9 +58,9 @@ def delete(item, item_id):
     :return:
     """
     if item == "user":
-        # Call thing to get the user
-        pass
+        q.delete_user(item_id)
 
     if item == "credentials":
-        # Call thing to get credentials
-        pass
+        # We probably aren't ever going to use this... but it's here
+        # for completeness :)
+        q.delete_credentials(item_id)
