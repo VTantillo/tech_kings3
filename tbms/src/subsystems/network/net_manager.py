@@ -3,34 +3,22 @@ Interface for the network subsystem for the rest of the system
 """
 import connection_string
 from server import Server
+from ..db.db_manager import NetworkDB
 import session
 import statistics
+
 
 def create():
     pass
 
-# Return server instance or
-# Return session instance or
-# Return statistics instance or
-# Return connection_string instance
-def read(class_name):
-    if class_name == 'servers': # Get all servers in database
-        servers = []
-        id = 1
-        server = Server(id, '', '', '', '', [], [], [], [])
-        servers.append(server.read())
-        if id == -1:
-            return None
-        else:
-            return servers
-    elif class_name == 'session':
-        pass
-    elif class_name == 'statistics':
-        pass
-    elif class_name == 'connection_string':
-        pass
-    else:
-        print("No such class in this subsystem!")
+
+# Return server(s) instance or
+# Return session(s) instance or
+# Return statistics(s) instance or
+# Return connection_string(s) instance
+def read(item):
+    data = NetworkDB.read(item)
+    return data
 
 
 def update():
@@ -43,3 +31,10 @@ def delete():
 
 def admin_session():
     pass
+
+
+def convert_query_list_to_instance_list(server_query_list):
+    servers = []
+    for server in server_query_list:
+        servers.append(Server(server.id, server.ip, server.username, server.password, server.status))
+    return servers

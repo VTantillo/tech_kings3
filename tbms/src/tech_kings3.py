@@ -99,10 +99,10 @@ def guest_user_required(f):
 @app.route('/')
 def login():
 
-    vms = db_workshop.read("all vms")
+    """vms = db_workshop.read("all vms")
 
     for vm in vms:
-        print(vm.__dict__)
+        print(vm.id)"""
 
     return render_template("login.html")
 
@@ -132,15 +132,15 @@ def login_auth():
         errors = {'login_error': "Invalid username or password"}
         return login_error(errors)
     elif controller.get_user().get_permissions() == 1:
-
-        # Get list of servers
-        server_list = net_manager.read('servers')
+        # Get list of server query objects
+        server_query_list = net_manager.read('all servers')
+        # Convert query object to Server instance
+        server_list = net_manager.convert_query_list_to_instance_list(server_query_list)
         init_servers(server_list)
-        # Get list of unit instances
-        # Get list of workshop instances
-        # Update servers in server list with wg, wu, wu(s), and vms that belong to that server
 
-        print(server_list)
+        for server in server_list:
+            server.print_server()
+
         # Add to controller
         controller.set_servers(server_list)
         return admin_servers()
@@ -230,28 +230,34 @@ def get_most_recent(root, most_recent):
 
 def init_servers(servers_list):
     print("Getting VM information from VirtualBox...")
+
     for server in servers_list:
-        print("Getting VMs from " + server.get_ip() + "...")
+        print("Getting VMs from " + server.ip + "...")
         manager = VirtualBoxManager("WEBSERVICE", {
-            'url': 'http://' + server.get_ip() + ':18083/',
-            'user': server.get_username,
-            'password': server.get_password})
+            'url': 'http://' + server.ip + ':18083/',
+            'user': server.username,
+            'password': server.password})
 
         # Get the global VirtualBox object
         vbox = manager.getVirtualBox()
 
 
-        # Make list of wg instances
-        wg_list = []
         # Get list of wgs in this server from database (query all wg records that have this server as host)
+        wg_query_list = ws_manager.read("server wgs", server.id)
         # Create list of wg instances
+        wg_list = ws_manager.convert_query_list_to_wg_instance_list(wg_query_list)
         # Add wg list for this server
+        server.set_groups(wg_list)
 
-        # Make list of wu instances
-        wu_list = []
         # Get list of wus in this server from database (query all wu records that have this server as host)
+        wu_query_list = ws_manager.read("server wus", server.id)
+        sawu_query_list = ws_manager.read("server sawus", server.id)
         # Create list of wu instances
+        wu_list = ws_manager.convert_query_list_to_wu_instance_list(wu_query_list)
+        sawu_list = ws_manager.convert_query_list_to_wu_instance_list(sawu_query_list)
         # Add wu list for this server
+        server.set_units(wu_list)
+        server.set_standalone_units(sawu_list)
 
         # Make list of vm instances
         vm_list = []
@@ -275,9 +281,9 @@ def init_servers(servers_list):
                          'adapter': vmadapter,
                          'port': vmport,
                          'recent_snapshot': recent_snapshot,
-                         'host_ip': server.get_ip()
+                         'host_ip': server.ip
                          }
-            vm_instance = ws_manager.create('vm', vm_fields)
+            vm_instance = ws_manager.create('virtual machine', vm_fields)
             vm_list.append(vm_instance)
             print("Machine added to vm list")
 

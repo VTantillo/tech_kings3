@@ -61,6 +61,9 @@ def read(item, item_id=None):
     if item == "server wus":
         return q.get_server_wus(item_id)
 
+    if item == "server sawus":
+        return q.get_server_standalone(item_id)
+
     if item == "server wgs":
         return q.get_server_wgs(item_id)
 

@@ -18,13 +18,12 @@ def hash_function(password, salt1):
 def authenticate(username, password):
     # Get credentials and check password
     dictionary = UserDB.read("credentials", username)
-    for key in dictionary:
-        print(key)
+    print(dictionary.count())
     # If not empty dictionary then extract password and salt and compare
-    if len(dictionary.keys()) != 0:
-        hashed_password = hash_function(password, dictionary['salt'])
-        if hashed_password == dictionary['password']:
-            return dictionary['id']
+    if dictionary.count() != 0:
+        hashed_password = hash_function(password, dictionary[0].salt)
+        if hashed_password == dictionary[0].password:
+            return dictionary[0].user_id
         else:
             return -1
     else:

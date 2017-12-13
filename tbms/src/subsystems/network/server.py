@@ -12,7 +12,7 @@ class Server:
     Representation of a server in the system.
     """
 
-    def __init__(self, id, ip, username, password, status, groups, units, standalone_units, vms):
+    def __init__(self, id, ip, username, password, status, groups=[], units=[], standalone_units=[], vms=[]):
         self.id = id
         self.ip = ip
         self.username = username
@@ -28,7 +28,7 @@ class Server:
 
     def read(self):
         # return dictionary of server specified by the id
-        dictionary = NetworkDB.get("servers", self.id)
+        dictionary = NetworkDB.read("servers", self.id)
         # get vm info
         manager = VirtualBoxManager("WEBSERVICE", {
             'url': 'http://'+dictionary['ip']+':18083/',
@@ -81,7 +81,23 @@ class Server:
     def set_vms(self, vm_list):
         self.vms = vm_list
 
+    def set_units(self, unit_list):
+        self.units = unit_list
+
+    def set_standalone_units(self, standalone_units):
+        self.standalone_units = standalone_units
+
+    def set_groups(self, group_list):
+        self.groups = group_list
+
     def print_server(self):
-        print(str(self.id)+" "+str(self.ip)+" "+str(self.status)+" "+str(self.groups)+" "+str(self.units)+" "+str(self.standalone_units)+" "+str(self.vms))
+        print("Server: "
+              +"\n    Id: "+str(self.id)
+              +"\n    Ip: "+str(self.ip)
+              +"\n    Status: "+str(self.status)
+              +"\n    Groups: "+str(self.groups)
+              +"\n    Units: "+str(self.units)
+              +"\n    Standalone Units: "+str(self.standalone_units)
+              +"\n    Vms: "+str(self.vms))
     # not sure if there is anything else we need to add here
     # for private responsibilities. Store maybe?

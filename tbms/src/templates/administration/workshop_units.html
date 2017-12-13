@@ -9,6 +9,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="{{ url_for('static', filename='scripts/collapseJS.js') }}"></script>
+    <script src="{{ url_for('static', filename='scripts/checkboxJS.js') }}"></script>
 </head>
 
 <header>
@@ -191,287 +192,7 @@
                 <strong>Clone</strong>
             </div>
             <div class="modal-body" style="background-color: #E2ECF3; width: 100%; height: 100%; max-height: 100%; overflow-y: scroll;">
-                <table class="table">
-                    <tbody>
-                    <tr>
-                        <td class="col-sm-1" style="border-color: #E2ECF3;"><strong>Selected Workshop Units</strong></td>
-                        <td class="col-sm-4" style="border-color: #E2ECF3;">Name of Workshop Unit</td>
-                    </tr>
-                    <tr>
-                        <td class="col-sm-1" style="border-color: #E2ECF3;"><strong>No. of Clones</strong></td>
-                        <td class="col-sm-4" style="border-color: #E2ECF3;">
-                            <input type="text" class="form-control" placeholder="Number"
-                                   aria-describedby="sizing-addon1">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-sm-1" style="border-color: #E2ECF3;"><strong>VRDP Seed</strong></td>
-                        <td class="col-sm-4" style="border-color: #E2ECF3;">
-                            <input type="text" class="form-control" placeholder="VRDP Seed"
-                                   aria-describedby="sizing-addon1">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-sm-1" style="border-color: #E2ECF3;"><strong>Network Adapter Name</strong></td>
-                        <td class="col-sm-4" style="border-color: #E2ECF3;">
-                            <input type="text" class="form-control" placeholder="Network Adapter Name"
-                                   aria-describedby="sizing-addon1">
-                        </td>
-                        <td class="col-sm-1" style="border-color: #E2ECF3;"><strong>Network Adapter Seed</strong></td>
-                        <td class="col-sm-4" style="border-color: #E2ECF3;">
-                            <input type="text" class="form-control" placeholder="Network Adapter Seed"
-                                   aria-describedby="sizing-addon1">
-                        </td>
-                        <td class="col-sm-1" style="border-color: #E2ECF3;">
-                            <button class="glyphicon glyphicon-plus"></button>
-                        </td>
-                    </tr>
-                    </tbody>
-                    <tbody>
-                    <tr>
-                        <td class="col-sm-1" style="border-color: #E2ECF3;"><strong>Selected Workshop Units</strong></td>
-                        <td class="col-sm-4" style="border-color: #E2ECF3;">Name of Workshop Unit</td>
-                    </tr>
-                    <tr>
-                        <td class="col-sm-1" style="border-color: #E2ECF3;"><strong>No. of Clones</strong></td>
-                        <td class="col-sm-4" style="border-color: #E2ECF3;">
-                            <input type="text" class="form-control" placeholder="Number"
-                                   aria-describedby="sizing-addon1">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-sm-1" style="border-color: #E2ECF3;"><strong>VRDP Seed</strong></td>
-                        <td class="col-sm-4" style="border-color: #E2ECF3;">
-                            <input type="text" class="form-control" placeholder="VRDP Seed"
-                                   aria-describedby="sizing-addon1">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-sm-1" style="border-color: #E2ECF3;"><strong>Network Adapter Name</strong></td>
-                        <td class="col-sm-4" style="border-color: #E2ECF3;">
-                            <input type="text" class="form-control" placeholder="Network Adapter Name"
-                                   aria-describedby="sizing-addon1">
-                        </td>
-                        <td class="col-sm-1" style="border-color: #E2ECF3;"><strong>Network Adapter Seed</strong></td>
-                        <td class="col-sm-4" style="border-color: #E2ECF3;">
-                            <input type="text" class="form-control" placeholder="Network Adapter Seed"
-                                   aria-describedby="sizing-addon1">
-                        </td>
-                        <td class="col-sm-1" style="border-color: #E2ECF3;">
-                            <button class="glyphicon glyphicon-plus"></button>
-                        </td>
-                    </tr>
-                    </tbody>
-                    <tbody>
-                    <tr>
-                        <td class="col-sm-1" style="border-color: #E2ECF3;"><strong>Selected Workshop Units</strong></td>
-                        <td class="col-sm-4" style="border-color: #E2ECF3;">Name of Workshop Unit</td>
-                    </tr>
-                    <tr>
-                        <td class="col-sm-1" style="border-color: #E2ECF3;"><strong>No. of Clones</strong></td>
-                        <td class="col-sm-4" style="border-color: #E2ECF3;">
-                            <input type="text" class="form-control" placeholder="Number"
-                                   aria-describedby="sizing-addon1">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-sm-1" style="border-color: #E2ECF3;"><strong>VRDP Seed</strong></td>
-                        <td class="col-sm-4" style="border-color: #E2ECF3;">
-                            <input type="text" class="form-control" placeholder="VRDP Seed"
-                                   aria-describedby="sizing-addon1">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-sm-1" style="border-color: #E2ECF3;"><strong>Network Adapter Name</strong></td>
-                        <td class="col-sm-4" style="border-color: #E2ECF3;">
-                            <input type="text" class="form-control" placeholder="Network Adapter Name"
-                                   aria-describedby="sizing-addon1">
-                        </td>
-                        <td class="col-sm-1" style="border-color: #E2ECF3;"><strong>Network Adapter Seed</strong></td>
-                        <td class="col-sm-4" style="border-color: #E2ECF3;">
-                            <input type="text" class="form-control" placeholder="Network Adapter Seed"
-                                   aria-describedby="sizing-addon1">
-                        </td>
-                        <td class="col-sm-1" style="border-color: #E2ECF3;">
-                            <button class="glyphicon glyphicon-plus"></button>
-                        </td>
-                    </tr>
-                    </tbody>
-                    <tbody>
-                    <tr>
-                        <td class="col-sm-1" style="border-color: #E2ECF3;"><strong>Selected Workshop Units</strong></td>
-                        <td class="col-sm-4" style="border-color: #E2ECF3;">Name of Workshop Unit</td>
-                    </tr>
-                    <tr>
-                        <td class="col-sm-1" style="border-color: #E2ECF3;"><strong>No. of Clones</strong></td>
-                        <td class="col-sm-4" style="border-color: #E2ECF3;">
-                            <input type="text" class="form-control" placeholder="Number"
-                                   aria-describedby="sizing-addon1">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-sm-1" style="border-color: #E2ECF3;"><strong>VRDP Seed</strong></td>
-                        <td class="col-sm-4" style="border-color: #E2ECF3;">
-                            <input type="text" class="form-control" placeholder="VRDP Seed"
-                                   aria-describedby="sizing-addon1">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-sm-1" style="border-color: #E2ECF3;"><strong>Network Adapter Name</strong></td>
-                        <td class="col-sm-4" style="border-color: #E2ECF3;">
-                            <input type="text" class="form-control" placeholder="Network Adapter Name"
-                                   aria-describedby="sizing-addon1">
-                        </td>
-                        <td class="col-sm-1" style="border-color: #E2ECF3;"><strong>Network Adapter Seed</strong></td>
-                        <td class="col-sm-4" style="border-color: #E2ECF3;">
-                            <input type="text" class="form-control" placeholder="Network Adapter Seed"
-                                   aria-describedby="sizing-addon1">
-                        </td>
-                        <td class="col-sm-1" style="border-color: #E2ECF3;">
-                            <button class="glyphicon glyphicon-plus"></button>
-                        </td>
-                    </tr>
-                    </tbody>
-                    <tbody>
-                    <tr>
-                        <td class="col-sm-1" style="border-color: #E2ECF3;"><strong>Selected Workshop Units</strong></td>
-                        <td class="col-sm-4" style="border-color: #E2ECF3;">Name of Workshop Unit</td>
-                    </tr>
-                    <tr>
-                        <td class="col-sm-1" style="border-color: #E2ECF3;"><strong>No. of Clones</strong></td>
-                        <td class="col-sm-4" style="border-color: #E2ECF3;">
-                            <input type="text" class="form-control" placeholder="Number"
-                                   aria-describedby="sizing-addon1">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-sm-1" style="border-color: #E2ECF3;"><strong>VRDP Seed</strong></td>
-                        <td class="col-sm-4" style="border-color: #E2ECF3;">
-                            <input type="text" class="form-control" placeholder="VRDP Seed"
-                                   aria-describedby="sizing-addon1">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-sm-1" style="border-color: #E2ECF3;"><strong>Network Adapter Name</strong></td>
-                        <td class="col-sm-4" style="border-color: #E2ECF3;">
-                            <input type="text" class="form-control" placeholder="Network Adapter Name"
-                                   aria-describedby="sizing-addon1">
-                        </td>
-                        <td class="col-sm-1" style="border-color: #E2ECF3;"><strong>Network Adapter Seed</strong></td>
-                        <td class="col-sm-4" style="border-color: #E2ECF3;">
-                            <input type="text" class="form-control" placeholder="Network Adapter Seed"
-                                   aria-describedby="sizing-addon1">
-                        </td>
-                        <td class="col-sm-1" style="border-color: #E2ECF3;">
-                            <button class="glyphicon glyphicon-plus"></button>
-                        </td>
-                    </tr>
-                    </tbody>
-                    <tbody>
-                    <tr>
-                        <td class="col-sm-1" style="border-color: #E2ECF3;"><strong>Selected Workshop Units</strong></td>
-                        <td class="col-sm-4" style="border-color: #E2ECF3;">Name of Workshop Unit</td>
-                    </tr>
-                    <tr>
-                        <td class="col-sm-1" style="border-color: #E2ECF3;"><strong>No. of Clones</strong></td>
-                        <td class="col-sm-4" style="border-color: #E2ECF3;">
-                            <input type="text" class="form-control" placeholder="Number"
-                                   aria-describedby="sizing-addon1">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-sm-1" style="border-color: #E2ECF3;"><strong>VRDP Seed</strong></td>
-                        <td class="col-sm-4" style="border-color: #E2ECF3;">
-                            <input type="text" class="form-control" placeholder="VRDP Seed"
-                                   aria-describedby="sizing-addon1">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-sm-1" style="border-color: #E2ECF3;"><strong>Network Adapter Name</strong></td>
-                        <td class="col-sm-4" style="border-color: #E2ECF3;">
-                            <input type="text" class="form-control" placeholder="Network Adapter Name"
-                                   aria-describedby="sizing-addon1">
-                        </td>
-                        <td class="col-sm-1" style="border-color: #E2ECF3;"><strong>Network Adapter Seed</strong></td>
-                        <td class="col-sm-4" style="border-color: #E2ECF3;">
-                            <input type="text" class="form-control" placeholder="Network Adapter Seed"
-                                   aria-describedby="sizing-addon1">
-                        </td>
-                        <td class="col-sm-1" style="border-color: #E2ECF3;">
-                            <button class="glyphicon glyphicon-plus"></button>
-                        </td>
-                    </tr>
-                    </tbody>
-                    <tbody>
-                    <tr>
-                        <td class="col-sm-1" style="border-color: #E2ECF3;"><strong>Selected Workshop Units</strong></td>
-                        <td class="col-sm-4" style="border-color: #E2ECF3;">Name of Workshop Unit</td>
-                    </tr>
-                    <tr>
-                        <td class="col-sm-1" style="border-color: #E2ECF3;"><strong>No. of Clones</strong></td>
-                        <td class="col-sm-4" style="border-color: #E2ECF3;">
-                            <input type="text" class="form-control" placeholder="Number"
-                                   aria-describedby="sizing-addon1">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-sm-1" style="border-color: #E2ECF3;"><strong>VRDP Seed</strong></td>
-                        <td class="col-sm-4" style="border-color: #E2ECF3;">
-                            <input type="text" class="form-control" placeholder="VRDP Seed"
-                                   aria-describedby="sizing-addon1">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-sm-1" style="border-color: #E2ECF3;"><strong>Network Adapter Name</strong></td>
-                        <td class="col-sm-4" style="border-color: #E2ECF3;">
-                            <input type="text" class="form-control" placeholder="Network Adapter Name"
-                                   aria-describedby="sizing-addon1">
-                        </td>
-                        <td class="col-sm-1" style="border-color: #E2ECF3;"><strong>Network Adapter Seed</strong></td>
-                        <td class="col-sm-4" style="border-color: #E2ECF3;">
-                            <input type="text" class="form-control" placeholder="Network Adapter Seed"
-                                   aria-describedby="sizing-addon1">
-                        </td>
-                        <td class="col-sm-1" style="border-color: #E2ECF3;">
-                            <button class="glyphicon glyphicon-plus"></button>
-                        </td>
-                    </tr>
-                    </tbody>
-                    <tbody>
-                    <tr>
-                        <td class="col-sm-1" style="border-color: #E2ECF3;"><strong>Selected Workshop Units</strong></td>
-                        <td class="col-sm-4" style="border-color: #E2ECF3;">Name of Workshop Unit</td>
-                    </tr>
-                    <tr>
-                        <td class="col-sm-1" style="border-color: #E2ECF3;"><strong>No. of Clones</strong></td>
-                        <td class="col-sm-4" style="border-color: #E2ECF3;">
-                            <input type="text" class="form-control" placeholder="Number"
-                                   aria-describedby="sizing-addon1">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-sm-1" style="border-color: #E2ECF3;"><strong>VRDP Seed</strong></td>
-                        <td class="col-sm-4" style="border-color: #E2ECF3;">
-                            <input type="text" class="form-control" placeholder="VRDP Seed"
-                                   aria-describedby="sizing-addon1">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-sm-1" style="border-color: #E2ECF3;"><strong>Network Adapter Name</strong></td>
-                        <td class="col-sm-4" style="border-color: #E2ECF3;">
-                            <input type="text" class="form-control" placeholder="Network Adapter Name"
-                                   aria-describedby="sizing-addon1">
-                        </td>
-                        <td class="col-sm-1" style="border-color: #E2ECF3;"><strong>Network Adapter Seed</strong></td>
-                        <td class="col-sm-4" style="border-color: #E2ECF3;">
-                            <input type="text" class="form-control" placeholder="Network Adapter Seed"
-                                   aria-describedby="sizing-addon1">
-                        </td>
-                        <td class="col-sm-1" style="border-color: #E2ECF3;">
-                            <button class="glyphicon glyphicon-plus"></button>
-                        </td>
-                    </tr>
-                    </tbody>
+                <table id="clone_table" class="table">
                 </table>
             </div>
             <div class="modal-footer" style="background-color: #E2ECF3">
@@ -536,7 +257,7 @@
                                 </button>
                             </li>
                             <li>
-                                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#cloneOverlay"
+                                <button type="button" class="btn btn-default" onclick="get_check_values('Selected Workshop Unit: ','wu_check')" data-toggle="modal" data-target="#cloneOverlay"
                                             style="background-color: #ECECEC; margin-top: 8px; margin-right: 8px;">
                                         Clone
                                 </button>
@@ -560,7 +281,7 @@
                             <thead>
                             <tr>
                                 <th class="col-sm-1" scope="col" align="center">
-                                    <input type="checkbox">
+                                    <input id="wu_master_check" type="checkbox" onclick="check_all('wu_master_check', 'wu_check')">
                                 </th>
                                 <th class="col-sm-4" scope="col" align="center">
                                     <strong>Workshop Unit</strong>
@@ -585,204 +306,97 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <th scope="row">
-                                    <input type="checkbox">
-                                </th>
-                                <td>
-                                    <i class="table-drop-button glyphicon glyphicon-triangle-right" data-toggle="collapse" data-target="#idOfRow1"></i>
-                                    <a data-toggle="modal" data-target="#detailsOverlay">Workshop Unit</a>
-                                </td>
-                                <td>No.</td>
-                                <td>Host</td>
-                                <td>Session</td>
-                                <td>Status</td>
-                            </tr>
-                            <tr id="idOfRow1" class="collapse out">
-                                <td></td>
-                                <td>
-                                    Description:<br>
-                                    <p>
-                                        This is th dscription blah blah blah blahhfsjakhflkjsdfkjalshfjksah fasnhfvlkjn jkfsad fkljnsk fnksfhasjek najkdhf kjs
-                                        fsda vjfkshflashkf lncsahkfc
-                                        fsdavjfsancflsahfsjlksha clnfhjssalj
-                                    </p>
-                                    Virtual Machines:<br>
-                                    <ul>
-                                        <li><table class="table"><tr><td class="col-sm-5">VM1</td><td class="col-sm-2">1234</td><td class="col-sm-5">netAdapter1,netAapter2</td></tr></table></li>
-                                        <li><table class="table"><tr><td class="col-sm-5">VM2</td><td class="col-sm-2">1235</td><td class="col-sm-5">netAdapter3</td></tr></table></li>
-                                    </ul>
-                                </td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">
-                                    <input type="checkbox">
-                                </th>
-                                <td>
-                                    <i class="table-drop-button glyphicon glyphicon-triangle-right" data-toggle="collapse" data-target="#idOfRow2"></i>
-                                    <a data-toggle="modal" data-target="#detailsOverlay">Workshop Unit</a>
-                                </td>
-                                <td>No.</td>
-                                <td>Host</td>
-                                <td>Session</td>
-                                <td>Status</td>
-                            </tr>
-                            <tr id="idOfRow2" class="collapse out">
-                                <td></td>
-                                <td>
-                                    Description:<br>
-                                    <p>
-                                        This is th dscription blah blah blah blahhfsjakhflkjsdfkjalshfjksah fasnhfvlkjn jkfsad fkljnsk fnksfhasjek najkdhf kjs
-                                        fsda vjfkshflashkf lncsahkfc
-                                        fsdavjfsancflsahfsjlksha clnfhjssalj
-                                    </p>
-                                    Virtual Machines:<br>
-                                    <ul>
-                                        <li><table class="table"><tr><td class="col-sm-5">VM1</td><td class="col-sm-2">1234</td><td class="col-sm-5">netAdapter1,netAapter2</td></tr></table></li>
-                                        <li><table class="table"><tr><td class="col-sm-5">VM2</td><td class="col-sm-2">1235</td><td class="col-sm-5">netAdapter3</td></tr></table></li>
-                                    </ul>
-                                </td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">
-                                    <input type="checkbox">
-                                </th>
-                                <td>
-                                    <i class="table-drop-button glyphicon glyphicon-triangle-right" data-toggle="collapse" data-target="#idOfRow3"></i>
-                                    <a data-toggle="modal" data-target="#detailsOverlay">Workshop Unit</a>
-                                </td>
-                                <td>No.</td>
-                                <td>Host</td>
-                                <td>Session</td>
-                                <td>Status</td>
-                            </tr>
-                            <tr id="idOfRow3" class="collapse out">
-                                <td></td>
-                                <td>
-                                    Description:<br>
-                                    <p>
-                                        This is th dscription blah blah blah blahhfsjakhflkjsdfkjalshfjksah fasnhfvlkjn jkfsad fkljnsk fnksfhasjek najkdhf kjs
-                                        fsda vjfkshflashkf lncsahkfc
-                                        fsdavjfsancflsahfsjlksha clnfhjssalj
-                                    </p>
-                                    Virtual Machines:<br>
-                                    <ul>
-                                        <li><table class="table"><tr><td class="col-sm-5">VM1</td><td class="col-sm-2">1234</td><td class="col-sm-5">netAdapter1,netAapter2</td></tr></table></li>
-                                        <li><table class="table"><tr><td class="col-sm-5">VM2</td><td class="col-sm-2">1235</td><td class="col-sm-5">netAdapter3</td></tr></table></li>
-                                    </ul>
-                                </td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">
-                                    <input type="checkbox">
-                                </th>
-                                <td>
-                                    <i class="table-drop-button glyphicon glyphicon-triangle-right" data-toggle="collapse" data-target="#idOfRow4"></i>
-                                    <a data-toggle="modal" data-target="#detailsOverlay">Workshop Unit</a>
-                                </td>
-                                <td>No.</td>
-                                <td>Host</td>
-                                <td>Session</td>
-                                <td>Status</td>
-                            </tr>
-                            <tr id="idOfRow4" class="collapse out">
-                                <td></td>
-                                <td>
-                                    Description:<br>
-                                    <p>
-                                        This is th dscription blah blah blah blahhfsjakhflkjsdfkjalshfjksah fasnhfvlkjn jkfsad fkljnsk fnksfhasjek najkdhf kjs
-                                        fsda vjfkshflashkf lncsahkfc
-                                        fsdavjfsancflsahfsjlksha clnfhjssalj
-                                    </p>
-                                    Virtual Machines:<br>
-                                    <ul>
-                                        <li><table class="table"><tr><td class="col-sm-5">VM1</td><td class="col-sm-2">1234</td><td class="col-sm-5">netAdapter1,netAapter2</td></tr></table></li>
-                                        <li><table class="table"><tr><td class="col-sm-5">VM2</td><td class="col-sm-2">1235</td><td class="col-sm-5">netAdapter3</td></tr></table></li>
-                                    </ul>
-                                </td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">
-                                    <input type="checkbox">
-                                </th>
-                                <td>
-                                    <i class="table-drop-button glyphicon glyphicon-triangle-right" data-toggle="collapse" data-target="#idOfRow5"></i>
-                                    <a data-toggle="modal" data-target="#detailsOverlay">Workshop Unit</a>
-                                </td>
-                                <td>No.</td>
-                                <td>Host</td>
-                                <td>Session</td>
-                                <td>Status</td>
-                            </tr>
-                            <tr id="idOfRow5" class="collapse out">
-                                <td></td>
-                                <td>
-                                    Description:<br>
-                                    <p>
-                                        This is th dscription blah blah blah blahhfsjakhflkjsdfkjalshfjksah fasnhfvlkjn jkfsad fkljnsk fnksfhasjek najkdhf kjs
-                                        fsda vjfkshflashkf lncsahkfc
-                                        fsdavjfsancflsahfsjlksha clnfhjssalj
-                                    </p>
-                                    Virtual Machines:<br>
-                                    <ul>
-                                        <li><table class="table"><tr><td class="col-sm-5">VM1</td><td class="col-sm-2">1234</td><td class="col-sm-5">netAdapter1,netAapter2</td></tr></table></li>
-                                        <li><table class="table"><tr><td class="col-sm-5">VM2</td><td class="col-sm-2">1235</td><td class="col-sm-5">netAdapter3</td></tr></table></li>
-                                    </ul>
-                                </td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">
-                                    <input type="checkbox">
-                                </th>
-                                <td>
-                                    <i class="table-drop-button glyphicon glyphicon-triangle-right" data-toggle="collapse" data-target="#idOfRow6"></i>
-                                    <a data-toggle="modal" data-target="#detailsOverlay">Workshop Unit</a>
-                                </td>
-                                <td>No.</td>
-                                <td>Host</td>
-                                <td>Session</td>
-                                <td>Status</td>
-                            </tr>
-                            <tr id="idOfRow6" class="collapse out">
-                                <td></td>
-                                <td>
-                                    Description:<br>
-                                    <p>
-                                        This is th dscription blah blah blah blahhfsjakhflkjsdfkjalshfjksah fasnhfvlkjn jkfsad fkljnsk fnksfhasjek najkdhf kjs
-                                        fsda vjfkshflashkf lncsahkfc
-                                        fsdavjfsancflsahfsjlksha clnfhjssalj
-                                    </p>
-                                    Virtual Machines:<br>
-                                    <ul>
-                                        <li><table class="table"><tr><td class="col-sm-5">VM1</td><td class="col-sm-2">1234</td><td class="col-sm-5">netAdapter1,netAapter2</td></tr></table></li>
-                                        <li><table class="table"><tr><td class="col-sm-5">VM2</td><td class="col-sm-2">1235</td><td class="col-sm-5">netAdapter3</td></tr></table></li>
-                                    </ul>
-                                </td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
+                            {% for server_index in range(servers|count) %}
+                                {% for wu_index in range(servers[server_index].get_units()|count) %}
+                                    <tr>
+                                        <th scope="row">
+                                            <input type="checkbox" name="wu_check" onclick="update_master('wu_master_check','wu_check')" value="{{ servers[server_index].get_units()[wu_index].name }}">
+                                        </th>
+                                        <td>
+                                            <i class="table-drop-button glyphicon glyphicon-triangle-right"
+                                               data-toggle="collapse" data-target="#s{{ server_index }}wu{{ wu_index }}"></i>
+                                            <a data-toggle="modal"
+                                               data-target="#detailsOverlay">{{ servers[server_index].get_units()[wu_index].name }}</a>
+                                        </td>
+                                        <td>{{ server_index }} {{ servers[server_index].get_units()[wu_index].name }}</td>
+                                        <td>{{ servers[server_index].get_units()[wu_index].server_id }}</td>
+                                        <td>{{ servers[server_index].get_units()[wu_index].session }}</td>
+                                        <td>{{ servers[server_index].get_units()[wu_index].status }}</td>
+                                    </tr>
+                                    <tr id="s{{ server_index }}wu{{ wu_index }}" class="collapse out">
+                                        <td></td>
+                                        <td>
+                                            Description:<br>
+                                            <p>
+                                                {{ servers[server_index].get_units()[wu_index].description }}
+                                            </p>
+                                            Virtual Machines:<br>
+                                            <ul>
+                                                {% for vm_index in range(servers[server_index].get_units()[wu_index].vms|count) %}
+                                                    <li>
+                                                        <table class="table">
+                                                            <tr>
+                                                                <td class="col-sm-5">servers[server_index].get_units()[wu_index].vms[vm_index].get_name()</td>
+                                                                <td class="col-sm-2">servers[server_index].get_units()[wu_index].vms[vm_index].get_port()</td>
+                                                                <td class="col-sm-5">servers[server_index].get_units()[wu_index].vms[vm_index].get_adapter()</td>
+                                                            </tr>
+                                                        </table>
+                                                    </li>
+                                                {% endfor %}
+                                            </ul>
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                {% endfor %}
+
+                                {% for wu_index in range(servers[server_index].get_standalone_units()|count) %}
+                                    <tr>
+                                        <th scope="row">
+                                            <input type="checkbox" name="wu_check" onclick="update_master('wu_master_check','wu_check')" value="{{ servers[server_index].get_standalone_units()[wu_index].name }}">
+                                        </th>
+                                        <td>
+                                            <i class="table-drop-button glyphicon glyphicon-triangle-right"
+                                               data-toggle="collapse" data-target="#s{{ server_index }}sawu{{ wu_index }}"></i>
+                                            <a data-toggle="modal"
+                                               data-target="#detailsOverlay">{{ servers[server_index].get_standalone_units()[wu_index].name }}</a>
+                                        </td>
+                                        <td>{{ server_index }} {{ servers[server_index].get_standalone_units()[wu_index].name }}</td>
+                                        <td>{{ servers[server_index].get_standalone_units()[wu_index].server_id }}</td>
+                                        <td>{{ servers[server_index].get_standalone_units()[wu_index].session }}</td>
+                                        <td>{{ servers[server_index].get_standalone_units()[wu_index].status }}</td>
+                                    </tr>
+                                    <tr id="s{{ server_index }}sawu{{ wu_index }}" class="collapse out">
+                                        <td></td>
+                                        <td>
+                                            Description:<br>
+                                            <p>
+                                                {{ servers[server_index].get_standalone_units()[wu_index].description }}
+                                            </p>
+                                            Virtual Machines:<br>
+                                            <ul>
+                                                {% for vm_index in range(servers[server_index].get_standalone_units()[wu_index].vms|count) %}
+                                                    <li>
+                                                        <table class="table">
+                                                            <tr>
+                                                                <td class="col-sm-5">servers[server_index].get_standalone_units()[wu_index].vms[vm_index].get_name()</td>
+                                                                <td class="col-sm-2">servers[server_index].get_standalone_units()[wu_index].vms[vm_index].get_port()</td>
+                                                                <td class="col-sm-5">servers[server_index].get_standalone_units()[wu_index].vms[vm_index].get_adapter()</td>
+                                                            </tr>
+                                                        </table>
+                                                    </li>
+                                                {% endfor %}
+                                            </ul>
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                {% endfor %}
+                            {% endfor %}
                             </tbody>
                         </table>
                     </div>

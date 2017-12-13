@@ -2,7 +2,7 @@
 A user of the system that has permissions, and may have other information about
 them.
 """
-from ..db.db_manger import UserDB
+from ..db.db_manager import UserDB
 
 
 class User:
@@ -25,14 +25,14 @@ class User:
 
     def read(self):
         # return instance of user specified by the id
-        dictionary = UserDB.get("user", self.user_id)
-        if len(dictionary.keys()) == 0:
+        dictionary = UserDB.read("user", self.user_id)
+        if dictionary.count() == 0:
             return None
         else:
-            return User(dictionary['id'], dictionary['first_name'],
-                        dictionary['last_name'], dictionary['organization'],
-                        dictionary['email'], dictionary['skill_level'],
-                        dictionary['permission'])
+            return User(dictionary[0].id, dictionary[0].first_name,
+                        dictionary[0].last_name, dictionary[0].organization,
+                        dictionary[0].email, dictionary[0].skill_level,
+                        dictionary[0].permissions)
 
     def update(self):
         pass

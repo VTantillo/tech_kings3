@@ -6,6 +6,7 @@ from db_demo import Credentials
 
 engine = create_engine('sqlite:///C:\\Users\\Emmanuel\\PycharmProjects\\tech_kings3\\tbms\\src\\subsystems\\db\\demo.db')
 Session = sessionmaker(bind=engine)
+
 session = Session()
 
 
@@ -35,7 +36,7 @@ def get_user(usr_id):
 
 
 def get_credentials(usr_id):
-    res = session.query(Credentials).filter(Credentials.user_id == usr_id)
+    res = session.query(Credentials).filter(Credentials.username == usr_id)
     return res
 
 

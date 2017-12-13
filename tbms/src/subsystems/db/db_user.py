@@ -29,19 +29,8 @@ def read(item, item_id):
         return q.get_user(item_id)
 
     if item == "credentials":
-        cred = q.get_credentials(item_id)
-        return cred.__dict__
-        """if cred.count() == 1:
-            dic = {
-                'user_id': cred.user_id,
-                'username': cred.username,
-                'password': cred.password,
-                'salt': cred.salt
-            }
-        else:
-            dic = {}
+        return q.get_credentials(item_id)
 
-        return dic"""
 
     if item == "all users":
         return q.get_all_users()

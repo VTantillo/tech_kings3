@@ -8,7 +8,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 from sqlalchemy.orm import sessionmaker
 
-engine = create_engine('sqlite:///C:\\Users\\Emmanuel\\PycharmProjects\\tech_kings3\\tbms\\src\\subsystems\\db\\demo.db')# echo=True)
+engine = create_engine('sqlite:///C:\\Users\\Emmanuel\\PycharmProjects\\tech_kings3\\tbms\\src\\subsystems\\db\\demo.db')
 Session = sessionmaker(bind=engine)
 
 Base = declarative_base()
@@ -206,7 +206,7 @@ class User(Base):
     skill_level = Column(String)
     credentials = relationship("Credentials", uselist=False,
                                back_populates="user")
-    permissions = Column(String, nullable=False)
+    permissions = Column(Integer, nullable=False)
 
     # unit has an n:n relationship
     workshop_history = relationship("WorkshopUnit", secondary='user_history')
@@ -237,7 +237,6 @@ class Server(Base):
     """
     Fields:
         id | ip | status | credentials
-
         (Server credential table?)
     """
     __tablename__ = "server"
@@ -245,26 +244,9 @@ class Server(Base):
     id = Column(Integer, primary_key=True)
     ip = Column(String)
     status = Column(String)
-    server_credentials = relationship("ServerCredentials", uselist=False,
-                                      back_populates='server')
-
-    # Why don't I have the VM's and stuff here?
-
-
-class ServerCredentials(Base):
-    """
-    Fields:
-        user id | username | password
-    """
-    __tablename__ = "server_credentials"
-
     username = Column(String)
     password = Column(String)
-    salt = Column(String)
 
-    # References
-    server_id = Column(Integer, ForeignKey('server.id'), primary_key=True)
-    server = relationship('Server', back_populates='server_credentials')
 
 
 class Session(Base):

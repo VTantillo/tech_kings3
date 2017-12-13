@@ -9,6 +9,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="{{ url_for('static', filename='scripts/collapseJS.js') }}"></script>
+    <script src="{{ url_for('static', filename='scripts/checkboxJS.js') }}"></script>
 </head>
 
 <header>
@@ -164,7 +165,7 @@
                             <thead>
                             <tr>
                                 <th class="col-sm-1" scope="col" align="center">
-                                    <input type="checkbox">
+                                    <input id="s_master_check" type="checkbox" onclick="check_all('s_master_check', 's_check')">
                                 </th>
                                 <th class="col-sm-9" scope="col" align="center">
                                     <strong>Server IP Address</strong>
@@ -179,7 +180,11 @@
                             <tbody>
                             {% for row_index in range(servers|count) %}
                                 <tr>
-                                    <th scope="row"><input type="checkbox"></th>
+                                    <th scope="row">
+                                        <input type="checkbox" name="s_check"
+                                                   onclick="update_master('s_master_check','s_check')"
+                                                   value="{{ servers[row_index].name }}">
+                                    </th>
                                     <td>
                                         <i class="table-drop-button glyphicon glyphicon-triangle-right"
                                            data-toggle="collapse" data-target="#{{ row_index }}"></i>
@@ -193,19 +198,19 @@
                                     Workshop Groups:<br>
                                     <ul>
                                         {% for index in range(servers[row_index].get_groups()|count) %}
-                                        <li><a>{{ servers[row_index].get_groups()[index] }}</a></li>
+                                        <li><a>{{ servers[row_index].get_groups()[index].name }}</a></li>
                                         {% endfor %}
                                     </ul>
                                     Workshop Units:<br>
                                     <ul>
                                         {% for index in range(servers[row_index].get_units()|count) %}
-                                        <li><a>{{ servers[row_index].get_units()[index] }}</a></li>
+                                        <li><a>{{ servers[row_index].get_units()[index].name }}</a></li>
                                         {% endfor %}
                                     </ul>
                                     Workshop Units(Standalone):<br>
                                     <ul>
                                         {% for index in range(servers[row_index].get_standalone_units()|count) %}
-                                        <li><a>{{ servers[row_index].get_standalone_units()[index] }}</a></li>
+                                        <li><a>{{ servers[row_index].get_standalone_units()[index].name }}</a></li>
                                         {% endfor %}
                                     </ul>
                                 </td>

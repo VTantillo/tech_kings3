@@ -1,54 +1,105 @@
 """
 Network subsystem specific database operations that the db_manager will call
 """
+import q_networks as q
 
 
-def get(item, item_id):
-    # Dictionary Stub
-    dictionary = {}
-    if item == "servers" and item_id == 1:
-        dictionary = {
-            'id': 1,
-            'ip': "192.168.0.18",
-            'username': "Vbox",
-            'password': "password"
-        }
-    elif item == "servers" and item_id == 2:
-        dictionary = {
-            'id': 2,
-            'ip': "Some ip",
-            'username': "Some username",
-            'password': "Some password"
-        }
-    return dictionary
-
-
-def add(item, values):
+def create(item, values):
     """
-    Description:
     :param item:
     :param values:
     :return:
     """
-    pass
+    if item == "server":
+        q.add_server(values)
+
+    if item == "connection string":
+        # Call thing for connection string
+        pass
+
+    if item == "session":
+        # Call thing for session
+        pass
+
+    if item == "statistics":
+        # Call thing for statistics
+        pass
+
+
+def read(item, item_id):
+    """
+    :param item:
+    :param item_id:
+    :return:
+    """
+    if item == "server":
+        return q.get_server(item_id)
+
+    if item == "connection string":
+        # Call thing for connection string
+        pass
+
+    if item == "session":
+        # Call thing for session
+        pass
+
+    if item == "statistics":
+        # Call thing for statistics
+        pass
+
+    if item == "all servers":
+        return q.get_all_servers()
+
+    if item == "all sessions":
+        pass
+
+    if item == "all statistics":
+        pass
 
 
 def update(item, item_id, values):
     """
-    Description:
     :param item:
     :param item_id:
     :param values:
     :return:
     """
-    pass
+    if item == "server":
+        q.update_server(item_id, values)
+
+    if item == "connection string":
+        # Call thing for connection string
+        pass
+
+    if item == "session":
+        # Call thing for session
+        pass
+
+    if item == "statistics":
+        # Call thing for statistics
+        pass
 
 
 def delete(item, item_id):
     """
-    Description:
     :param item:
     :param item_id:
     :return:
     """
-    pass
+    if item == "server":
+        q.delete_server(item_id)
+
+    if item == "connection string":
+        # Call thing for connection string
+        pass
+
+    if item == "session":
+        # Call thing for session
+        pass
+
+    if item == "statistics":
+        # Call thing for statistics
+        pass
+
+    if item == "all servers":
+        q.delete_all_servers()

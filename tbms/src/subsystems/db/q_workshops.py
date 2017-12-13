@@ -103,13 +103,21 @@ def get_all_wgs():
 
 def get_server_wus(server_id):
     res = session.query(WorkshopUnit).filter(
-        WorkshopUnit.server_id == server_id).all()
+        WorkshopUnit.server_id == server_id).filter(
+        WorkshopUnit.wg_id != -1).all()
     return res
 
 
 def get_server_wgs(server_id):
     res = session.query(WorkshopGroup).filter(
         WorkshopGroup.server_id == server_id).all()
+    return res
+
+
+def get_server_standalone(server_id):
+    res = session.query(WorkshopUnit).filter(
+        WorkshopUnit.server_id == server_id).filter(
+        WorkshopUnit.wg_id == -1).all()
     return res
 
 
