@@ -9,7 +9,6 @@ from sqlalchemy.orm import relationship
 
 from db import engine
 
-#engine = create_engine('sqlite:///test.db', echo=True)
 Base = declarative_base()
 
 # Workshop subsystem stuff
@@ -205,7 +204,7 @@ class User(Base):
     skill_level = Column(String)
     credentials = relationship("Credentials", uselist=False,
                                back_populates="user")
-    permissions = Column(String, nullable=False)
+    permissions = Column(Integer, nullable=False)
 
     # unit has an n:n relationship
     workshop_history = relationship("WorkshopUnit", secondary='user_history')
@@ -244,10 +243,9 @@ class Server(Base):
     id = Column(Integer, primary_key=True)
     ip = Column(String)
     status = Column(String)
-    server_credentials = relationship("ServerCredentials", uselist=False,
-                                      back_populates='server')
+    username = Column(String)
+    password = Column(String)
 
-    # Why don't I have the VM's and stuff here?
 
 
 class ServerCredentials(Base):
