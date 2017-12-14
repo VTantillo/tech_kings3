@@ -6,7 +6,8 @@ import snapshot
 from workshop_unit import WorkshopUnit
 from workshop_group import WorkshopGroup
 from virtual_machine import VirtualMachine
-from ..db.db_manager import WorkshopDB
+
+from src.sub_db.db_manager import WorkshopDB
 import workshop_unit
 import workshop_group
 

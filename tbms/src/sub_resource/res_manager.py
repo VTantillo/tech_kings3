@@ -1,8 +1,8 @@
 """
 Interface for the resources subsystem.
 """
-import resources.reference_material
-import resources.survey
+import reference_material
+import Survey
 
 
 def create():

@@ -3,9 +3,10 @@ Interface for the network subsystem for the rest of the system
 """
 import connection_string
 from server import Server
-from ..db.db_manager import NetworkDB
 import session
 import statistics
+
+from src.sub_db.db_manager import NetworkDB
 
 
 def create(item, values):

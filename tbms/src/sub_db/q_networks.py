@@ -1,10 +1,6 @@
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
-
 from db_demo import Server
 
-engine = create_engine('sqlite:///C:\\Users\\Emmanuel\\PycharmProjects\\tech_kings3\\tbms\\src\\subsystems\\db\\demo.db')
-Session = sessionmaker(bind=engine)
+from src.sub_db import Session
 
 session = Session()
 

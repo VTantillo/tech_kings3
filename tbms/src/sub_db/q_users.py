@@ -4,8 +4,7 @@ from sqlalchemy.orm import sessionmaker
 from db_demo import User
 from db_demo import Credentials
 
-engine = create_engine('sqlite:///C:\\Users\\Emmanuel\\PycharmProjects\\tech_kings3\\tbms\\src\\subsystems\\db\\demo.db')
-Session = sessionmaker(bind=engine)
+from src.sub_db import Session
 
 session = Session()
 

@@ -1,7 +1,7 @@
-from db.db_demo import ReferenceMaterial
-from db.db_demo import Survey
+from db_demo import ReferenceMaterial
+from db_demo import Survey
 
-from db import Session
+from src.sub_db import Session
 
 session = Session()
 

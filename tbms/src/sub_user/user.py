@@ -2,7 +2,7 @@
 A user of the system that has permissions, and may have other information about
 them.
 """
-from ..db.db_manager import UserDB
+from src.sub_db.db_manager import UserDB
 
 
 class User:

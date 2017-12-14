@@ -8,8 +8,8 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 from sqlalchemy.orm import sessionmaker
 
-engine = create_engine('sqlite:///C:\\Users\\Emmanuel\\PycharmProjects\\tech_kings3\\tbms\\src\\subsystems\\db\\demo.db')
-Session = sessionmaker(bind=engine)
+from src.sub_db import Session
+from src.sub_db import engine
 
 Base = declarative_base()
 

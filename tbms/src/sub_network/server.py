@@ -4,7 +4,7 @@ stored in order for them to be used by participants.
 """
 from vboxapi import VirtualBoxManager
 
-from ..db.db_manager import NetworkDB
+from src.sub_db.db_manager import NetworkDB
 
 
 class Server:

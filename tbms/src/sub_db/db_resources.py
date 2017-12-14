@@ -2,7 +2,7 @@
 Resource subsystem specific database operations that the db_manager will call
 """
 
-import db.q_resources as q
+import q_resources as q
 
 
 def create(item, values):

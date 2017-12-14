@@ -4,14 +4,16 @@ A workshop unit contains multiple virtual machines for a particular exercise
 
 from cloneable import Cloneable
 from portable import Portable
-from ..db.db_manager import NetworkDB
+from src.sub_db.db_manager import NetworkDB
+
 
 class WorkshopUnit(Cloneable, Portable):
     """
     A collection of VMs of a particular exercise
     """
 
-    def __init__(self, id, name, description, session, status, lifetime, published_date, server_id, wg_id, vms=[]):
+    def __init__(self, id, name, description, session, status, lifetime,
+                 published_date, server_id, wg_id, vms=[]):
         self.id = id
         self.name = name
         self.description = description

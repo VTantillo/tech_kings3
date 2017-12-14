@@ -4,7 +4,7 @@ A workshop group contains multiple workshop units of a specific exercise
 
 from cloneable import Cloneable
 from portable import Portable
-from ..db.db_manager import NetworkDB
+from src.sub_db.db_manager import NetworkDB
 
 
 class WorkshopGroup(Cloneable, Portable):
