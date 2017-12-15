@@ -17,7 +17,8 @@ class WorkshopDB:
         :param item: A string specifying which class that is to be added
         :param values: A dictionary with the values that are to be added to
             the row corresponding to the new item
-        :return: The id of the item that was created in the database
+        :return: The id of the item that was created in the database.
+        Returns -1 if the item was not created
         """
         new_id = workshop.create(item, values)
         return new_id

@@ -247,7 +247,10 @@ class Server(Base):
     server_credentials = relationship("ServerCredentials", uselist=False,
                                       back_populates='server')
 
-    # Why don't I have the VM's and stuff here?
+    # Server has a 1:n relationship to VMs, WUs, and WGs
+    vms = relationship("VirtualMachine")
+    wus = relationship("WorkshopUnit")
+    wgs = relationship("WorkshopGroup")
 
 
 class ServerCredentials(Base):
