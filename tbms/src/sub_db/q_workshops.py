@@ -1,10 +1,10 @@
 import datetime
 
-from db_demo import VirtualMachine
-from db_demo import WorkshopUnit
-from db_demo import WorkshopGroup
-from db_demo import Snapshot
-from db_demo import NetworkAdapter
+from db_def import VirtualMachine
+from db_def import WorkshopUnit
+from db_def import WorkshopGroup
+from db_def import Snapshot
+from db_def import NetworkAdapter
 
 from src.sub_db import Session
 

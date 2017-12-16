@@ -19,7 +19,6 @@ class VirtualMachine(Cloneable):
         self.recent_snapshot = recent_snapshot
         self. host_ip = host_ip
 
-
     def create(self):
         pass
 

@@ -84,11 +84,16 @@ def update(item, item_id, values):
     :param values:
     :return:
     """
+    status = False
     if item == "user":
         q.update_user(item_id, values)
+        status = True
 
     if item == "credentials":
         q.update_credentials(item_id, values)
+        status = True
+
+    return status
 
 
 def delete(item, item_id):
