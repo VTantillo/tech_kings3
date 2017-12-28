@@ -1,17 +1,30 @@
 """
 Network subsystem specific database operations that the db_manager will call
 """
-import q_networks as q
+from db_def import Server
+from db_def import ServerCredentials
+from db_def import ConnectionString
+from db_def import Session
+from db_def import Statistics
+
+from src.sub_db import Session
+
+session = Session()
 
 
-def create(item, values):
+def create(item, val):
     """
     :param item:
-    :param values:
+    :param val:
     :return:
     """
     if item == "server":
-        q.add_server(values)
+        new_server = Server(ip = val['ip'],
+                            status = val['status'],
+                            username = val['username'],
+                            password = val['password'])
+        session.add(new_server)
+        session.commit()
 
     if item == "connection string":
         # Call thing for connection string
@@ -26,14 +39,15 @@ def create(item, values):
         pass
 
 
-def read(item, item_id):
+def read(item, item_id = None):
     """
     :param item:
     :param item_id:
     :return:
     """
     if item == "server":
-        return q.get_server(item_id)
+        res = session.query(Server).filter(Server.id == server_id)
+        return res
 
     if item == "connection string":
         # Call thing for connection string
@@ -48,7 +62,8 @@ def read(item, item_id):
         pass
 
     if item == "all servers":
-        return q.get_all_servers()
+        res = session.query(Server).all()
+        return res
 
     if item == "all sessions":
         pass
@@ -57,7 +72,7 @@ def read(item, item_id):
         pass
 
 
-def update(item, item_id, values):
+def update(item, item_id, val):
     """
     :param item:
     :param item_id:
@@ -65,7 +80,17 @@ def update(item, item_id, values):
     :return:
     """
     if item == "server":
-        q.update_server(item_id, values)
+        server = get_server(server_id)
+        if 'ip' in val:
+            server.ip = val['ip']
+        if 'status' in val:
+            server.status = val['status']
+        if 'username' in val:
+            server.username = val['username']
+        if 'password' in val:
+            server.password = val['password']
+
+        session.commit()
 
     if item == "connection string":
         # Call thing for connection string
@@ -80,14 +105,16 @@ def update(item, item_id, values):
         pass
 
 
-def delete(item, item_id):
+def delete(item, item_id = None):
     """
     :param item:
     :param item_id:
     :return:
     """
     if item == "server":
-        q.delete_server(item_id)
+        server = get_server(server_id)
+        session.delete(server)
+        session.commit()
 
     if item == "connection string":
         # Call thing for connection string
@@ -102,4 +129,6 @@ def delete(item, item_id):
         pass
 
     if item == "all servers":
-        q.delete_all_servers()
+        server = get_all_servers()
+        session.delete(server)
+        session.commit()
