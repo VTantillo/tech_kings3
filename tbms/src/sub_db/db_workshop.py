@@ -1,8 +1,15 @@
 """
 Workshop subsystem specific operations that the db_manager will call.
 """
+from db_def import VirtualMachine
+from db_def import WorkshopUnit
+from db_def import WorkshopGroup
+from db_def import Snapshot
+from db_def import NetworkAdapter
 
-import q_workshops as q
+from src.sub_db import Session
+
+session = Session()
 
 
 def create(item, values):
@@ -11,23 +18,51 @@ def create(item, values):
     :param values:
     :return:
     """
+    new_id = -1
     if item == "virtual machine":
-        q.add_vm(values)
+        new_vm = VirtualMachine(name = values['name'],
+                                file_name = values['file_name'],
+                                vrdp = values['vrdp'],
+                                server_id = values['server_id'],
+                                wu_id = values['wu_id'])
+        session.add(new_vm)
+        session.commit()
 
     if item == "workshop unit":
-        q.add_wu(values)
+        new_wu = WorkshopUnit(name = values['name'],
+                              description = values['description'],
+                              status = values['status'],
+                              lifetime = values['lifetime'],
+                              published_date = values['published_date'],
+                              server_id = values['server_id'],
+                              wg_id = values['wg_id'])
+
+        session.add(new_wu)
+        session.commit()
 
     if item == "workshop group":
-        q.add_wg(values)
+        new_wg = WorkshopGroup(name = values['name'],
+                               description = values['description'],
+                               status = values['status'],
+                               lifetime = values['lifetime'],
+                               published_date = values['published_date'],
+                               server_id = values['server_id'])
+        session.add(new_wg)
+        session.commit()
 
     if item == "snapshot":
-        q.add_snapshot(values)
+        new_snap = Snapshot(date = values['date'],
+                            file_name = values['file_name'])
+        session.add(new_snap)
+        session.commit()
 
     if item == "network adapter":
-        q.add_network_adapter(values)
+        new_net = NetworkAdapter(name = values['name'])
+        session.add(new_net)
+        session.commit()
 
 
-def read(item, item_id=None):
+def read(item, item_id = None):
     """
 
     :param item:
@@ -35,37 +70,53 @@ def read(item, item_id=None):
     :return:
     """
     if item == "virtual machine":
-        return q.get_vm(item_id)
+        res = session.query(VirtualMachine).filter(VirtualMachine.id == vm_id)
+        return res
 
     if item == "workshop unit":
-        return q.get_wu(item_id)
+        res = session.query(WorkshopUnit).filter(WorkshopUnit.id == wu_id)
+        return res
 
     if item == "workshop group":
-        return q.get_wg(item_id)
+        res = session.query(WorkshopGroup).filter(WorkshopGroup.id == wg_id)
+        return res
 
     if item == "snapshot":
-        return q.get_snapshot(item_id)
+        res = session.query(Snapshot).filter(Snapshot.id == snap_id)
+        return res
 
     if item == "network adapter":
-        return q.get_network_adapter(item_id)
+        res = session.query(NetworkAdapter).filter(NetworkAdapter.id == net_id)
+        return res
 
     if item == "all vms":
-        return q.get_all_vms()
+        res = session.query(VirtualMachine).all()
+        return res
 
     if item == "all wus":
-        return q.get_all_wus()
+        res = session.query(WorkshopUnit).all()
+        return res
 
     if item == "all wgs":
-        return q.get_all_wgs()
+        res = session.query(WorkshopGroup).all()
+        return res
 
     if item == "server wus":
-        return q.get_server_wus(item_id)
+        res = session.query(WorkshopUnit).filter(
+            WorkshopUnit.server_id == server_id).filter(
+            WorkshopUnit.wg_id != -1).all()
+        return res
 
-    if item == "server sawus":
-        return q.get_server_standalone(item_id)
+    if item == "server standalone":
+        res = session.query(WorkshopUnit).filter(
+            WorkshopUnit.server_id == server_id).filter(
+            WorkshopUnit.wg_id == -1).all()
+        return res
 
     if item == "server wgs":
-        return q.get_server_wgs(item_id)
+        res = session.query(WorkshopGroup).filter(
+            WorkshopGroup.server_id == server_id).all()
+        return res
 
 
 def update(item, item_id, values):
@@ -77,19 +128,71 @@ def update(item, item_id, values):
     :return:
     """
     if item == "virtual machine":
-        return q.update_vm(item_id, values)
+        vm = get_vm(vm_id)
+        if 'name' in values:
+            vm.name = values['name']
+        if 'file_name' in values:
+            vm.file_name = values['file_name']
+        if 'vrdp' in values:
+            vm.vrdp = values['vrdp']
+        if 'server_id' in values:
+            vm.server_id = values['server_id']
+        if 'wu_id' in values:
+            vm.wu_id = values['wu_id']
+
+        session.commit()
 
     if item == "workshop unit":
-        return q.update_wu(item_id, values)
+        wu = get_wu(wu_id)
+        if 'name' in values:
+            wu.name = values['name']
+        if 'description' in values:
+            wu.description = values['description']
+        if 'status' in values:
+            wu.status = values['status']
+        if 'lifetime' in values:
+            wu.lifetime = values['lifetime']
+        if 'published_date' in values:
+            wu.published_date = values['published_date']
+        if 'server_id' in values:
+            wu.server_id = values['server_id']
+        if 'wg_id' in values:
+            wu.wg_id = values['wg_id']
+        if 'session_id' in values:
+            wu.session_id = values['session_id']
+
+        session.commit()
 
     if item == "workshop group":
-        return q.update_wg(item_id, values)
+        wg = get_wg(wg_id)
+        if 'name' in values:
+            wg.name = values['name']
+        if 'description' in values:
+            wg.description = values['description']
+        if 'status' in values:
+            wg.status = values['status']
+        if 'lifetime' in values:
+            wg.lifetime = values['lifetime']
+        if 'published_date' in values:
+            wg.published_date = values['published_date']
+        if 'server_id' in values:
+            wg.server_id = values['server_id']
+
+        session.commit()
 
     if item == "snapshot":
-        return q.update_wu(item_id, values)
+        snap = get_snapshot(snap_id)
+        if 'name' in values:
+            snap.name = values['name']
+        if 'file_name' in values:
+            snap.file_name = values['file_name']
 
     if item == "network adapter":
-        return q.update_network_adapter(item_id, values)
+        net = get_network_adapter(net_id)
+        if 'name' in values:
+            net.name = values['name']
+
+        session.commit()
 
 
 def delete(item, item_id):
@@ -100,16 +203,47 @@ def delete(item, item_id):
     :return:
     """
     if item == "virtual machine":
-        return q.delete_vm(item_id)
+        vm = get_vm(vm_id)
+        session.delete(vm)
+        session.commit()
 
-    if item == "workshop unit":
-        return q.delete_wu(item_id)
+    elif item == "workshop unit":
+        wu = get_wu(wu_id)
+        session.delete(wu)
+        session.commit()
 
-    if item == "workshop group":
-        return q.delete_wg(item_id)
+    elif item == "workshop group":
+        wg = get_vm(wg_id)
+        session.delete(wg)
+        session.commit()
 
-    if item == "snapshot":
-        return q.delete_snapshot(item_id)
+    elif item == "snapshot":
+        snap = get_snapshot(snap_id)
+        session.delete(snap)
+        session.commit()
 
-    if item == "network adapter":
-        return q.delete_network_adapter(item_id)
+    elif item == "network adapter":
+        na = get_vm(na_id)
+        session.delete(na)
+        session.commit()
+
+    elif item == "all vms":
+        vms = get_all_vms()
+        session.delete(vms)
+        session.commit()
+
+    elif item == "all wus":
+        wus = get_all_wus()
+        session.delete(wus)
+        session.commit()
+
+    elif item == "all wgs":
+        wgs = get_all_wgs()
+        session.delete(wgs)
+        session.commit()
+
+    elif item == "all snapshots":
+        pass
+
+    elif item == "all network adapters":
+        pass

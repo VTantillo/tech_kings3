@@ -38,7 +38,7 @@ def create(item, values):
     return new_id
 
 
-def read(item, item_id = 0):
+def read(item, item_id = None):
     """
 
     :param item:

@@ -46,7 +46,7 @@ def create(item, val):
     return new_id
 
 
-def read(item, item_id):
+def read(item, item_id = None):
     """
     Retrieves the specified item with "item_id" from the database.
     :param item: String that specifies the object or query that is to be
