@@ -7,7 +7,7 @@ from sqlalchemy import Column, Date, Integer, String, Boolean, Table
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 
-from db import engine
+from src.sub_db import engine
 
 #engine = create_engine('sqlite:///test.db', echo=True)
 Base = declarative_base()
