@@ -2,8 +2,8 @@
 User subsystem specific database operations that the db_manager will call
 """
 
-from db_demo import User
-from db_demo import Credentials
+from db_def import User
+from db_def import Credentials
 
 from src.sub_db import Session
 
@@ -76,22 +76,43 @@ def read(item, item_id):
         return dict()
 
 
-def update(item, item_id, values):
+def update(item, item_id, val):
     """
 
     :param item:
     :param item_id:
-    :param values:
+    :param val:
     :return:
     """
     status = False
     if item == "user":
-        q.update_user(item_id, values)
+        user = read("user", item_id)
+        if 'first_name' in val:
+            user.first_name = val['first_name']
+        if 'last_name' in val:
+            user.last_name = val['']
+        if 'organization' in val:
+            user.organization = val['organization']
+        if 'email' in val:
+            user.email = val['email']
+        if 'skill_level' in val:
+            user.skill_level = val['skill_level']
+        if 'permissions' in val:
+            user.permissions = val['permissions']
+        if 'session_id' in val:
+            user.session_id = val['session_id']
+
+        session.commit()
         status = True
 
-    if item == "credentials":
-        q.update_credentials(item_id, values)
-        status = True
+    elif item == "credentials":
+        credentials = read("credentials", item_id)
+        if 'username' in val:
+            credentials.username = val['username']
+        if 'password' in val:
+            credentials.password = val['password']
+
+        session.commit()
 
     return status
 
@@ -103,13 +124,21 @@ def delete(item, item_id):
     :param item_id:
     :return:
     """
+    status = False
     if item == "user":
-        q.delete_user(item_id)
+        user = read("user", item_id)
+        delete("credentials", item_id)
+        session.delete(user)
+        session.commit()
+        status = True
 
-    if item == "credentials":
-        # We probably aren't ever going to use this... but it's here
-        # for completeness :)
-        q.delete_credentials(item_id)
+    elif item == "credentials":
+        credentials = read("credentials", item_id)
+        session.delete(credentials)
+        session.commit()
+        status = True
+
+    return status
 
 
 def user_to_dict(obj):
